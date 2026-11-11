@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { NassyProvider } from "@/components/frontend/NassyProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PTN Progress With Nassy",
-  description: "Platform belajar dan pelacakan progres PTN bersama Nassy.",
+  title: "PTN Progress with Nassy",
+  description:
+    "PTN Progress with Nassy — catat progres belajar, bangun streak, dan belajar bersama pejuang PTN.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,7 +25,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="id"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <NassyProvider>{children}</NassyProvider>
+      </body>
     </html>
   );
 }
