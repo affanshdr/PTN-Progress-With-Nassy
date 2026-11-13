@@ -1,41 +1,43 @@
 "use client";
 
 import Link from "next/link";
+import { COIN_PRICING } from "@/lib/progress-utils";
 import { useNassy } from "@/components/frontend/NassyProvider";
 
 const featureCards = [
   {
     icon: "📚",
-    title: "Progress Tracker",
+    title: "Soal + Pembahasan 7 Subtes",
     description:
-      "Catat subtes, materi, kendala, target besok, durasi, dan bukti belajar.",
+      "Latihan interaktif gratis mencakup PK, PM, PU, PPU, LBI, LBE, dan PBM lengkap dengan kunci & pembahasan.",
+  },
+  {
+    icon: "📝",
+    title: "Tryout Mingguan & Leaderboard",
+    description: `Ikuti Tryout mingguan hanya ${COIN_PRICING.TRYOUT_WEEKLY_COST} Coin, dilengkapi timer, auto-skor SNBT, pembahasan, dan papan peringkat.`,
+  },
+  {
+    icon: "🎥",
+    title: "Live Class Bulanan",
+    description: `Aktifkan Live Class Pass ${COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin untuk akses penuh kelas interaktif dan rekaman selama 30 hari.`,
+  },
+  {
+    icon: "🪙",
+    title: "Bonus 100 Coin Akun Baru",
+    description:
+      "Setiap pendaftar baru langsung menerima 100 Coin awal untuk mencoba Tryout atau mengaktifkan Live Class Pass.",
   },
   {
     icon: "🔥",
-    title: "Streak",
+    title: "Progress & Streak Tracker",
     description:
-      "Bangun konsistensi dari hari ke hari dan lihat rekor belajarmu sendiri.",
-  },
-  {
-    icon: "🏆",
-    title: "Leaderboard",
-    description: "Ikuti peringkat komunitas berdasarkan poin progres belajar.",
+      "Catat progres harian, durasi belajar, dan bangun streak konsistensi menuju PTN impian.",
   },
   {
     icon: "👥",
-    title: "Community",
-    description: "Lihat perjalanan belajar teman dan saling memberi apresiasi.",
-  },
-  {
-    icon: "🎯",
-    title: "Target PTN",
+    title: "Komunitas Pejuang PTN",
     description:
-      "Simpan PTN dan program studi tujuan sebagai pengingat perjalananmu.",
-  },
-  {
-    icon: "☁️",
-    title: "Database Supabase",
-    description: "Data tersimpan permanen secara online dan aman.",
+      "Lihat perjalanan belajar teman seperjuangan dan bersaing sehat di Leaderboard.",
   },
 ] as const;
 
@@ -72,7 +74,7 @@ export function LandingView() {
                   onClick={() => openAuthModal("register")}
                   className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5"
                 >
-                  Daftar
+                  Daftar (+100 Coin)
                 </button>
               </>
             )}
@@ -84,21 +86,21 @@ export function LandingView() {
         <div className="mx-auto grid w-[min(1160px,92%)] grid-cols-1 items-center gap-14 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#dce7f6] bg-white px-3 py-1.5 text-[13px] font-extrabold text-[var(--blue)]">
-              ✦ Study community for PTN fighters
+              ✦ 7 Subtes · Tryout Mingguan · Live Class · Bonus 100 Coin
             </div>
 
             <h1 className="my-4.5 text-[clamp(40px,6vw,72px)] leading-[1.02] font-extrabold tracking-[-2.5px] text-[var(--ink)]">
-              Catat progres.
+              Latihan terarah.
               <br />
-              <span className="text-[var(--blue)]">Jaga konsistensi.</span>
+              <span className="text-[var(--blue)]">Tryout terukur.</span>
               <br />
               Raih PTN impian.
             </h1>
 
             <p className="max-w-[650px] text-lg leading-relaxed text-[var(--muted)]">
-              PTN Progress with Nassy adalah ruang belajar untuk mencatat
-              perjalananmu, membangun streak, melihat progres teman, dan tumbuh
-              bersama menuju kampus tujuan.
+              Pelajari 7 subtes SNBT lengkap dengan pembahasannya, ikuti Tryout
+              mingguan dengan Leaderboard nasional, dan bergabung di Live Class
+              bareng mentor terbaik.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -115,14 +117,14 @@ export function LandingView() {
                   onClick={() => openAuthModal("register")}
                   className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4.5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5"
                 >
-                  Mulai Sekarang →
+                  Daftar & Klaim 100 Coin →
                 </button>
               )}
               <a
                 href="#features"
                 className="rounded-[10px] border border-[var(--border)] bg-white px-4.5 py-3 text-sm font-bold text-[var(--navy)] transition hover:-translate-y-0.5"
               >
-                Lihat Fitur
+                Lihat Fitur & Tarif Coin
               </a>
             </div>
           </div>
@@ -130,41 +132,48 @@ export function LandingView() {
           <div className="rounded-[22px] border border-[var(--border)] bg-white p-5.5 shadow-[0_12px_35px_rgba(20,35,55,0.08)]">
             <div className="mb-5 flex items-center justify-between">
               <div>
-                <b className="block text-sm font-bold">Progress Overview</b>
+                <b className="block text-sm font-bold">Ekonomi Coin Nassy</b>
                 <div className="text-xs text-[var(--muted)]">
-                  Dashboard Online
+                  Transparan & Fleksibel
                 </div>
               </div>
-              <div className="grid h-10 w-10 place-items-center rounded-full bg-[var(--blue-soft)] font-extrabold text-[var(--blue)]">
-                N
+              <div className="grid h-10 w-10 place-items-center rounded-full bg-[#fff8e1] text-lg">
+                🪙
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-2.5">
               <div className="rounded-[14px] border border-[var(--border)] p-4">
-                <b className="block text-xl font-extrabold sm:text-2xl">
-                  Realtime
+                <b className="block text-xl font-extrabold text-[var(--navy)] sm:text-2xl">
+                  +100
                 </b>
-                <small className="text-xs text-[var(--muted)]">Progres</small>
+                <small className="text-xs text-[var(--muted)]">
+                  Bonus Daftar
+                </small>
               </div>
               <div className="rounded-[14px] border border-[var(--border)] p-4">
-                <b className="block text-xl font-extrabold sm:text-2xl">
-                  Cloud
+                <b className="block text-xl font-extrabold text-[var(--blue)] sm:text-2xl">
+                  25
                 </b>
-                <small className="text-xs text-[var(--muted)]">Database</small>
+                <small className="text-xs text-[var(--muted)]">
+                  Coin / Tryout
+                </small>
               </div>
               <div className="rounded-[14px] border border-[var(--border)] p-4">
-                <b className="block text-xl font-extrabold sm:text-2xl">
-                  Online
+                <b className="block text-xl font-extrabold text-[var(--navy)] sm:text-2xl">
+                  100
                 </b>
-                <small className="text-xs text-[var(--muted)]">Status</small>
+                <small className="text-xs text-[var(--muted)]">
+                  Live Class / Bln
+                </small>
               </div>
             </div>
 
             <div className="mt-4 rounded-[14px] border border-[var(--border)] p-4">
-              <b className="text-sm font-bold">Belajar hari ini?</b>
+              <b className="text-sm font-bold">7 Subtes Lengkap Gratis</b>
               <p className="mt-1.5 text-[13px] text-[var(--muted)]">
-                Satu progres kecil tetap berarti.
+                PK · PM · PU · PPU · LBI · LBE · PBM disertai kunci jawaban dan
+                pembahasan langkah demi langkah.
               </p>
             </div>
           </div>
@@ -175,10 +184,11 @@ export function LandingView() {
         <div className="mx-auto w-[min(1160px,92%)]">
           <div className="mx-auto mb-9 max-w-[650px] text-center">
             <h2 className="mb-2.5 text-[34px] font-bold tracking-[-1.2px]">
-              Satu tempat untuk perjalanan belajarmu.
+              Semua amunisi UTBK-SNBT dalam satu tempat.
             </h2>
             <p className="leading-relaxed text-[var(--muted)]">
-              Dirancang sederhana supaya fokus tetap pada belajar.
+              Mulai dari latihan subtes gratis hingga Tryout mingguan dan Live
+              Class intensif.
             </p>
           </div>
 

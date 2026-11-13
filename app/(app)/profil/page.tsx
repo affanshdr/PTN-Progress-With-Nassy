@@ -1,13 +1,21 @@
 "use client";
 
+import Link from "next/link";
+import {
+  formatDateTimeId,
+  getDaysRemaining,
+  isLiveClassPassActive,
+} from "@/lib/progress-utils";
 import { useNassy } from "@/components/frontend/NassyProvider";
 
 export default function ProfilPage() {
-  const { currentUser } = useNassy();
+  const { currentUser, coinBalance } = useNassy();
 
   if (!currentUser) return null;
 
   const initial = (currentUser.name || "N")[0]?.toUpperCase() ?? "N";
+  const hasPass = isLiveClassPassActive(currentUser.liveclass_pass_until);
+  const daysLeft = getDaysRemaining(currentUser.liveclass_pass_until);
 
   return (
     <div>
@@ -16,7 +24,7 @@ export default function ProfilPage() {
           Profil Saya
         </h1>
         <div className="text-sm text-[var(--muted)]">
-          Informasi akun dan targetmu.
+          Informasi akun, target PTN, dan status Coin kamu.
         </div>
       </div>
 
@@ -37,7 +45,7 @@ export default function ProfilPage() {
 
         <hr className="my-5 border-0 border-t border-[var(--border)]" />
 
-        <div className="grid gap-3.5 text-sm">
+        <div className="grid gap-3.5 text-sm sm:grid-cols-2">
           <div>
             <b className="block text-[var(--ink)]">Kelas</b>
             <div className="text-[var(--muted)]">{currentUser.class_name}</div>
@@ -49,6 +57,23 @@ export default function ProfilPage() {
           <div>
             <b className="block text-[var(--ink)]">Program Studi</b>
             <div className="text-[var(--muted)]">{currentUser.major}</div>
+          </div>
+          <div>
+            <b className="block text-[var(--ink)]">Saldo Coin</b>
+            <div className="font-bold text-[#8a5300]">
+              🪙 {coinBalance} Coin ·{" "}
+              <Link href="/coin" className="text-[var(--blue)] underline">
+                Kelola Dompet
+              </Link>
+            </div>
+          </div>
+          <div className="sm:col-span-2">
+            <b className="block text-[var(--ink)]">Live Class Pass</b>
+            <div className="text-[var(--muted)]">
+              {hasPass && currentUser.liveclass_pass_until
+                ? `Aktif (${daysLeft} hari tersisa · s.d. ${formatDateTimeId(currentUser.liveclass_pass_until)})`
+                : "Belum aktif — aktifkan 100 Coin untuk akses 30 hari di menu Live Class."}
+            </div>
           </div>
         </div>
       </div>

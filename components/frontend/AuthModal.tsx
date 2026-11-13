@@ -2,8 +2,9 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { CLASS_OPTIONS } from "@/lib/progress-utils";
+import { CLASS_OPTIONS, COIN_PRICING } from "@/lib/progress-utils";
 import { getSupabaseClient } from "@/lib/supabase/client";
+import { getErrorMessage } from "@/lib/supabase/errors";
 import type { Profile } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
 
@@ -39,32 +40,61 @@ export function AuthModal() {
       const normalizedEmail = email.trim().toLowerCase();
 
       if (isRegister) {
-        const { data: authData, error: authError } = await supabase.auth.signUp({
-          email: normalizedEmail,
-          password,
-        });
+        const cleanName = name.trim() || "Pengguna";
+        const cleanPtn = ptn.trim() || "Belum diatur";
+        const cleanMajor = major.trim() || "Belum diatur";
+
+        const { data: authData, error: authError } = await supabase.auth.signUp(
+          {
+            email: normalizedEmail,
+            password,
+            options: {
+              data: {
+                name: cleanName,
+                class_name: className,
+                ptn: cleanPtn,
+                major: cleanMajor,
+              },
+            },
+          },
+        );
         if (authError) throw authError;
 
-        if (authData.user) {
-          const profileData: Profile = {
+        if (authData.user && authData.session) {
+          const profilePayload = {
             id: authData.user.id,
-            name: name.trim() || "Pengguna",
+            name: cleanName,
             email: normalizedEmail,
             class_name: className,
-            ptn: ptn.trim() || "Belum diatur",
-            major: major.trim() || "Belum diatur",
+            ptn: cleanPtn,
+            major: cleanMajor,
           };
 
-          const { error: profileError } = await supabase
+          const { data: insertedProfile, error: profileError } = await supabase
             .from("profiles")
-            .insert([profileData]);
+            .upsert([profilePayload], { onConflict: "id" })
+            .select("*")
+            .single();
+
           if (profileError) throw profileError;
 
-          setCurrentUser(profileData);
+          setCurrentUser(
+            (insertedProfile as Profile | null) ?? {
+              ...profilePayload,
+              coin_balance: COIN_PRICING.WELCOME_BONUS,
+            },
+          );
           closeAuthModal();
           await refreshData();
-          showToast("Akun berhasil dibuat!");
+          showToast(
+            `Akun berhasil dibuat! Kamu mendapat ${COIN_PRICING.WELCOME_BONUS} Coin awal 🪙`,
+          );
           router.push("/dashboard");
+        } else if (authData.user) {
+          showToast(
+            "Akun dibuat! Cek email untuk konfirmasi lalu masuk untuk klaim 100 Coin.",
+          );
+          toggleAuthModalMode();
         }
       } else {
         const { data: authData, error: signInError } =
@@ -74,22 +104,44 @@ export function AuthModal() {
           });
         if (signInError) throw signInError;
 
-        const { data: profileData } = await supabase
+        const { data: existingProfile } = await supabase
           .from("profiles")
           .select("*")
           .eq("id", authData.user.id)
-          .single();
+          .maybeSingle();
 
-        setCurrentUser((profileData as Profile | null) ?? null);
+        let finalProfile = existingProfile as Profile | null;
+
+        if (!finalProfile) {
+          const meta = (authData.user.user_metadata ?? {}) as Record<
+            string,
+            string | undefined
+          >;
+          const fallbackPayload = {
+            id: authData.user.id,
+            name: meta.name || "Pengguna",
+            email: normalizedEmail,
+            class_name: meta.class_name || CLASS_OPTIONS[2],
+            ptn: meta.ptn || "Belum diatur",
+            major: meta.major || "Belum diatur",
+          };
+          const { data: createdProfile, error: createError } = await supabase
+            .from("profiles")
+            .upsert([fallbackPayload], { onConflict: "id" })
+            .select("*")
+            .single();
+          if (createError) throw createError;
+          finalProfile = createdProfile as Profile;
+        }
+
+        setCurrentUser(finalProfile);
         closeAuthModal();
         await refreshData();
         showToast("Berhasil masuk.");
         router.push("/dashboard");
       }
     } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Terjadi kesalahan.";
-      showToast(message);
+      showToast(getErrorMessage(error, "Terjadi kesalahan."));
     } finally {
       setIsSubmitting(false);
     }
@@ -116,8 +168,8 @@ export function AuthModal() {
             </h2>
             <p className="mt-1.5 text-sm text-[var(--muted)]">
               {isRegister
-                ? "Mulai perjalanan belajarmu bersama komunitas."
-                : "Masuk ke ruang progresmu."}
+                ? "Mulai belajar 7 subtes, Tryout Mingguan, dan Live Class."
+                : "Masuk ke ruang belajar Nassy."}
             </p>
           </div>
           <button
@@ -129,6 +181,13 @@ export function AuthModal() {
             ×
           </button>
         </div>
+
+        {isRegister ? (
+          <div className="mt-4 rounded-xl border border-[#cde1ff] bg-[var(--blue-soft)] px-3.5 py-2.5 text-xs font-bold text-[var(--navy)]">
+            🪙 Bonus Akun Baru: Otomatis mendapat{" "}
+            {COIN_PRICING.WELCOME_BONUS} Coin untuk ikut Tryout & Live Class!
+          </div>
+        ) : null}
 
         <form onSubmit={handleSubmit} className="mt-5 grid gap-3.5">
           {isRegister ? (
@@ -251,7 +310,7 @@ export function AuthModal() {
             {isSubmitting
               ? "Memproses..."
               : isRegister
-                ? "Daftar & Masuk"
+                ? "Daftar & Klaim 100 Coin"
                 : "Masuk"}
           </button>
         </form>
