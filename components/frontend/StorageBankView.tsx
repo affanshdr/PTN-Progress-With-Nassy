@@ -118,26 +118,26 @@ export function StorageBankView() {
   }, [entries, searchQuery]);
 
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-white p-5">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2.5">
+    <div className="rounded-2xl border border-[#e5eaf1] bg-white p-5 sm:p-6">
+      <div className="mb-4 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <input
           type="search"
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
           placeholder="Cari nama file PDF/modul di folder ini..."
-          className="min-w-[200px] flex-1 rounded-[10px] border border-[var(--border)] px-3 py-2.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+          className="min-w-0 w-full flex-1 rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3.5 py-2.5 text-sm outline-none transition focus:border-[var(--blue)] focus:bg-white focus:ring-3 focus:ring-[var(--blue-soft)] sm:min-w-[200px] sm:w-auto"
         />
         <button
           type="button"
           onClick={handleReload}
           disabled={isLoading}
-          className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-xs font-bold text-[var(--navy)] transition hover:-translate-y-0.5 disabled:opacity-60"
+          className="w-full cursor-pointer rounded-lg border border-[#dce4ef] bg-white px-4 py-2.5 text-center text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] hover:text-[var(--blue)] disabled:opacity-60 sm:w-auto"
         >
           ↻ Muat ulang
         </button>
       </div>
 
-      <div className="my-2.5 mb-4.5 flex flex-wrap items-center gap-1.5 text-[13px] text-[var(--muted)]">
+      <div className="my-2.5 mb-5 flex flex-wrap items-center gap-1.5 rounded-xl border border-[#eef2f7] bg-[#f8fafd] px-3 py-2 text-[13px] text-[var(--muted)]">
         <button
           type="button"
           onClick={() => navigateToFolder("")}
@@ -172,9 +172,9 @@ export function StorageBankView() {
       ) : null}
 
       {!isLoading && !errorMessage ? (
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3">
+        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]">
           {filteredEntries.length === 0 ? (
-            <div className="col-span-full py-9 text-center text-sm text-[var(--muted)]">
+            <div className="col-span-full rounded-xl border border-dashed border-[#dce4ef] py-10 text-center text-sm text-[var(--muted)]">
               Belum ada folder atau file pada lokasi ini.
             </div>
           ) : (
@@ -192,17 +192,17 @@ export function StorageBankView() {
               return (
                 <div
                   key={fullPath}
-                  className="flex min-w-0 items-center gap-3 rounded-[13px] border border-[var(--border)] bg-white p-3.5"
+                  className="flex min-w-0 items-center gap-3 rounded-xl border border-[#e5eaf1] bg-white p-3.5 transition hover:-translate-y-0.5 hover:border-[#c3d6f4] hover:shadow-[0_10px_20px_rgba(23,50,77,0.06)]"
                 >
-                  <span className="text-2xl">{icon}</span>
-                  <span className="flex-1 text-sm font-bold break-words">
+                  <span className="shrink-0 text-2xl">{icon}</span>
+                  <span className="min-w-0 flex-1 break-all text-sm font-bold text-[var(--ink)]">
                     {item.name}
                   </span>
                   {item.isFolder ? (
                     <button
                       type="button"
                       onClick={() => navigateToFolder(fullPath)}
-                      className="cursor-pointer rounded-[9px] border-0 bg-[var(--blue-soft)] px-3 py-2 text-xs font-bold text-[var(--blue)]"
+                      className="cursor-pointer rounded-lg border-0 bg-[var(--blue-soft)] px-3 py-2 text-xs font-bold text-[var(--blue)] transition hover:bg-[var(--blue)] hover:text-white"
                     >
                       Buka
                     </button>
@@ -211,7 +211,7 @@ export function StorageBankView() {
                       href={item.publicUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-[9px] bg-[var(--blue-soft)] px-3 py-2 text-xs font-bold text-[var(--blue)]"
+                      className="rounded-lg bg-[var(--blue-soft)] px-3 py-2 text-xs font-bold text-[var(--blue)] transition hover:bg-[var(--blue)] hover:text-white"
                     >
                       Buka
                     </a>
@@ -223,7 +223,7 @@ export function StorageBankView() {
         </div>
       ) : null}
 
-      <p className="mt-3 text-[13px] leading-relaxed text-[var(--muted)]">
+      <p className="mt-4 text-[13px] leading-relaxed text-[var(--muted)]">
         File dibaca langsung dari bucket <b>{SOAL_BUCKET}</b>.
       </p>
     </div>

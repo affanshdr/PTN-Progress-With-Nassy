@@ -11,8 +11,16 @@ import type {
   SnbtSubtestCode,
 } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import { SubtestThumbnail } from "@/components/frontend/SkilvulUi";
 
 const OPTION_KEYS: readonly OptionLetter[] = ["A", "B", "C", "D", "E"];
+
+const STATUS_TABS = [
+  { key: "ALL", label: "Semua Soal" },
+  { key: "UNANSWERED", label: "Belum Dikerjakan" },
+  { key: "CORRECT", label: "Sudah Benar" },
+  { key: "WRONG", label: "Perlu Review" },
+] as const;
 
 function getOptionText(q: PracticeQuestion, letter: OptionLetter): string {
   switch (letter) {
@@ -78,6 +86,7 @@ export function SubtestPracticeView() {
         if (sRes.error) throw sRes.error;
 
         setQuestions((qRes.data as PracticeQuestion[]) ?? []);
+
         const subMap: Record<string, PracticeSubmission> = {};
         for (const item of (sRes.data as PracticeSubmission[]) ?? []) {
           subMap[item.question_id] = item;
@@ -133,6 +142,11 @@ export function SubtestPracticeView() {
     return map;
   }, [questions, submissions]);
 
+  const totalAnsweredAll = useMemo(
+    () => questions.filter((q) => Boolean(submissions[q.id])).length,
+    [questions, submissions],
+  );
+
   const filteredQuestions = useMemo(() => {
     return questions.filter((q) => {
       if (selectedSubtest !== "ALL" && q.subtest !== selectedSubtest) {
@@ -165,6 +179,17 @@ export function SubtestPracticeView() {
     : undefined;
   const shownChoice =
     draftChoice ?? activeSubmission?.selected_option ?? null;
+
+  const activeSubtestTotals =
+    selectedSubtest === "ALL"
+      ? { total: questions.length, answered: totalAnsweredAll }
+      : subtestStats[selectedSubtest];
+  const progressPct =
+    activeSubtestTotals.total > 0
+      ? Math.round(
+          (activeSubtestTotals.answered / activeSubtestTotals.total) * 100,
+        )
+      : 0;
 
   function selectSubtest(code: SnbtSubtestCode | "ALL") {
     setSelectedSubtest(code);
@@ -218,83 +243,196 @@ export function SubtestPracticeView() {
   }
 
   return (
-    <div className="space-y-5">
-      {/* 7 Subtes Selector */}
-      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-4">
+    <div className="space-y-6">
+      {/* Skilvul Enrolled Course Cards Grid for 7 Subtests */}
+      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
         <button
           type="button"
           onClick={() => selectSubtest("ALL")}
-          className={`cursor-pointer rounded-2xl border p-3.5 text-left transition ${
+          className={`flex cursor-pointer flex-col justify-between overflow-hidden rounded-[14px] border bg-white text-left transition hover:-translate-y-0.5 ${
             selectedSubtest === "ALL"
-              ? "border-[var(--blue)] bg-[var(--blue-soft)]/70"
-              : "border-[var(--border)] bg-white hover:border-[#ccd7e6]"
+              ? "border-[var(--blue)] ring-2 ring-[var(--blue)]/25"
+              : "border-[var(--border)] hover:border-[#b9cde8]"
           }`}
         >
-          <div className="flex items-center justify-between gap-2">
-            <span className="rounded-md bg-[var(--navy)] px-2 py-0.5 text-[11px] font-extrabold text-white">
-              SEMUA
-            </span>
-            <span className="text-xs font-bold text-[#147a4b]">GRATIS</span>
-          </div>
-          <div className="mt-2 text-sm font-bold text-[var(--ink)]">
-            Semua 7 Subtes
-          </div>
-          <div className="mt-0.5 text-xs text-[var(--muted)]">
-            {questions.length} soal tersedia
+          <SubtestThumbnail
+            code="ALL"
+            topRightLabel="GRATIS"
+            bottomLeftLabel={`${questions.length} Soal`}
+          />
+          <div className="flex w-full flex-1 flex-col justify-between p-3.5">
+            <div>
+              <div className="text-sm font-extrabold text-[var(--ink)]">
+                Semua 7 Subtes
+              </div>
+              <div className="mt-2 flex items-center justify-between text-[11px] font-bold text-[var(--muted)]">
+                <span>
+                  {totalAnsweredAll} / {questions.length} dikerjakan
+                </span>
+                <span className="text-[var(--blue)]">
+                  {questions.length > 0
+                    ? Math.round((totalAnsweredAll / questions.length) * 100)
+                    : 0}
+                  %
+                </span>
+              </div>
+              <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-[#eef2f6]">
+                <div
+                  className="h-full rounded-full bg-[var(--blue)]"
+                  style={{
+                    width: `${
+                      questions.length > 0
+                        ? Math.round(
+                            (totalAnsweredAll / questions.length) * 100,
+                          )
+                        : 0
+                    }%`,
+                  }}
+                />
+              </div>
+            </div>
+
+            <div
+              className={`mt-3 w-full rounded-lg py-1.5 text-center text-xs font-extrabold ${
+                selectedSubtest === "ALL"
+                  ? "bg-[var(--navy)] text-white"
+                  : "bg-[#f4f7fb] text-[var(--navy)]"
+              }`}
+            >
+              {selectedSubtest === "ALL" ? "Sedang Dibuka" : "Pilih Semua"}
+            </div>
           </div>
         </button>
 
         {SNBT_SUBTESTS.map((sub) => {
           const stats = subtestStats[sub.code];
           const isSelected = selectedSubtest === sub.code;
+          const pct =
+            stats.total > 0
+              ? Math.round((stats.answered / stats.total) * 100)
+              : 0;
+
           return (
             <button
               key={sub.code}
               type="button"
               onClick={() => selectSubtest(sub.code)}
-              className={`cursor-pointer rounded-2xl border p-3.5 text-left transition ${
+              className={`flex cursor-pointer flex-col justify-between overflow-hidden rounded-[14px] border bg-white text-left transition hover:-translate-y-0.5 ${
                 isSelected
-                  ? "border-[var(--blue)] bg-[var(--blue-soft)]/70"
-                  : "border-[var(--border)] bg-white hover:border-[#ccd7e6]"
+                  ? "border-[var(--blue)] ring-2 ring-[var(--blue)]/25"
+                  : "border-[var(--border)] hover:border-[#b9cde8]"
               }`}
             >
-              <div className="flex items-center justify-between gap-2">
-                <span className="rounded-md bg-[var(--blue-soft)] px-2 py-0.5 text-[11px] font-extrabold text-[var(--blue)]">
-                  {sub.code}
-                </span>
-                <span className="text-[11px] font-semibold text-[var(--muted)]">
-                  {stats.answered}/{stats.total}
-                </span>
-              </div>
-              <div className="mt-2 line-clamp-1 text-sm font-bold text-[var(--ink)]">
-                {sub.name}
-              </div>
-              <div className="mt-0.5 text-xs text-[var(--muted)]">
-                {stats.answered > 0
-                  ? `Benar ${stats.correct}/${stats.answered}`
-                  : sub.category}
+              <SubtestThumbnail
+                code={sub.code}
+                topRightLabel={
+                  stats.answered > 0
+                    ? `${stats.correct}/${stats.answered} Benar`
+                    : "GRATIS"
+                }
+                bottomLeftLabel={sub.category}
+              />
+              <div className="flex w-full flex-1 flex-col justify-between p-3.5">
+                <div>
+                  <div className="line-clamp-1 text-sm font-extrabold text-[var(--ink)]">
+                    {sub.name}
+                  </div>
+                  <div className="mt-2 flex items-center justify-between text-[11px] font-bold text-[var(--muted)]">
+                    <span>
+                      {stats.answered} / {stats.total} Soal
+                    </span>
+                    <span className="text-[var(--blue)]">{pct}%</span>
+                  </div>
+                  <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-[#eef2f6]">
+                    <div
+                      className="h-full rounded-full bg-[var(--blue)]"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className={`mt-3 w-full rounded-lg py-1.5 text-center text-xs font-extrabold ${
+                    isSelected
+                      ? "bg-[var(--navy)] text-white"
+                      : "bg-[#f4f7fb] text-[var(--navy)]"
+                  }`}
+                >
+                  {isSelected
+                    ? "Sedang Dipelajari"
+                    : stats.answered > 0
+                      ? "Lanjutkan"
+                      : "Mulai Latihan"}
+                </div>
               </div>
             </button>
           );
         })}
       </div>
 
-      {/* Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white p-4">
-        <div>
-          <div className="text-sm font-bold text-[var(--ink)]">
-            {selectedSubtest === "ALL"
-              ? "Semua Subtes SNBT (PK, PM, PU, PPU, LBI, LBE, PBM)"
-              : `${selectedSubtest} — ${SNBT_SUBTEST_MAP[selectedSubtest].name}`}
+      {/* Skilvul Classroom Top Progress & Filter Header */}
+      <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs sm:p-5">
+        <div className="flex flex-col justify-between gap-3 border-b border-[var(--border)] pb-4 md:flex-row md:items-center">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-1.5 text-xs font-bold text-[var(--blue)]">
+              <span>Bank Soal</span>
+              <span>›</span>
+              <span>
+                {selectedSubtest === "ALL"
+                  ? "Semua 7 Subtes"
+                  : `${selectedSubtest} — ${SNBT_SUBTEST_MAP[selectedSubtest].name}`}
+              </span>
+            </div>
+            <p className="mt-1 text-xs text-[var(--muted)]">
+              {selectedSubtest === "ALL"
+                ? "Latihan soal interaktif seluruh subtes SNBT lengkap dengan pembahasan."
+                : SNBT_SUBTEST_MAP[selectedSubtest].description}
+            </p>
           </div>
-          <div className="text-xs text-[var(--muted)]">
-            {selectedSubtest === "ALL"
-              ? "Pilih soal di bawah untuk berlatih dan melihat pembahasan lengkap."
-              : SNBT_SUBTEST_MAP[selectedSubtest].description}
+
+          <div className="w-full md:w-64">
+            <div className="flex items-center justify-between text-xs font-extrabold text-[var(--navy)]">
+              <span>Progres Subtes</span>
+              <span>
+                {activeSubtestTotals.answered}/{activeSubtestTotals.total} (
+                {progressPct}%)
+              </span>
+            </div>
+            <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#eef2f6]">
+              <div
+                className="h-full rounded-full bg-[var(--blue)] transition-all"
+                style={{ width: `${progressPct}%` }}
+              />
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        {/* Status Pill Tabs + Difficulty Filter */}
+        <div className="mt-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-wrap gap-1.5">
+            {STATUS_TABS.map((tab) => {
+              const active = statusFilter === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => {
+                    setStatusFilter(tab.key);
+                    setActiveIndex(0);
+                    setDraftChoice(null);
+                  }}
+                  className={`cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition ${
+                    active
+                      ? "bg-[var(--navy)] text-white"
+                      : "bg-[#f4f7fb] text-[var(--muted)] hover:text-[var(--navy)]"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
           <select
             aria-label="Filter kesulitan"
             value={difficultyFilter}
@@ -303,36 +441,18 @@ export function SubtestPracticeView() {
               setActiveIndex(0);
               setDraftChoice(null);
             }}
-            className="rounded-[10px] border border-[var(--border)] bg-white px-3 py-2 text-xs font-bold text-[var(--ink)] outline-none"
+            className="w-full rounded-lg border border-[var(--border)] bg-white px-3 py-2 text-xs font-bold text-[var(--ink)] outline-none sm:w-auto"
           >
             <option value="ALL">Semua Level</option>
             <option value="Mudah">Mudah</option>
             <option value="Sedang">Sedang</option>
             <option value="Sulit">Sulit</option>
           </select>
-
-          <select
-            aria-label="Filter status"
-            value={statusFilter}
-            onChange={(event) => {
-              setStatusFilter(
-                event.target.value as "ALL" | "UNANSWERED" | "CORRECT" | "WRONG",
-              );
-              setActiveIndex(0);
-              setDraftChoice(null);
-            }}
-            className="rounded-[10px] border border-[var(--border)] bg-white px-3 py-2 text-xs font-bold text-[var(--ink)] outline-none"
-          >
-            <option value="ALL">Semua Status</option>
-            <option value="UNANSWERED">Belum Dikerjakan</option>
-            <option value="CORRECT">Sudah Benar</option>
-            <option value="WRONG">Perlu Review</option>
-          </select>
         </div>
       </div>
 
       {isLoading ? (
-        <div className="rounded-2xl border border-[var(--border)] bg-white p-8 text-center text-sm text-[var(--muted)]">
+        <div className="rounded-2xl border border-[var(--border)] bg-white p-10 text-center text-sm text-[var(--muted)]">
           Memuat bank soal 7 subtes...
         </div>
       ) : errorMessage ? (
@@ -340,109 +460,127 @@ export function SubtestPracticeView() {
           {errorMessage}
         </div>
       ) : filteredQuestions.length === 0 ? (
-        <div className="rounded-2xl border border-[var(--border)] bg-white p-8 text-center text-sm text-[var(--muted)]">
+        <div className="rounded-2xl border border-[var(--border)] bg-white p-10 text-center text-sm text-[var(--muted)]">
           Tidak ada soal yang cocok dengan filter saat ini.
         </div>
       ) : activeQuestion ? (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_250px]">
-          {/* Active Question Card */}
-          <div className="rounded-2xl border border-[var(--border)] bg-white p-5 sm:p-6">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border)] pb-3.5">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-md bg-[var(--blue-soft)] px-2.5 py-1 text-xs font-extrabold text-[var(--blue)]">
-                  {activeQuestion.subtest}
-                </span>
-                <span className="rounded-md bg-[#f1f5f9] px-2.5 py-1 text-xs font-bold text-[var(--navy)]">
-                  {activeQuestion.topic}
-                </span>
-                <span className="rounded-md border border-[var(--border)] px-2.5 py-1 text-xs font-semibold text-[var(--muted)]">
-                  {activeQuestion.difficulty}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_256px]">
+          {/* Active Question Classroom Container */}
+          <div className="min-w-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-2xs">
+            <div className="p-5 sm:p-6">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border)] pb-3.5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full bg-[var(--blue-soft)] px-3 py-1 text-xs font-extrabold text-[var(--blue)]">
+                    {activeQuestion.subtest}
+                  </span>
+                  <span className="rounded-full bg-[#f1f5f9] px-3 py-1 text-xs font-bold text-[var(--navy)]">
+                    {activeQuestion.topic}
+                  </span>
+                  <span className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold text-[var(--muted)]">
+                    {activeQuestion.difficulty}
+                  </span>
+                </div>
+                <span className="text-xs font-extrabold text-[var(--muted)]">
+                  Soal {safeIndex + 1} dari {filteredQuestions.length}
                 </span>
               </div>
-              <span className="text-xs font-bold text-[var(--muted)]">
-                Soal {safeIndex + 1} dari {filteredQuestions.length}
-              </span>
-            </div>
 
-            <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed font-medium text-[var(--ink)]">
-              {activeQuestion.question_text}
-            </p>
+              <p className="mt-5 whitespace-pre-line text-[15px] leading-relaxed font-medium text-[var(--ink)]">
+                {activeQuestion.question_text}
+              </p>
 
-            <div className="mt-5 grid gap-2.5">
-              {OPTION_KEYS.map((letter) => {
-                const isSelected = shownChoice === letter;
-                const isSubmitted = Boolean(activeSubmission);
-                const isCorrectKey =
-                  isSubmitted && letter === activeQuestion.correct_option;
-                const isWrongUserPick =
-                  isSubmitted &&
-                  activeSubmission?.selected_option === letter &&
-                  !activeSubmission.is_correct;
+              <div className="mt-5 grid gap-2.5">
+                {OPTION_KEYS.map((letter) => {
+                  const isSelected = shownChoice === letter;
+                  const isSubmitted = Boolean(activeSubmission);
+                  const isCorrectKey =
+                    isSubmitted && letter === activeQuestion.correct_option;
+                  const isWrongUserPick =
+                    isSubmitted &&
+                    activeSubmission?.selected_option === letter &&
+                    !activeSubmission.is_correct;
 
-                let optionClasses =
-                  "border-[var(--border)] bg-white hover:border-[#c3d2e8]";
-                if (isCorrectKey) {
-                  optionClasses =
-                    "border-[#147a4b] bg-[#ecfdf3] text-[#115e3b]";
-                } else if (isWrongUserPick) {
-                  optionClasses =
-                    "border-[#d92d20] bg-[#fef3f2] text-[#912018]";
-                } else if (isSelected) {
-                  optionClasses =
-                    "border-[var(--blue)] bg-[var(--blue-soft)]/70 text-[var(--navy)]";
-                }
+                  let optionClasses =
+                    "border-[var(--border)] bg-white hover:border-[#b7cce6] hover:bg-[#fafcff]";
+                  if (isCorrectKey) {
+                    optionClasses =
+                      "border-[#147a4b] bg-[#ecfdf3] text-[#115e3b]";
+                  } else if (isWrongUserPick) {
+                    optionClasses =
+                      "border-[#d92d20] bg-[#fef3f2] text-[#912018]";
+                  } else if (isSelected) {
+                    optionClasses =
+                      "border-[var(--blue)] bg-[var(--blue-soft)]/70 text-[var(--navy)]";
+                  }
 
-                return (
-                  <button
-                    key={letter}
-                    type="button"
-                    onClick={() => setDraftChoice(letter)}
-                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 text-left text-sm transition ${optionClasses}`}
-                  >
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-current text-xs font-extrabold">
-                      {letter}
-                    </span>
-                    <span className="leading-relaxed">
-                      {getOptionText(activeQuestion, letter)}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  disabled={safeIndex === 0}
-                  onClick={() => {
-                    setActiveIndex((prev) => Math.max(0, prev - 1));
-                    setDraftChoice(null);
-                  }}
-                  className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-3.5 py-2 text-xs font-bold text-[var(--navy)] disabled:cursor-not-allowed disabled:opacity-45"
-                >
-                  ← Sebelumnya
-                </button>
-                <button
-                  type="button"
-                  disabled={safeIndex >= filteredQuestions.length - 1}
-                  onClick={() => {
-                    setActiveIndex((prev) =>
-                      Math.min(filteredQuestions.length - 1, prev + 1),
-                    );
-                    setDraftChoice(null);
-                  }}
-                  className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-3.5 py-2 text-xs font-bold text-[var(--navy)] disabled:cursor-not-allowed disabled:opacity-45"
-                >
-                  Berikutnya →
-                </button>
+                  return (
+                    <button
+                      key={letter}
+                      type="button"
+                      onClick={() => setDraftChoice(letter)}
+                      className={`flex min-w-0 cursor-pointer items-start gap-3 rounded-xl border p-3.5 text-left text-sm transition ${optionClasses}`}
+                    >
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-current text-xs font-extrabold">
+                        {letter}
+                      </span>
+                      <span className="min-w-0 break-words leading-relaxed">
+                        {getOptionText(activeQuestion, letter)}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
+
+              {activeSubmission ? (
+                <div
+                  className={`mt-5 rounded-xl border p-4.5 ${
+                    activeSubmission.is_correct
+                      ? "border-[#b7e4c7] bg-[#f2fbf6]"
+                      : "border-[#fed7aa] bg-[#fffaf0]"
+                  }`}
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <b
+                      className={`text-sm font-extrabold ${
+                        activeSubmission.is_correct
+                          ? "text-[#147a4b]"
+                          : "text-[#b45309]"
+                      }`}
+                    >
+                      {activeSubmission.is_correct
+                        ? "✓ Jawaban Kamu Benar!"
+                        : `✕ Jawaban Kamu (${activeSubmission.selected_option}) Belum Tepat · Kunci: ${activeQuestion.correct_option}`}
+                    </b>
+                    <span className="rounded-full bg-white px-2.5 py-0.5 text-[11px] font-extrabold text-[var(--navy)]">
+                      Pembahasan Lengkap
+                    </span>
+                  </div>
+                  <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--ink)]">
+                    {activeQuestion.explanation}
+                  </p>
+                </div>
+              ) : null}
+            </div>
+
+            {/* Skilvul Classroom Signature Bottom Control Bar */}
+            <div className="flex flex-col items-stretch justify-between gap-2.5 bg-[var(--navy)] px-4 py-3 text-white sm:flex-row sm:items-center sm:px-6">
+              <button
+                type="button"
+                disabled={safeIndex === 0}
+                onClick={() => {
+                  setActiveIndex((prev) => Math.max(0, prev - 1));
+                  setDraftChoice(null);
+                }}
+                className="cursor-pointer rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                ‹ Sebelumnya
+              </button>
 
               <button
                 type="button"
                 disabled={isSubmitting || !shownChoice}
                 onClick={() => void handleCheckAnswer()}
-                className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4.5 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-55"
+                className="cursor-pointer rounded-full bg-white px-5 py-2.5 text-center text-xs font-extrabold text-[var(--navy)] shadow-sm transition hover:bg-[var(--blue-soft)] disabled:cursor-not-allowed disabled:opacity-55 sm:text-sm"
               >
                 {isSubmitting
                   ? "Memeriksa..."
@@ -450,43 +588,27 @@ export function SubtestPracticeView() {
                     ? "Cek Ulang Jawaban"
                     : "Periksa Jawaban & Buka Pembahasan"}
               </button>
-            </div>
 
-            {activeSubmission ? (
-              <div
-                className={`mt-5 rounded-2xl border p-4.5 ${
-                  activeSubmission.is_correct
-                    ? "border-[#b7e4c7] bg-[#f2fbf6]"
-                    : "border-[#fed7aa] bg-[#fffaf0]"
-                }`}
+              <button
+                type="button"
+                disabled={safeIndex >= filteredQuestions.length - 1}
+                onClick={() => {
+                  setActiveIndex((prev) =>
+                    Math.min(filteredQuestions.length - 1, prev + 1),
+                  );
+                  setDraftChoice(null);
+                }}
+                className="cursor-pointer rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <b
-                    className={`text-sm font-extrabold ${
-                      activeSubmission.is_correct
-                        ? "text-[#147a4b]"
-                        : "text-[#b45309]"
-                    }`}
-                  >
-                    {activeSubmission.is_correct
-                      ? "✓ Jawaban Kamu Benar!"
-                      : `✕ Jawaban Kamu (${activeSubmission.selected_option}) Belum Tepat · Kunci: ${activeQuestion.correct_option}`}
-                  </b>
-                  <span className="text-xs font-bold text-[var(--muted)]">
-                    Pembahasan
-                  </span>
-                </div>
-                <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--ink)]">
-                  {activeQuestion.explanation}
-                </p>
-              </div>
-            ) : null}
+                Berikutnya ›
+              </button>
+            </div>
           </div>
 
-          {/* Question Navigator */}
-          <aside className="rounded-2xl border border-[var(--border)] bg-white p-4 self-start">
-            <div className="text-sm font-bold text-[var(--ink)]">
-              Navigasi Soal
+          {/* Question Navigator Drawer Card */}
+          <aside className="self-start rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs">
+            <div className="text-sm font-extrabold text-[var(--navy)]">
+              Navigasi Nomor Soal
             </div>
             <div className="mt-1 text-xs text-[var(--muted)]">
               Hijau: Benar · Merah: Salah
@@ -512,7 +634,7 @@ export function SubtestPracticeView() {
                       setDraftChoice(null);
                     }}
                     className={`h-9 cursor-pointer rounded-lg border text-xs font-extrabold transition ${pillStyle} ${
-                      isCurrent ? "ring-2 ring-[var(--blue)]" : ""
+                      isCurrent ? "ring-2 ring-[var(--blue)] ring-offset-1" : ""
                     }`}
                   >
                     {idx + 1}

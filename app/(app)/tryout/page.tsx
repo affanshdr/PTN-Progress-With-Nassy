@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { COIN_PRICING, formatDateTimeId } from "@/lib/progress-utils";
 import { getSupabaseClient, isSupabaseBrowserConfigured } from "@/lib/supabase/client";
 import { getErrorMessage, isMissingSchemaError } from "@/lib/supabase/errors";
 import type { TryoutCatalogItem } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import { WorkspaceHeroBanner } from "@/components/frontend/SkilvulUi";
 
 export default function TryoutPage() {
   const {
@@ -20,6 +21,9 @@ export default function TryoutPage() {
   } = useNassy();
 
   const [tryouts, setTryouts] = useState<TryoutCatalogItem[]>([]);
+  const [statusTab, setStatusTab] = useState<"ALL" | "REGISTERED" | "DONE">(
+    "ALL",
+  );
   const [nowMs, setNowMs] = useState(0);
   const [reloadNonce, setReloadNonce] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -100,35 +104,69 @@ export default function TryoutPage() {
     }
   }
 
-  return (
-    <div>
-      <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <h1 className="m-0 mb-1.5 text-[28px] font-bold sm:text-[30px]">
-            📝 Tryout Mingguan
-          </h1>
-          <div className="text-sm text-[var(--muted)]">
-            Uji kemampuan tiap minggu ({COIN_PRICING.TRYOUT_WEEKLY_COST} Coin
-            per Tryout), dapatkan skor skala SNBT, pembahasan, & masuk
-            Leaderboard.
-          </div>
-        </div>
+  const filteredTryouts = useMemo(() => {
+    if (statusTab === "REGISTERED") {
+      return tryouts.filter((t) => t.is_registered && !t.has_attempted);
+    }
+    if (statusTab === "DONE") {
+      return tryouts.filter((t) => t.has_attempted);
+    }
+    return tryouts;
+  }, [statusTab, tryouts]);
 
-        <div className="flex flex-wrap items-center gap-2">
-          <Link
-            href="/peringkat"
-            className="rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-xs font-bold text-[var(--navy)] transition hover:-translate-y-0.5 sm:text-sm"
-          >
-            🏆 Leaderboard Tryout
-          </Link>
+  return (
+    <div className="space-y-5">
+      <WorkspaceHeroBanner
+        badge={`SIMULASI SNBT · ${COIN_PRICING.TRYOUT_WEEKLY_COST} COIN / EVENT`}
+        title="Tryout Mingguan SNBT"
+        description="Uji kemampuan setiap minggu, dapatkan skor skala SNBT 200–1000, analisis per subtes, pembahasan lengkap, dan posisi di Leaderboard."
+        actions={
+          <>
+            <Link
+              href="/peringkat"
+              className="rounded-lg border border-white/25 bg-white/12 px-4 py-2.5 text-xs font-extrabold text-white backdrop-blur-xs transition hover:bg-white/20 sm:text-sm"
+            >
+              🏆 Leaderboard Tryout
+            </Link>
+            <button
+              type="button"
+              onClick={openTopupModal}
+              className="cursor-pointer rounded-lg bg-white px-4 py-2.5 text-xs font-extrabold text-[var(--navy)] transition hover:bg-[var(--blue-soft)] sm:text-sm"
+            >
+              🪙 Saldo: {coinBalance} Coin
+            </button>
+          </>
+        }
+      />
+
+      {/* Skilvul-style Underlined Status Tabs */}
+      <div className="flex flex-wrap items-center gap-6 border-b border-[var(--border)] px-1">
+        {(
+          [
+            { key: "ALL", label: `Semua Paket (${tryouts.length})` },
+            {
+              key: "REGISTERED",
+              label: `Terdaftar (${tryouts.filter((t) => t.is_registered && !t.has_attempted).length})`,
+            },
+            {
+              key: "DONE",
+              label: `Selesai (${tryouts.filter((t) => t.has_attempted).length})`,
+            },
+          ] as const
+        ).map((tab) => (
           <button
+            key={tab.key}
             type="button"
-            onClick={openTopupModal}
-            className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-xs font-bold text-white transition hover:-translate-y-0.5 sm:text-sm"
+            onClick={() => setStatusTab(tab.key)}
+            className={`relative cursor-pointer pb-3 text-sm font-extrabold transition ${
+              statusTab === tab.key
+                ? "text-[var(--blue)] after:absolute after:right-0 after:bottom-0 after:left-0 after:h-[3px] after:rounded-full after:bg-[var(--blue)]"
+                : "text-[var(--muted)] hover:text-[var(--navy)]"
+            }`}
           >
-            🪙 Saldo: {coinBalance} Coin
+            {tab.label}
           </button>
-        </div>
+        ))}
       </div>
 
       {isLoading ? (
@@ -139,13 +177,13 @@ export default function TryoutPage() {
         <div className="rounded-2xl border border-[#ffd4d4] bg-[#fff1f1] p-5 text-sm text-[#a52b36]">
           {errorMessage}
         </div>
-      ) : tryouts.length === 0 ? (
+      ) : filteredTryouts.length === 0 ? (
         <div className="rounded-2xl border border-[var(--border)] bg-white p-8 text-center text-sm text-[var(--muted)]">
-          Belum ada paket Tryout Mingguan yang dipublikasikan.
+          Belum ada paket Tryout Mingguan pada kategori ini.
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {tryouts.map((item) => {
+          {filteredTryouts.map((item) => {
             const startsAt = new Date(item.starts_at).getTime();
             const endsAt = new Date(item.ends_at).getTime();
             const isUpcoming = nowMs > 0 && nowMs < startsAt;
@@ -193,10 +231,10 @@ export default function TryoutPage() {
                     {item.description}
                   </p>
 
-                  <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-[#f8fafc] p-3 text-center">
+                  <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-[#f8fafc] p-2.5 text-center sm:p-3">
                     <div>
                       <div className="text-[11px] text-[var(--muted)]">Soal</div>
-                      <div className="text-sm font-extrabold text-[var(--ink)]">
+                      <div className="text-xs font-extrabold text-[var(--ink)] sm:text-sm">
                         {item.question_count} nomor
                       </div>
                     </div>
@@ -204,7 +242,7 @@ export default function TryoutPage() {
                       <div className="text-[11px] text-[var(--muted)]">
                         Durasi
                       </div>
-                      <div className="text-sm font-extrabold text-[var(--ink)]">
+                      <div className="text-xs font-extrabold text-[var(--ink)] sm:text-sm">
                         {item.duration_minutes} menit
                       </div>
                     </div>
@@ -212,7 +250,7 @@ export default function TryoutPage() {
                       <div className="text-[11px] text-[var(--muted)]">
                         Peserta
                       </div>
-                      <div className="text-sm font-extrabold text-[var(--ink)]">
+                      <div className="text-xs font-extrabold text-[var(--ink)] sm:text-sm">
                         {item.participant_count}
                       </div>
                     </div>
@@ -224,18 +262,18 @@ export default function TryoutPage() {
                   </div>
                 </div>
 
-                <div className="mt-5 flex flex-wrap items-center gap-2.5 border-t border-[var(--border)] pt-4">
+                <div className="mt-5 flex flex-col gap-2 border-t border-[var(--border)] pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2.5">
                   {item.has_attempted ? (
                     <>
                       <Link
                         href={`/tryout/${item.id}`}
-                        className="flex-1 rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-center text-sm font-bold text-white transition hover:-translate-y-0.5"
+                        className="w-full rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-center text-sm font-bold text-white transition hover:-translate-y-0.5 sm:flex-1"
                       >
                         Lihat Skor & Pembahasan →
                       </Link>
                       <Link
                         href={`/peringkat?tryout=${item.id}`}
-                        className="rounded-[10px] border border-[var(--border)] bg-white px-3.5 py-2.5 text-xs font-bold text-[var(--navy)]"
+                        className="w-full rounded-[10px] border border-[var(--border)] bg-white px-3.5 py-2.5 text-center text-xs font-bold text-[var(--navy)] sm:w-auto"
                       >
                         Ranking
                       </Link>
@@ -329,12 +367,12 @@ export default function TryoutPage() {
               </div>
             ) : null}
 
-            <div className="mt-5 flex flex-wrap justify-end gap-2.5">
+            <div className="mt-5 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">
               <button
                 type="button"
                 disabled={isUnlocking}
                 onClick={() => setConfirmTarget(null)}
-                className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-sm font-bold text-[var(--muted)]"
+                className="w-full cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-sm font-bold text-[var(--muted)] sm:w-auto"
               >
                 Batal
               </button>
@@ -346,7 +384,7 @@ export default function TryoutPage() {
                     setConfirmTarget(null);
                     openTopupModal();
                   }}
-                  className="cursor-pointer rounded-[10px] bg-[var(--blue)] px-4 py-2.5 text-sm font-bold text-white"
+                  className="w-full cursor-pointer rounded-[10px] bg-[var(--blue)] px-4 py-2.5 text-sm font-bold text-white sm:w-auto"
                 >
                   Isi Coin Sekarang →
                 </button>
@@ -355,7 +393,7 @@ export default function TryoutPage() {
                   type="button"
                   disabled={isUnlocking}
                   onClick={() => void handleConfirmUnlock()}
-                  className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60"
+                  className="w-full cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60 sm:w-auto"
                 >
                   {isUnlocking
                     ? "Memproses..."

@@ -345,31 +345,31 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
         </div>
 
         {/* Summary Metrics */}
-        <div className="grid grid-cols-2 gap-3.5 lg:grid-cols-4">
-          <div className="rounded-2xl border border-[var(--border)] bg-white p-4.5">
+        <div className="grid grid-cols-2 gap-3 sm:gap-3.5 lg:grid-cols-4">
+          <div className="min-w-0 rounded-2xl border border-[var(--border)] bg-white p-4 sm:p-4.5">
             <div className="text-xs text-[var(--muted)]">Skor SNBT</div>
-            <div className="mt-1 text-3xl font-extrabold text-[var(--blue)]">
+            <div className="mt-1 text-2xl font-extrabold text-[var(--blue)] sm:text-3xl">
               {attempt.score}
             </div>
             <div className="text-[11px] text-[var(--muted)]">Skala 200–1000</div>
           </div>
-          <div className="rounded-2xl border border-[var(--border)] bg-white p-4.5">
+          <div className="min-w-0 rounded-2xl border border-[var(--border)] bg-white p-4 sm:p-4.5">
             <div className="text-xs text-[var(--muted)]">Jawaban Benar</div>
-            <div className="mt-1 text-3xl font-extrabold text-[#147a4b]">
+            <div className="mt-1 text-2xl font-extrabold text-[#147a4b] sm:text-3xl">
               {attempt.correct_count}/{attempt.total_questions}
             </div>
             <div className="text-[11px] text-[var(--muted)]">Soal terjawab</div>
           </div>
-          <div className="rounded-2xl border border-[var(--border)] bg-white p-4.5">
+          <div className="min-w-0 rounded-2xl border border-[var(--border)] bg-white p-4 sm:p-4.5">
             <div className="text-xs text-[var(--muted)]">Akurasi</div>
-            <div className="mt-1 text-3xl font-extrabold text-[var(--ink)]">
+            <div className="mt-1 text-2xl font-extrabold text-[var(--ink)] sm:text-3xl">
               {accuracy}%
             </div>
             <div className="text-[11px] text-[var(--muted)]">Ketepatan</div>
           </div>
-          <div className="rounded-2xl border border-[var(--border)] bg-white p-4.5">
+          <div className="min-w-0 rounded-2xl border border-[var(--border)] bg-white p-4 sm:p-4.5">
             <div className="text-xs text-[var(--muted)]">Waktu Pakai</div>
-            <div className="mt-1 text-3xl font-extrabold text-[var(--ink)]">
+            <div className="mt-1 text-2xl font-extrabold text-[var(--ink)] sm:text-3xl">
               {formatSecondsAsClock(attempt.duration_seconds)}
             </div>
             <div className="text-[11px] text-[var(--muted)]">Durasi selesai</div>
@@ -553,106 +553,138 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
 
   return (
     <div className="space-y-4">
-      {/* Top Exam Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white p-4">
-        <div>
-          <div className="text-xs font-bold text-[var(--blue)]">
-            Tryout Aktif · Minggu #{tryout.week_number}
+      {/* Top Exam Classroom Bar */}
+      <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs sm:p-5">
+        <div className="flex flex-col items-stretch justify-between gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="min-w-0">
+            <div className="text-xs font-extrabold text-[var(--blue)]">
+              Tryout Aktif · Minggu #{tryout.week_number}
+            </div>
+            <h1 className="m-0 break-words text-lg font-extrabold text-[var(--navy)]">
+              {tryout.title}
+            </h1>
           </div>
-          <h1 className="m-0 text-lg font-bold text-[var(--ink)]">
-            {tryout.title}
-          </h1>
+
+          <div className="flex flex-wrap items-center justify-between gap-2.5 sm:justify-end">
+            <div
+              className={`rounded-xl px-3.5 py-2 font-mono text-sm font-extrabold ${
+                (secondsLeft ?? 999) <= 180
+                  ? "bg-[#fef3f2] text-[#b42318]"
+                  : "bg-[var(--blue-soft)] text-[var(--navy)]"
+              }`}
+            >
+              ⏱ {formatSecondsAsClock(secondsLeft ?? 0)}
+            </div>
+            <button
+              type="button"
+              disabled={isSubmitting}
+              onClick={() => setShowSubmitConfirm(true)}
+              className="flex-1 cursor-pointer rounded-lg bg-[#147a4b] px-4 py-2 text-center text-sm font-extrabold text-white transition hover:-translate-y-0.5 disabled:opacity-60 sm:flex-none"
+            >
+              Selesai &amp; Kumpulkan
+            </button>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div
-            className={`rounded-xl px-3.5 py-2 font-mono text-sm font-extrabold ${
-              (secondsLeft ?? 999) <= 180
-                ? "bg-[#fef3f2] text-[#b42318]"
-                : "bg-[var(--blue-soft)] text-[var(--navy)]"
-            }`}
-          >
-            ⏱ {formatSecondsAsClock(secondsLeft ?? 0)}
+        {/* Linear Classroom Progress Bar */}
+        <div className="mt-3.5 border-t border-[var(--border)] pt-3">
+          <div className="flex items-center justify-between text-xs font-bold text-[var(--muted)]">
+            <span>Progres Pengerjaan Tryout</span>
+            <span className="text-[var(--navy)]">
+              {answeredCount} / {questions.length} terjawab (
+              {questions.length > 0
+                ? Math.round((answeredCount / questions.length) * 100)
+                : 0}
+              %)
+            </span>
           </div>
-          <button
-            type="button"
-            disabled={isSubmitting}
-            onClick={() => setShowSubmitConfirm(true)}
-            className="cursor-pointer rounded-[10px] bg-[#147a4b] px-4 py-2 text-sm font-bold text-white transition hover:-translate-y-0.5 disabled:opacity-60"
-          >
-            Selesai & Kumpulkan
-          </button>
+          <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#eef2f6]">
+            <div
+              className="h-full rounded-full bg-[var(--blue)] transition-all"
+              style={{
+                width: `${
+                  questions.length > 0
+                    ? Math.round((answeredCount / questions.length) * 100)
+                    : 0
+                }%`,
+              }}
+            />
+          </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_260px]">
-        {/* Question Card */}
-        <div className="rounded-2xl border border-[var(--border)] bg-white p-5 sm:p-6">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border)] pb-3.5">
-            <div className="flex items-center gap-2">
-              <span className="rounded-md bg-[var(--blue-soft)] px-2.5 py-1 text-xs font-extrabold text-[var(--blue)]">
-                {currentQuestion.subtest}
-              </span>
-              <span className="text-xs font-semibold text-[var(--muted)]">
-                {SNBT_SUBTEST_MAP[currentQuestion.subtest]?.name}
+        {/* Question Card with Skilvul Classroom Bottom Control Bar */}
+        <div className="min-w-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-2xs">
+          <div className="p-4 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border)] pb-3.5">
+              <div className="flex items-center gap-2">
+                <span className="rounded-full bg-[var(--blue-soft)] px-3 py-1 text-xs font-extrabold text-[var(--blue)]">
+                  {currentQuestion.subtest}
+                </span>
+                <span className="text-xs font-semibold text-[var(--muted)]">
+                  {SNBT_SUBTEST_MAP[currentQuestion.subtest]?.name}
+                </span>
+              </div>
+
+              <span className="text-xs font-extrabold text-[var(--muted)]">
+                Soal {activeIndex + 1} dari {questions.length}
               </span>
             </div>
 
-            <button
-              type="button"
-              onClick={handleToggleFlag}
-              className={`cursor-pointer rounded-lg border px-2.5 py-1 text-xs font-bold ${
-                isFlagged
-                  ? "border-[#f59e0b] bg-[#fffbeb] text-[#b45309]"
-                  : "border-[var(--border)] bg-white text-[var(--muted)]"
-              }`}
-            >
-              {isFlagged ? "⚑ Ditandai Ragu-ragu" : "⚐ Tandai Ragu-ragu"}
-            </button>
+            <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed font-medium text-[var(--ink)]">
+              {currentQuestion.question_text}
+            </p>
+
+            <div className="mt-5 grid gap-2.5">
+              {OPTION_KEYS.map((letter) => {
+                const selected = currentAnswer === letter;
+                return (
+                  <button
+                    key={letter}
+                    type="button"
+                    onClick={() => handleSelectOption(letter)}
+                    className={`flex min-w-0 cursor-pointer items-start gap-3 rounded-xl border p-3.5 text-left text-sm transition ${
+                      selected
+                        ? "border-[var(--blue)] bg-[var(--blue-soft)]/70 font-semibold text-[var(--navy)]"
+                        : "border-[var(--border)] bg-white hover:border-[#b7cce6] hover:bg-[#fafcff]"
+                    }`}
+                  >
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-current text-xs font-extrabold">
+                      {letter}
+                    </span>
+                    <span className="min-w-0 break-words leading-relaxed">
+                      {getOptionText(currentQuestion, letter)}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="mt-3 text-xs font-bold text-[var(--muted)]">
-            Soal Nomor {activeIndex + 1} dari {questions.length}
-          </div>
-
-          <p className="mt-2 whitespace-pre-line text-[15px] leading-relaxed font-medium text-[var(--ink)]">
-            {currentQuestion.question_text}
-          </p>
-
-          <div className="mt-5 grid gap-2.5">
-            {OPTION_KEYS.map((letter) => {
-              const selected = currentAnswer === letter;
-              return (
-                <button
-                  key={letter}
-                  type="button"
-                  onClick={() => handleSelectOption(letter)}
-                  className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 text-left text-sm transition ${
-                    selected
-                      ? "border-[var(--blue)] bg-[var(--blue-soft)]/70 font-semibold text-[var(--navy)]"
-                      : "border-[var(--border)] bg-white hover:border-[#c3d2e8]"
-                  }`}
-                >
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-current text-xs font-extrabold">
-                    {letter}
-                  </span>
-                  <span className="leading-relaxed">
-                    {getOptionText(currentQuestion, letter)}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="mt-5 flex items-center justify-between gap-2">
+          {/* Skilvul Classroom Bottom Control Bar */}
+          <div className="flex flex-col items-stretch justify-between gap-2.5 bg-[var(--navy)] px-4 py-3 text-white sm:flex-row sm:items-center sm:px-6">
             <button
               type="button"
               disabled={activeIndex === 0}
               onClick={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
-              className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2 text-xs font-bold text-[var(--navy)] disabled:opacity-45"
+              className="cursor-pointer rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              ← Sebelumnya
+              ‹ Sebelumnya
             </button>
+
+            <button
+              type="button"
+              onClick={handleToggleFlag}
+              className={`cursor-pointer rounded-full px-4 py-2 text-xs font-extrabold transition ${
+                isFlagged
+                  ? "bg-[#fef3c7] text-[#92400e]"
+                  : "bg-white text-[var(--navy)] hover:bg-[var(--blue-soft)]"
+              }`}
+            >
+              {isFlagged ? "⚑ Ditandai Ragu-ragu" : "⚐ Tandai Ragu-ragu"}
+            </button>
+
             <button
               type="button"
               disabled={activeIndex >= questions.length - 1}
@@ -661,9 +693,9 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
                   Math.min(questions.length - 1, prev + 1),
                 )
               }
-              className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-2 text-xs font-bold text-white disabled:opacity-45"
+              className="cursor-pointer rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Berikutnya →
+              Berikutnya ›
             </button>
           </div>
         </div>
@@ -729,12 +761,12 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
               <b>{questions.length}</b> soal. Setelah dikumpulkan, skor langsung
               dihitung dan masuk Leaderboard.
             </p>
-            <div className="mt-5 flex justify-end gap-2.5">
+            <div className="mt-5 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">
               <button
                 type="button"
                 disabled={isSubmitting}
                 onClick={() => setShowSubmitConfirm(false)}
-                className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-sm font-bold text-[var(--muted)]"
+                className="w-full cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-sm font-bold text-[var(--muted)] sm:w-auto"
               >
                 Lanjut Mengerjakan
               </button>
@@ -742,7 +774,7 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
                 type="button"
                 disabled={isSubmitting}
                 onClick={() => void handleSubmitAttempt()}
-                className="cursor-pointer rounded-[10px] bg-[#147a4b] px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60"
+                className="w-full cursor-pointer rounded-[10px] bg-[#147a4b] px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60 sm:w-auto"
               >
                 {isSubmitting ? "Menilai..." : "Ya, Kumpulkan Sekarang"}
               </button>

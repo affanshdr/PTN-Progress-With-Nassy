@@ -67,29 +67,29 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="progress-modal-title"
-      className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.5)] p-5"
+      className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.55)] p-3.5 backdrop-blur-[2px] sm:p-5"
       onClick={(event) => {
         if (event.target === event.currentTarget) closeProgressModal();
       }}
     >
-      <div className="max-h-[90vh] w-full max-w-[500px] overflow-auto rounded-[20px] bg-white p-7 shadow-xl">
+      <div className="max-h-[92vh] w-full max-w-[500px] overflow-auto rounded-2xl border border-[#e5eaf1] bg-white p-5 shadow-2xl sm:p-7">
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2
               id="progress-modal-title"
-              className="m-0 text-2xl font-bold text-[var(--ink)]"
+              className="m-0 font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[var(--ink)] sm:text-2xl"
             >
-              Tambah Progres
+              Tambah Progres Belajar
             </h2>
-            <p className="mt-1.5 text-sm text-[var(--muted)]">
-              Catat apa yang kamu kerjakan hari ini.
+            <p className="mt-1 text-sm text-[var(--muted)]">
+              Catat materi atau soal yang kamu kerjakan hari ini.
             </p>
           </div>
           <button
             type="button"
             aria-label="Tutup dialog"
             onClick={closeProgressModal}
-            className="cursor-pointer border-0 bg-transparent text-2xl leading-none text-[var(--muted)] hover:text-[var(--ink)]"
+            className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#e5eaf1] bg-white text-base font-bold text-[var(--muted)] transition hover:bg-[#f5f8fc] hover:text-[var(--navy)]"
           >
             ×
           </button>
@@ -99,7 +99,7 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
           <div>
             <label
               htmlFor="p-date"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
               Tanggal
             </label>
@@ -109,14 +109,14 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
               required
               value={date}
               onChange={(event) => setDate(event.target.value)}
-              className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              className="w-full rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2.5 text-sm outline-none transition focus:border-[var(--blue)] focus:bg-white focus:ring-3 focus:ring-[var(--blue-soft)]"
             />
           </div>
 
           <div>
             <label
               htmlFor="p-subtest"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
               Subtes
             </label>
@@ -124,7 +124,7 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
               id="p-subtest"
               value={subtest}
               onChange={(event) => setSubtest(event.target.value)}
-              className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              className="w-full rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2.5 text-sm outline-none transition focus:border-[var(--blue)] focus:bg-white focus:ring-3 focus:ring-[var(--blue-soft)]"
             >
               {SUBTESTS.map((item) => (
                 <option key={item} value={item}>
@@ -137,7 +137,7 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
           <div>
             <label
               htmlFor="p-progress"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
               Progres Belajar
             </label>
@@ -147,14 +147,14 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
               value={progress}
               onChange={(event) => setProgress(event.target.value)}
               placeholder="Contoh: menyelesaikan 30 soal..."
-              className="min-h-[105px] w-full resize-y rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              className="min-h-[105px] w-full resize-y rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2.5 text-sm outline-none transition focus:border-[var(--blue)] focus:bg-white focus:ring-3 focus:ring-[var(--blue-soft)]"
             />
           </div>
 
           <div>
             <label
               htmlFor="p-target"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
               Kendala / Target Belajar Besok
             </label>
@@ -164,14 +164,14 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
               value={target}
               onChange={(event) => setTarget(event.target.value)}
               placeholder="Contoh: masih kesulitan soal cerita..."
-              className="min-h-[105px] w-full resize-y rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              className="min-h-[105px] w-full resize-y rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2.5 text-sm outline-none transition focus:border-[var(--blue)] focus:bg-white focus:ring-3 focus:ring-[var(--blue-soft)]"
             />
           </div>
 
           <div>
             <label
               htmlFor="p-duration"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
               Durasi Belajar (menit)
             </label>
@@ -183,14 +183,14 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
               value={duration}
               onChange={(event) => setDuration(event.target.value)}
               placeholder="120"
-              className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              className="w-full rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2.5 text-sm outline-none transition focus:border-[var(--blue)] focus:bg-white focus:ring-3 focus:ring-[var(--blue-soft)]"
             />
           </div>
 
           <div>
             <label
               htmlFor="p-proof"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
               Bukti Belajar
             </label>
@@ -202,14 +202,14 @@ export function ProgressModal({ initialDate }: { initialDate: string }) {
                 const file = event.target.files?.[0];
                 setProofName(file ? file.name : "");
               }}
-              className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              className="w-full rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2.5 text-sm outline-none transition focus:border-[var(--blue)] focus:bg-white focus:ring-3 focus:ring-[var(--blue-soft)]"
             />
           </div>
 
           <button
             type="submit"
             disabled={isSaving}
-            className="mt-1 cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-3 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-1 cursor-pointer rounded-lg bg-[var(--navy)] px-4 py-3 text-sm font-bold text-white transition hover:bg-[var(--navy-deep)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSaving ? "Menyimpan..." : "Simpan Progres"}
           </button>

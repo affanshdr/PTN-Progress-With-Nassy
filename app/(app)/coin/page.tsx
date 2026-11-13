@@ -11,6 +11,7 @@ import {
 } from "@/lib/progress-utils";
 import type { CoinTopupOrder } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import { WorkspaceHeroBanner } from "@/components/frontend/SkilvulUi";
 import { TopupGatewayModal } from "@/components/frontend/TopupGatewayModal";
 
 export default function CoinPage() {
@@ -31,33 +32,29 @@ export default function CoinPage() {
   const daysLeft = getDaysRemaining(currentUser.liveclass_pass_until);
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <h1 className="m-0 mb-1.5 text-[28px] font-bold sm:text-[30px]">
-            🪙 Dompet Coin & Top-Up
-          </h1>
-          <div className="text-sm text-[var(--muted)]">
-            Kelola saldo Coin untuk akses Live Class Bulanan & Tryout Mingguan.
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={openTopupModal}
-          className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4.5 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5"
-        >
-          + Isi Ulang Coin
-        </button>
-      </div>
+    <div className="space-y-6">
+      <WorkspaceHeroBanner
+        badge="DOMPET & TOP-UP"
+        title="Dompet Coin & Top-Up"
+        description="Kelola saldo Coin untuk membuka akses Tryout Mingguan SNBT, Live Class Bulanan, dan pembahasan lengkap."
+        actions={
+          <button
+            type="button"
+            onClick={openTopupModal}
+            className="w-full cursor-pointer rounded-lg bg-[var(--navy)] px-4.5 py-2.5 text-center text-sm font-bold text-white transition hover:bg-[var(--navy-deep)] sm:w-auto"
+          >
+            + Isi Ulang Coin
+          </button>
+        }
+      />
 
       {/* Wallet Overview & Pricing Summary */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="rounded-2xl border border-[#f2d07b] bg-[#fffcf0] p-5">
-          <div className="text-xs font-bold text-[#8a5300]">
+          <div className="text-xs font-extrabold tracking-wide text-[#8a5300] uppercase">
             Saldo Coin Saat Ini
           </div>
-          <div className="mt-1.5 text-3xl font-extrabold text-[var(--navy)]">
+          <div className="mt-2 font-[family-name:var(--font-jakarta)] text-3xl font-extrabold text-[var(--navy)]">
             🪙 {coinBalance} Coin
           </div>
           <div className="mt-2 text-xs text-[#925c09]">
@@ -66,11 +63,11 @@ export default function CoinPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[var(--border)] bg-white p-5">
-          <div className="text-xs font-bold text-[var(--muted)]">
+        <div className="rounded-2xl border border-[#e5eaf1] bg-white p-5">
+          <div className="text-xs font-extrabold tracking-wide text-[var(--muted)] uppercase">
             Status Live Class Pass
           </div>
-          <div className="mt-1.5 text-lg font-extrabold text-[var(--ink)]">
+          <div className="mt-2 font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[var(--ink)]">
             {hasPass ? `✓ Aktif (${daysLeft} hari lagi)` : "Belum Aktif"}
           </div>
           <div className="mt-2 text-xs text-[var(--muted)]">
@@ -80,11 +77,11 @@ export default function CoinPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[var(--border)] bg-white p-5">
-          <div className="text-xs font-bold text-[var(--muted)]">
+        <div className="rounded-2xl border border-[#e5eaf1] bg-white p-5">
+          <div className="text-xs font-extrabold tracking-wide text-[var(--muted)] uppercase">
             Tarif Fitur Nassy
           </div>
-          <ul className="mt-2 space-y-1.5 text-xs text-[var(--ink)]">
+          <ul className="mt-2.5 space-y-2 text-xs text-[var(--ink)]">
             <li className="flex justify-between">
               <span>Soal + Pembahasan 7 Subtes</span>
               <b className="text-[#147a4b]">Gratis</b>
@@ -102,10 +99,10 @@ export default function CoinPage() {
       </div>
 
       {/* Dummy Payment Gateway Packages Preview */}
-      <section className="rounded-2xl border border-[var(--border)] bg-white p-5">
-        <div className="flex flex-wrap items-center justify-between gap-2">
+      <section className="rounded-2xl border border-[#e5eaf1] bg-white p-5 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-lg font-bold text-[var(--ink)]">
+            <h2 className="m-0 font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--ink)]">
               Paket Top-Up Coin (Simulasi Payment Gateway)
             </h2>
             <p className="mt-0.5 text-xs text-[var(--muted)]">
@@ -116,40 +113,40 @@ export default function CoinPage() {
           <button
             type="button"
             onClick={openTopupModal}
-            className="cursor-pointer rounded-[10px] bg-[var(--blue)] px-4 py-2 text-xs font-bold text-white"
+            className="cursor-pointer rounded-lg bg-[var(--blue)] px-4 py-2 text-xs font-bold text-white transition hover:bg-[var(--blue-hover)]"
           >
             Buka Checkout Top-Up →
           </button>
         </div>
 
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-5 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
           {COIN_PACKAGES.map((pkg) => (
             <div
               key={pkg.id}
-              className="flex flex-col justify-between rounded-2xl border border-[var(--border)] p-4"
+              className="flex flex-col justify-between rounded-2xl border border-[#e5eaf1] bg-[#fcfdff] p-4 transition hover:-translate-y-0.5 hover:border-[#c3d6f4] hover:bg-white hover:shadow-[0_10px_22px_rgba(23,50,77,0.06)]"
             >
               <div>
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-base font-extrabold text-[var(--navy)]">
+                  <span className="font-[family-name:var(--font-jakarta)] text-base font-extrabold text-[var(--navy)]">
                     🪙 {pkg.coins} Coin
                   </span>
                   {pkg.badge ? (
-                    <span className="rounded-full bg-[var(--blue-soft)] px-2 py-0.5 text-[10px] font-bold text-[var(--blue)]">
+                    <span className="rounded-full bg-[var(--blue-soft)] px-2.5 py-0.5 text-[10px] font-extrabold text-[var(--blue)]">
                       {pkg.badge}
                     </span>
                   ) : null}
                 </div>
-                <div className="mt-1 text-lg font-extrabold text-[var(--blue)]">
+                <div className="mt-1.5 font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--blue)]">
                   {formatIdr(pkg.priceIdr)}
                 </div>
-                <p className="mt-1.5 text-xs text-[var(--muted)]">
+                <p className="mt-1.5 text-xs leading-relaxed text-[var(--muted)]">
                   {pkg.description}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={openTopupModal}
-                className="mt-4 w-full cursor-pointer rounded-[10px] border border-[var(--border)] bg-[#f8fafc] py-2 text-xs font-bold text-[var(--navy)] hover:bg-[var(--blue-soft)]"
+                className="mt-4 w-full cursor-pointer rounded-lg border border-[#dce4ef] bg-white py-2 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] hover:bg-[var(--blue-soft)] hover:text-[var(--blue)]"
               >
                 Pilih Paket
               </button>
@@ -160,15 +157,15 @@ export default function CoinPage() {
 
       {/* Pending / Recent Top-up Orders */}
       {topupOrders.length > 0 ? (
-        <section className="rounded-2xl border border-[var(--border)] bg-white p-5">
-          <h2 className="mb-3 text-lg font-bold text-[var(--ink)]">
+        <section className="rounded-2xl border border-[#e5eaf1] bg-white p-5 sm:p-6">
+          <h2 className="m-0 mb-3 font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--ink)]">
             Riwayat Tagihan Top-Up
           </h2>
-          <div className="divide-y divide-[var(--border)]">
+          <div className="divide-y divide-[#eef2f7]">
             {topupOrders.map((order) => (
               <div
                 key={order.id}
-                className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm"
+                className="flex flex-wrap items-center justify-between gap-3 py-3.5 text-sm"
               >
                 <div>
                   <div className="font-bold text-[var(--ink)]">
@@ -184,7 +181,7 @@ export default function CoinPage() {
                     <button
                       type="button"
                       onClick={() => setPendingCheckoutOrder(order)}
-                      className="cursor-pointer rounded-lg bg-[var(--blue)] px-3 py-1.5 text-xs font-bold text-white"
+                      className="cursor-pointer rounded-lg bg-[var(--blue)] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[var(--blue-hover)]"
                     >
                       Lanjut Bayar
                     </button>
@@ -207,8 +204,8 @@ export default function CoinPage() {
       ) : null}
 
       {/* Coin Transactions Ledger */}
-      <section className="rounded-2xl border border-[var(--border)] bg-white p-5">
-        <h2 className="mb-3 text-lg font-bold text-[var(--ink)]">
+      <section className="rounded-2xl border border-[#e5eaf1] bg-white p-5 sm:p-6">
+        <h2 className="m-0 mb-3 font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--ink)]">
           Mutasi Coin Terbaru
         </h2>
         {coinTransactions.length === 0 ? (
@@ -216,21 +213,23 @@ export default function CoinPage() {
             Belum ada riwayat transaksi coin.
           </div>
         ) : (
-          <div className="divide-y divide-[var(--border)]">
+          <div className="divide-y divide-[#eef2f7]">
             {coinTransactions.map((tx) => (
               <div
                 key={tx.id}
-                className="flex items-center justify-between gap-3 py-3 text-sm"
+                className="flex flex-wrap items-center justify-between gap-2 py-3.5 text-sm"
               >
-                <div>
-                  <div className="font-bold text-[var(--ink)]">{tx.title}</div>
+                <div className="min-w-0 flex-1">
+                  <div className="break-words font-bold text-[var(--ink)]">
+                    {tx.title}
+                  </div>
                   <div className="text-xs text-[var(--muted)]">
                     {formatDateTimeId(tx.created_at)} · Saldo akhir:{" "}
                     {tx.balance_after} Coin
                   </div>
                 </div>
                 <div
-                  className={`font-extrabold ${
+                  className={`shrink-0 font-extrabold ${
                     tx.amount >= 0 ? "text-[#147a4b]" : "text-[#b45309]"
                   }`}
                 >

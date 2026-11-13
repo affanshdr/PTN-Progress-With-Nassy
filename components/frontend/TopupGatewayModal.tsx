@@ -128,7 +128,7 @@ export function TopupGatewayModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="topup-modal-title"
-      className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.55)] p-4"
+      className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.55)] p-4 backdrop-blur-[2px]"
       onClick={(event) => {
         if (event.target === event.currentTarget && !isProcessing) {
           setActiveOrder(null);
@@ -136,15 +136,15 @@ export function TopupGatewayModal({
         }
       }}
     >
-      <div className="max-h-[92vh] w-full max-w-[540px] overflow-auto rounded-[20px] bg-white p-6 shadow-xl">
+      <div className="max-h-[92vh] w-full max-w-[540px] overflow-auto rounded-2xl border border-[#e5eaf1] bg-white p-5 shadow-2xl sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-[var(--blue-soft)] px-2.5 py-1 text-[11px] font-bold text-[var(--blue)]">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-[var(--blue-soft)] px-2.5 py-1 text-[11px] font-extrabold text-[var(--blue)]">
               Payment Gateway Simulator (Dummy · Siap Midtrans/Xendit)
             </div>
             <h2
               id="topup-modal-title"
-              className="mt-2 text-xl font-bold text-[var(--ink)]"
+              className="mt-2 font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[var(--ink)]"
             >
               {currentOrder ? "Checkout Pembayaran Coin" : "Isi Ulang Coin"}
             </h2>
@@ -157,7 +157,7 @@ export function TopupGatewayModal({
               setActiveOrder(null);
               onClose();
             }}
-            className="cursor-pointer border-0 bg-transparent text-2xl leading-none text-[var(--muted)] hover:text-[var(--ink)]"
+            className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#e5eaf1] bg-white text-base font-bold text-[var(--muted)] transition hover:bg-[#f5f8fc] hover:text-[var(--navy)]"
           >
             ×
           </button>
@@ -217,7 +217,7 @@ export function TopupGatewayModal({
                       key={method.code}
                       type="button"
                       onClick={() => setPaymentMethod(method.code)}
-                      className={`flex cursor-pointer items-center justify-between rounded-xl border px-3.5 py-2.5 text-left text-sm transition ${
+                      className={`flex cursor-pointer flex-wrap items-center justify-between gap-1 rounded-xl border px-3.5 py-2.5 text-left text-sm transition ${
                         active
                           ? "border-[var(--blue)] bg-[var(--blue-soft)]/50 font-bold text-[var(--navy)]"
                           : "border-[var(--border)] bg-white text-[var(--ink)] hover:border-[#cdd7e5]"
@@ -244,7 +244,7 @@ export function TopupGatewayModal({
               type="button"
               disabled={isProcessing}
               onClick={() => void handleCreateOrder()}
-              className="w-full cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full cursor-pointer rounded-lg bg-[var(--navy)] px-4 py-3 text-sm font-bold text-white transition hover:bg-[var(--navy-deep)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isProcessing ? "Membuat Tagihan..." : "Lanjut ke Pembayaran →"}
             </button>
@@ -298,10 +298,10 @@ export function TopupGatewayModal({
                   <div className="text-xs text-[var(--muted)]">
                     Nomor Virtual Account / Referensi Simulasi
                   </div>
-                  <div className="mt-1 font-mono text-lg font-extrabold tracking-wider text-[var(--navy)]">
+                  <div className="mt-1 break-all font-mono text-lg font-extrabold tracking-wider text-[var(--navy)]">
                     8808{currentOrder.order_code.replace(/\D/g, "").slice(-10)}
                   </div>
-                  <p className="mt-1.5 text-xs text-[var(--muted)]">
+                  <p className="mt-1.5 break-all text-xs text-[var(--muted)]">
                     Token Gateway:{" "}
                     <span className="font-mono">{currentOrder.snap_token}</span>
                   </p>
@@ -314,7 +314,7 @@ export function TopupGatewayModal({
                 type="button"
                 disabled={isProcessing}
                 onClick={() => void handleSimulatePaid()}
-                className="flex-1 cursor-pointer rounded-[10px] bg-[#147a4b] px-4 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 disabled:opacity-60"
+                className="flex-1 cursor-pointer rounded-lg bg-[#147a4b] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#10663e] disabled:opacity-60"
               >
                 {isProcessing
                   ? "Memverifikasi..."
@@ -324,7 +324,7 @@ export function TopupGatewayModal({
                 type="button"
                 disabled={isProcessing}
                 onClick={() => void handleCancelOrder()}
-                className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-3 text-sm font-bold text-[var(--muted)] hover:text-[#a52b36]"
+                className="cursor-pointer rounded-lg border border-[#dce4ef] bg-white px-4 py-3 text-sm font-bold text-[var(--muted)] hover:text-[#a52b36]"
               >
                 Batalkan
               </button>

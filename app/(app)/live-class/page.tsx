@@ -6,12 +6,17 @@ import {
   formatDateTimeId,
   getDaysRemaining,
   isLiveClassPassActive,
+  SNBT_SUBTEST_MAP,
   SNBT_SUBTESTS,
 } from "@/lib/progress-utils";
 import { getSupabaseClient, isSupabaseBrowserConfigured } from "@/lib/supabase/client";
 import { getErrorMessage, isMissingSchemaError } from "@/lib/supabase/errors";
-import type { LiveClassSession } from "@/lib/supabase/types";
+import type { LiveClassSession, SnbtSubtestCode } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import {
+  SubtestThumbnail,
+  WorkspaceHeroBanner,
+} from "@/components/frontend/SkilvulUi";
 
 export default function LiveClassPage() {
   const {
@@ -115,49 +120,48 @@ export default function LiveClassPage() {
   }
 
   return (
-    <div className="space-y-5">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <h1 className="m-0 mb-1.5 text-[28px] font-bold sm:text-[30px]">
-            🎥 Live Class Bulanan
-          </h1>
-          <div className="text-sm text-[var(--muted)]">
-            Akses penuh seluruh kelas interaktif 7 subtes dan rekaman video
-            selama 30 hari hanya dengan {COIN_PRICING.LIVECLASS_MONTHLY_COST}{" "}
-            Coin.
-          </div>
-        </div>
+    <div className="space-y-6">
+      <WorkspaceHeroBanner
+        badge="LIVE MENTORING & WEBINAR"
+        title="Live Class Bulanan SNBT"
+        description={`Akses penuh seluruh sesi kelas interaktif 7 subtes, bedah soal live, materi PDF, dan rekaman video selama 30 hari dengan ${COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin.`}
+        actions={
+          <button
+            type="button"
+            onClick={openTopupModal}
+            className="cursor-pointer rounded-lg border border-[#d6e3f5] bg-white px-4 py-2.5 text-xs font-extrabold text-[var(--navy)] transition hover:border-[var(--blue)] sm:text-sm"
+          >
+            🪙 Saldo: {coinBalance} Coin (+ Isi Coin)
+          </button>
+        }
+      />
 
-        <button
-          type="button"
-          onClick={openTopupModal}
-          className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-xs font-bold text-[var(--navy)] transition hover:-translate-y-0.5 sm:text-sm"
-        >
-          🪙 Saldo: {coinBalance} Coin (+ Isi Coin)
-        </button>
-      </div>
-
-      {/* Monthly Pass Banner */}
+      {/* Monthly Pass Highlight Banner (Skilvul Upsell Ribbon Pattern) */}
       <section
         className={`rounded-2xl border p-5 sm:p-6 ${
           hasActivePass
             ? "border-[#b7e4c7] bg-[#f2fbf6]"
-            : "border-[#cde1ff] bg-white"
+            : "border-[#c7daf8] bg-gradient-to-r from-[#f4f8ff] to-[#ffffff]"
         }`}
       >
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-extrabold text-[var(--navy)] shadow-2xs">
-              {hasActivePass ? "✓ PASS AKTIF 30 HARI" : "🔒 PASS BELUM AKTIF"}
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#dce6f4] bg-white px-3 py-1 text-[11px] font-extrabold tracking-wide text-[var(--navy)]">
+              <span
+                className={`h-2 w-2 rounded-full ${
+                  hasActivePass ? "bg-[#147a4b]" : "bg-[#f59e0b]"
+                }`}
+              />
+              {hasActivePass ? "PASS AKTIF 30 HARI" : "PASS BELUM AKTIF"}
             </div>
-            <h2 className="mt-2.5 text-xl font-bold text-[var(--ink)]">
+            <h2 className="mt-2.5 font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--ink)] sm:text-xl">
               {hasActivePass
-                ? `Live Class Pass aktif (sisa ${daysLeft} hari)`
-                : `Buka Semua Live Class & Rekaman — ${COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin / Bulan`}
+                ? `Live Class Pass aktif — sisa ${daysLeft} hari`
+                : `Buka Semua Live Class & Rekaman (${COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin / Bulan)`}
             </h2>
             <p className="mt-1 text-sm text-[var(--muted)]">
               {hasActivePass && currentUser?.liveclass_pass_until
-                ? `Berlaku sampai ${formatDateTimeId(currentUser.liveclass_pass_until)}. Link Zoom/Meet, materi PDF, dan rekaman sudah terbuka.`
+                ? `Berlaku sampai ${formatDateTimeId(currentUser.liveclass_pass_until)}. Link Zoom/Meet, materi PDF, dan arsip rekaman sudah terbuka.`
                 : "Satu kali aktivasi langsung membuka seluruh jadwal live session dan arsip rekaman video selama 30 hari penuh."}
             </p>
           </div>
@@ -165,7 +169,7 @@ export default function LiveClassPage() {
           <button
             type="button"
             onClick={() => setShowConfirmModal(true)}
-            className="shrink-0 cursor-pointer rounded-[10px] bg-[var(--navy)] px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5"
+            className="w-full shrink-0 cursor-pointer rounded-lg bg-[var(--navy)] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[var(--navy-deep)] md:w-auto"
           >
             {hasActivePass
               ? `Perpanjang +30 Hari (${COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin)`
@@ -174,37 +178,40 @@ export default function LiveClassPage() {
         </div>
       </section>
 
-      {/* Filters */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white p-4">
-        <div className="flex flex-wrap gap-1.5">
+      {/* Filters Bar */}
+      <div className="flex flex-col gap-3 rounded-2xl border border-[#e5eaf1] bg-white px-5 pt-3 pb-4 sm:flex-row sm:items-center sm:justify-between sm:pb-3">
+        <div className="flex flex-wrap gap-5 border-b border-transparent">
           {(
             [
               { key: "ALL", label: "Semua Sesi" },
-              { key: "live", label: "🔴 Sedang Live" },
-              { key: "upcoming", label: "📅 Mendatang" },
-              { key: "recorded", label: "▶ Rekaman" },
+              { key: "live", label: "Sedang Live" },
+              { key: "upcoming", label: "Mendatang" },
+              { key: "recorded", label: "Rekaman" },
             ] as const
-          ).map((tab) => (
-            <button
-              key={tab.key}
-              type="button"
-              onClick={() => setStatusFilter(tab.key)}
-              className={`cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition ${
-                statusFilter === tab.key
-                  ? "bg-[var(--navy)] text-white"
-                  : "bg-[#f4f7fb] text-[var(--muted)] hover:text-[var(--ink)]"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+          ).map((tab) => {
+            const active = statusFilter === tab.key;
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                onClick={() => setStatusFilter(tab.key)}
+                className={`cursor-pointer border-b-2 pb-2.5 text-sm font-bold transition ${
+                  active
+                    ? "border-[var(--blue)] text-[var(--blue)]"
+                    : "border-transparent text-[var(--muted)] hover:text-[var(--navy)]"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
 
         <select
           aria-label="Filter subtes live class"
           value={subtestFilter}
           onChange={(event) => setSubtestFilter(event.target.value)}
-          className="rounded-[10px] border border-[var(--border)] bg-white px-3 py-2 text-xs font-bold text-[var(--ink)] outline-none"
+          className="w-full rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2 text-xs font-bold text-[var(--ink)] outline-none focus:border-[var(--blue)] sm:w-auto"
         >
           <option value="ALL">Semua Subtes</option>
           {SNBT_SUBTESTS.map((sub) => (
@@ -217,7 +224,7 @@ export default function LiveClassPage() {
 
       {/* Sessions Grid */}
       {isLoading ? (
-        <div className="rounded-2xl border border-[var(--border)] bg-white p-8 text-center text-sm text-[var(--muted)]">
+        <div className="rounded-2xl border border-[#e5eaf1] bg-white p-8 text-center text-sm text-[var(--muted)]">
           Memuat jadwal Live Class...
         </div>
       ) : errorMessage ? (
@@ -225,52 +232,70 @@ export default function LiveClassPage() {
           {errorMessage}
         </div>
       ) : filteredSessions.length === 0 ? (
-        <div className="rounded-2xl border border-[var(--border)] bg-white p-8 text-center text-sm text-[var(--muted)]">
+        <div className="rounded-2xl border border-[#e5eaf1] bg-white p-8 text-center text-sm text-[var(--muted)]">
           Belum ada kelas yang sesuai dengan filter saat ini.
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {filteredSessions.map((session) => {
             const statusBadge =
               session.status === "live"
-                ? { label: "🔴 LIVE SEKARANG", cls: "bg-[#fef3f2] text-[#b42318]" }
+                ? "LIVE SEKARANG"
                 : session.status === "upcoming"
-                  ? { label: "📅 Mendatang", cls: "bg-[#eff6ff] text-[var(--blue)]" }
-                  : { label: "▶ Rekaman Video", cls: "bg-[#f1f5f9] text-[var(--navy)]" };
+                  ? "Mendatang"
+                  : "Rekaman";
+            const thumbCode: SnbtSubtestCode | "ALL" =
+              session.subtest in SNBT_SUBTEST_MAP
+                ? (session.subtest as SnbtSubtestCode)
+                : "ALL";
 
             return (
               <article
                 key={session.id}
-                className="flex flex-col justify-between rounded-2xl border border-[var(--border)] bg-white p-5"
+                className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e5eaf1] bg-white transition hover:-translate-y-0.5 hover:border-[#c3d6f4] hover:shadow-[0_14px_30px_rgba(23,50,77,0.08)]"
               >
                 <div>
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="rounded-md bg-[var(--blue-soft)] px-2.5 py-1 text-xs font-extrabold text-[var(--blue)]">
-                      {session.subtest}
-                    </span>
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-extrabold ${statusBadge.cls}`}
-                    >
-                      {statusBadge.label}
-                    </span>
-                  </div>
+                  <SubtestThumbnail
+                    code={thumbCode}
+                    topRightLabel={statusBadge}
+                    bottomLeftLabel={`${session.duration_minutes} Menit`}
+                  />
 
-                  <h3 className="mt-3 text-lg font-bold text-[var(--ink)]">
-                    {session.title}
-                  </h3>
-                  <div className="mt-1 text-xs font-semibold text-[var(--navy)]">
-                    Mentor: {session.mentor_name} · {session.duration_minutes}{" "}
-                    menit
+                  <div className="p-5">
+                    <div className="flex items-center justify-between gap-2 text-[11px] font-bold">
+                      <span className="text-[var(--blue)]">
+                        {session.subtest}
+                      </span>
+                      <span
+                        className={`rounded-full px-2.5 py-0.5 ${
+                          session.status === "live"
+                            ? "bg-[#fef3f2] text-[#b42318]"
+                            : session.status === "upcoming"
+                              ? "bg-[#eaf2ff] text-[var(--blue)]"
+                              : "bg-[#f1f5f9] text-[var(--navy)]"
+                        }`}
+                      >
+                        {statusBadge}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-2 font-[family-name:var(--font-jakarta)] text-[17px] leading-snug font-extrabold text-[var(--ink)]">
+                      {session.title}
+                    </h3>
+
+                    <div className="mt-2 text-xs font-semibold text-[var(--navy)]">
+                      Mentor: {session.mentor_name}
+                    </div>
+                    <div className="mt-0.5 text-xs text-[var(--muted)]">
+                      {formatDateTimeId(session.scheduled_at)}
+                    </div>
+                    <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
+                      {session.description}
+                    </p>
                   </div>
-                  <div className="mt-0.5 text-xs text-[var(--muted)]">
-                    Jadwal: {formatDateTimeId(session.scheduled_at)}
-                  </div>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--muted)]">
-                    {session.description}
-                  </p>
                 </div>
 
-                <div className="mt-4 border-t border-[var(--border)] pt-4">
+                <div className="border-t border-[#eef2f7] px-5 py-4">
                   {session.has_active_pass ? (
                     <div className="flex flex-wrap gap-2">
                       {session.meeting_url && session.status !== "recorded" ? (
@@ -278,9 +303,9 @@ export default function LiveClassPage() {
                           href={session.meeting_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 rounded-[10px] bg-[var(--blue)] px-4 py-2.5 text-center text-xs font-bold text-white transition hover:-translate-y-0.5 sm:text-sm"
+                          className="flex-1 rounded-lg bg-[var(--blue)] px-3.5 py-2.5 text-center text-xs font-bold text-white transition hover:bg-[var(--blue-hover)]"
                         >
-                          Masuk Ruang Meeting →
+                          Masuk Meeting →
                         </a>
                       ) : null}
                       {session.recording_url ? (
@@ -288,9 +313,9 @@ export default function LiveClassPage() {
                           href={session.recording_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-center text-xs font-bold text-white transition hover:-translate-y-0.5 sm:text-sm"
+                          className="flex-1 rounded-lg bg-[var(--navy)] px-3.5 py-2.5 text-center text-xs font-bold text-white transition hover:bg-[var(--navy-deep)]"
                         >
-                          ▶ Tonton Rekaman
+                          ▶ Rekaman
                         </a>
                       ) : null}
                       {session.material_url ? (
@@ -298,7 +323,7 @@ export default function LiveClassPage() {
                           href={session.material_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="rounded-[10px] border border-[var(--border)] bg-white px-3.5 py-2.5 text-xs font-bold text-[var(--navy)]"
+                          className="rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-2.5 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--navy)]"
                         >
                           📄 Materi
                         </a>
@@ -308,9 +333,9 @@ export default function LiveClassPage() {
                     <button
                       type="button"
                       onClick={() => setShowConfirmModal(true)}
-                      className="w-full cursor-pointer rounded-[10px] border border-[#dce7f6] bg-[#f8fbff] px-4 py-2.5 text-xs font-bold text-[var(--navy)] transition hover:bg-[var(--blue-soft)]"
+                      className="w-full cursor-pointer rounded-lg border border-[#d6e3f5] bg-[#f6f9ff] px-4 py-2.5 text-xs font-bold text-[var(--navy)] transition hover:bg-[var(--blue-soft)] hover:text-[var(--blue)]"
                     >
-                      🔒 Aktifkan Live Class Pass ({COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin) untuk Akses Link & Rekaman
+                      🔒 Aktifkan Pass ({COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin)
                     </button>
                   )}
                 </div>
@@ -325,25 +350,38 @@ export default function LiveClassPage() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.5)] p-4"
+          className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.55)] p-4 backdrop-blur-[2px]"
           onClick={(event) => {
             if (event.target === event.currentTarget && !isPurchasing) {
               setShowConfirmModal(false);
             }
           }}
         >
-          <div className="w-full max-w-[460px] rounded-[20px] bg-white p-6 shadow-xl">
-            <h2 className="m-0 text-xl font-bold text-[var(--ink)]">
-              {hasActivePass
-                ? "Perpanjang Live Class Pass"
-                : "Aktifkan Live Class Pass 30 Hari"}
-            </h2>
-            <p className="mt-1.5 text-sm text-[var(--muted)]">
-              Akses penuh seluruh jadwal kelas interaktif, materi PDF, dan
-              rekaman video selama 30 hari.
-            </p>
+          <div className="w-full max-w-[460px] rounded-2xl border border-[#e5eaf1] bg-white p-6 shadow-2xl">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="m-0 font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[var(--ink)]">
+                  {hasActivePass
+                    ? "Perpanjang Live Class Pass"
+                    : "Aktifkan Live Class Pass 30 Hari"}
+                </h2>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  Akses penuh seluruh jadwal kelas interaktif, materi PDF, dan
+                  rekaman video selama 30 hari.
+                </p>
+              </div>
+              <button
+                type="button"
+                disabled={isPurchasing}
+                onClick={() => setShowConfirmModal(false)}
+                aria-label="Tutup modal"
+                className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#e5eaf1] text-base font-bold text-[var(--muted)] hover:bg-[#f5f8fc] hover:text-[var(--navy)]"
+              >
+                ×
+              </button>
+            </div>
 
-            <div className="mt-4 space-y-2 rounded-xl border border-[var(--border)] bg-[#f8fafc] p-4 text-sm">
+            <div className="mt-4 space-y-2 rounded-xl border border-[#e5eaf1] bg-[#f8fafd] p-4 text-sm">
               <div className="flex justify-between">
                 <span className="text-[var(--muted)]">Saldo Coin Kamu</span>
                 <span className="font-bold text-[var(--ink)]">
@@ -358,7 +396,7 @@ export default function LiveClassPage() {
                   -{COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin
                 </span>
               </div>
-              <div className="flex justify-between border-t border-[var(--border)] pt-2">
+              <div className="flex justify-between border-t border-[#e5eaf1] pt-2">
                 <span className="font-bold text-[var(--ink)]">Sisa Saldo</span>
                 <span
                   className={`font-extrabold ${
@@ -379,12 +417,12 @@ export default function LiveClassPage() {
               </div>
             ) : null}
 
-            <div className="mt-5 flex flex-wrap justify-end gap-2.5">
+            <div className="mt-5 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">
               <button
                 type="button"
                 disabled={isPurchasing}
                 onClick={() => setShowConfirmModal(false)}
-                className="cursor-pointer rounded-[10px] border border-[var(--border)] bg-white px-4 py-2.5 text-sm font-bold text-[var(--muted)]"
+                className="w-full cursor-pointer rounded-lg border border-[#dce4ef] bg-white px-4 py-2.5 text-sm font-bold text-[var(--muted)] sm:w-auto"
               >
                 Batal
               </button>
@@ -396,7 +434,7 @@ export default function LiveClassPage() {
                     setShowConfirmModal(false);
                     openTopupModal();
                   }}
-                  className="cursor-pointer rounded-[10px] bg-[var(--blue)] px-4 py-2.5 text-sm font-bold text-white"
+                  className="w-full cursor-pointer rounded-lg bg-[var(--blue)] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[var(--blue-hover)] sm:w-auto"
                 >
                   Isi Coin Sekarang →
                 </button>
@@ -405,7 +443,7 @@ export default function LiveClassPage() {
                   type="button"
                   disabled={isPurchasing}
                   onClick={() => void handleBuyPass()}
-                  className="cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60"
+                  className="w-full cursor-pointer rounded-lg bg-[var(--navy)] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[var(--navy-deep)] disabled:opacity-60 sm:w-auto"
                 >
                   {isPurchasing
                     ? "Memproses..."

@@ -7,6 +7,7 @@ import { getSupabaseClient } from "@/lib/supabase/client";
 import { getErrorMessage } from "@/lib/supabase/errors";
 import type { Profile } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import { NassyLogo } from "@/components/frontend/SkilvulUi";
 
 export function AuthModal() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export function AuthModal() {
   const [className, setClassName] = useState<string>(CLASS_OPTIONS[0]);
   const [ptn, setPtn] = useState("");
   const [major, setMajor] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!authModalMode) return null;
@@ -152,40 +154,42 @@ export function AuthModal() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="auth-modal-title"
-      className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.5)] p-5"
+      className="fixed inset-0 z-50 grid place-items-center bg-[rgba(10,20,30,0.55)] p-3.5 backdrop-blur-[2px] sm:p-5"
       onClick={(event) => {
         if (event.target === event.currentTarget) closeAuthModal();
       }}
     >
-      <div className="max-h-[90vh] w-full max-w-[500px] overflow-auto rounded-[20px] bg-white p-7 shadow-xl">
+      <div className="max-h-[92vh] w-full max-w-[460px] overflow-auto rounded-2xl border border-[var(--border)] bg-white p-5 shadow-2xl sm:p-7">
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <h2
-              id="auth-modal-title"
-              className="m-0 text-2xl font-bold text-[var(--ink)]"
-            >
-              {isRegister ? "Buat Akun" : "Masuk"}
-            </h2>
-            <p className="mt-1.5 text-sm text-[var(--muted)]">
-              {isRegister
-                ? "Mulai belajar 7 subtes, Tryout Mingguan, dan Live Class."
-                : "Masuk ke ruang belajar Nassy."}
-            </p>
-          </div>
+          <NassyLogo compact />
           <button
             type="button"
             aria-label="Tutup dialog"
             onClick={closeAuthModal}
-            className="cursor-pointer border-0 bg-transparent text-2xl leading-none text-[var(--muted)] hover:text-[var(--ink)]"
+            className="grid h-8 w-8 cursor-pointer place-items-center rounded-lg border border-[var(--border)] bg-white text-lg leading-none text-[var(--muted)] transition hover:text-[var(--ink)]"
           >
             ×
           </button>
         </div>
 
+        <div className="mt-5 text-center">
+          <h2
+            id="auth-modal-title"
+            className="m-0 text-2xl font-extrabold text-[var(--navy)]"
+          >
+            {isRegister ? "Daftar Akun Nassy" : "Masuk ke Nassy"}
+          </h2>
+          <p className="mt-1.5 text-sm text-[var(--muted)]">
+            {isRegister
+              ? "Yuk mulai persiapan UTBK-SNBT dengan 7 subtes, Tryout, dan Live Class."
+              : "Yuk, lanjutin belajar kamu di ruang workspace Nassy."}
+          </p>
+        </div>
+
         {isRegister ? (
           <div className="mt-4 rounded-xl border border-[#cde1ff] bg-[var(--blue-soft)] px-3.5 py-2.5 text-xs font-bold text-[var(--navy)]">
             🪙 Bonus Akun Baru: Otomatis mendapat{" "}
-            {COIN_PRICING.WELCOME_BONUS} Coin untuk ikut Tryout & Live Class!
+            {COIN_PRICING.WELCOME_BONUS} Coin untuk ikut Tryout &amp; Live Class!
           </div>
         ) : null}
 
@@ -194,16 +198,16 @@ export function AuthModal() {
             <div>
               <label
                 htmlFor="reg-name"
-                className="mb-1.5 block text-[13px] font-bold"
+                className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
               >
-                Nama Lengkap
+                Nama Lengkap <span className="text-[var(--blue)]">*</span>
               </label>
               <input
                 id="reg-name"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder="Nama kamu"
-                className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+                className="w-full rounded-lg border border-[#dfe4ea] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
               />
             </div>
           ) : null}
@@ -211,9 +215,9 @@ export function AuthModal() {
           <div>
             <label
               htmlFor="auth-email"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
-              Email
+              Email <span className="text-[var(--blue)]">*</span>
             </label>
             <input
               id="auth-email"
@@ -222,27 +226,36 @@ export function AuthModal() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="nama@email.com"
-              className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              className="w-full rounded-lg border border-[#dfe4ea] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
             />
           </div>
 
           <div>
             <label
               htmlFor="auth-password"
-              className="mb-1.5 block text-[13px] font-bold"
+              className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
             >
-              Password
+              Password <span className="text-[var(--blue)]">*</span>
             </label>
-            <input
-              id="auth-password"
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Minimal 6 karakter"
-              className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
-            />
+            <div className="relative">
+              <input
+                id="auth-password"
+                type={showPassword ? "text" : "password"}
+                required
+                minLength={6}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Minimal 6 karakter"
+                className="w-full rounded-lg border border-[#dfe4ea] bg-white py-2.5 pr-16 pl-3.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute top-1/2 right-2.5 -translate-y-1/2 cursor-pointer rounded-md px-2 py-1 text-xs font-bold text-[var(--muted)] hover:bg-[#f4f7fb] hover:text-[var(--navy)]"
+              >
+                {showPassword ? "Tutup" : "Lihat"}
+              </button>
+            </div>
           </div>
 
           {isRegister ? (
@@ -250,7 +263,7 @@ export function AuthModal() {
               <div>
                 <label
                   htmlFor="reg-class"
-                  className="mb-1.5 block text-[13px] font-bold"
+                  className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
                 >
                   Kelas
                 </label>
@@ -258,7 +271,7 @@ export function AuthModal() {
                   id="reg-class"
                   value={className}
                   onChange={(event) => setClassName(event.target.value)}
-                  className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+                  className="w-full rounded-lg border border-[#dfe4ea] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
                 >
                   {CLASS_OPTIONS.map((option) => (
                     <option key={option} value={option}>
@@ -268,36 +281,38 @@ export function AuthModal() {
                 </select>
               </div>
 
-              <div>
-                <label
-                  htmlFor="reg-ptn"
-                  className="mb-1.5 block text-[13px] font-bold"
-                >
-                  PTN Tujuan
-                </label>
-                <input
-                  id="reg-ptn"
-                  value={ptn}
-                  onChange={(event) => setPtn(event.target.value)}
-                  placeholder="Contoh: Universitas Indonesia"
-                  className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
-                />
-              </div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="reg-ptn"
+                    className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
+                  >
+                    PTN Tujuan
+                  </label>
+                  <input
+                    id="reg-ptn"
+                    value={ptn}
+                    onChange={(event) => setPtn(event.target.value)}
+                    placeholder="Contoh: UI / ITB / UGM"
+                    className="w-full rounded-lg border border-[#dfe4ea] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="reg-major"
-                  className="mb-1.5 block text-[13px] font-bold"
-                >
-                  Program Studi Tujuan
-                </label>
-                <input
-                  id="reg-major"
-                  value={major}
-                  onChange={(event) => setMajor(event.target.value)}
-                  placeholder="Contoh: Teknik Informatika"
-                  className="w-full rounded-[10px] border border-[#dfe4ea] bg-white px-3 py-2.5 outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
-                />
+                <div>
+                  <label
+                    htmlFor="reg-major"
+                    className="mb-1.5 block text-[13px] font-bold text-[var(--ink)]"
+                  >
+                    Program Studi
+                  </label>
+                  <input
+                    id="reg-major"
+                    value={major}
+                    onChange={(event) => setMajor(event.target.value)}
+                    placeholder="Contoh: Teknik Informatika"
+                    className="w-full rounded-lg border border-[#dfe4ea] bg-white px-3.5 py-2.5 text-sm outline-none focus:border-[var(--blue)] focus:ring-3 focus:ring-[var(--blue-soft)]"
+                  />
+                </div>
               </div>
             </>
           ) : null}
@@ -305,7 +320,7 @@ export function AuthModal() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-1 cursor-pointer rounded-[10px] bg-[var(--navy)] px-4 py-3 font-bold text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-1 cursor-pointer rounded-lg bg-[var(--navy)] px-4 py-3 text-sm font-extrabold text-white transition hover:bg-[var(--blue)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting
               ? "Memproses..."
@@ -315,14 +330,14 @@ export function AuthModal() {
           </button>
         </form>
 
-        <p className="mt-4 text-center text-sm text-[var(--muted)]">
+        <p className="mt-5 text-center text-sm text-[var(--muted)]">
           {isRegister ? "Sudah punya akun?" : "Belum punya akun?"}{" "}
           <button
             type="button"
             onClick={toggleAuthModalMode}
-            className="cursor-pointer border-0 bg-transparent font-bold text-[var(--blue)]"
+            className="cursor-pointer border-0 bg-transparent font-extrabold text-[var(--blue)] hover:underline"
           >
-            {isRegister ? "Masuk" : "Daftar"}
+            {isRegister ? "Masuk Sekarang" : "Daftar Sekarang"}
           </button>
         </p>
       </div>
