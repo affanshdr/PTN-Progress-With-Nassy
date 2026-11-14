@@ -39,17 +39,17 @@ export function NassyLogo({
   return (
     <span className="inline-flex min-w-0 items-center gap-2.5">
       <span
-        className={`relative shrink-0 overflow-hidden rounded-xl bg-white ${
-          compact ? "h-10 w-10" : "h-11 w-11"
+        className={`relative shrink-0 ${
+          compact ? "h-9 w-9" : "h-10 w-10"
         }`}
       >
         <Image
-          src="/logo.jpeg"
+          src="/logo.png"
           alt="Logo Nassy"
-          width={88}
-          height={88}
+          width={80}
+          height={80}
           priority
-          className="h-full w-full scale-[1.35] object-cover"
+          className="h-full w-full object-contain"
         />
       </span>
       <span
@@ -177,44 +177,44 @@ const SUBTEST_THEME: Record<
     symbol: "SNBT",
   },
   PK: {
-    bg: "from-[#17324d] to-[#2459bd]",
-    facet: "bg-[#60a5fa]/25",
+    bg: "from-[#0e7490] to-[#0891b2]",
+    facet: "bg-[#a5f3fc]/20",
     badge: "TPS",
     symbol: "∑x",
   },
   PM: {
-    bg: "from-[#1a3a5c] to-[#2d6cdf]",
-    facet: "bg-[#93c5fd]/25",
+    bg: "from-[#1e293b] to-[#334155]",
+    facet: "bg-[#93c5fd]/20",
     badge: "Literasi",
     symbol: "f(x)",
   },
   PU: {
-    bg: "from-[#163654] to-[#2563eb]",
-    facet: "bg-[#60a5fa]/25",
+    bg: "from-[#1e3a8a] to-[#3b82f6]",
+    facet: "bg-[#bfdbfe]/20",
     badge: "TPS",
     symbol: "P→Q",
   },
   PPU: {
-    bg: "from-[#1c3d5a] to-[#3b82f6]",
-    facet: "bg-[#bfdbfe]/25",
+    bg: "from-[#312e81] to-[#4f46e5]",
+    facet: "bg-[#c7d2fe]/20",
     badge: "TPS",
     symbol: "Aa",
   },
   LBI: {
-    bg: "from-[#15304b] to-[#1d4ed8]",
-    facet: "bg-[#93c5fd]/25",
+    bg: "from-[#0f766e] to-[#14b8a6]",
+    facet: "bg-[#99f6e4]/20",
     badge: "Literasi",
     symbol: "ID",
   },
   LBE: {
-    bg: "from-[#183756] to-[#2563eb]",
-    facet: "bg-[#60a5fa]/25",
+    bg: "from-[#0c4a6e] to-[#0284c7]",
+    facet: "bg-[#bae6fd]/20",
     badge: "Literasi",
     symbol: "EN",
   },
   PBM: {
-    bg: "from-[#17324d] to-[#3b82f6]",
-    facet: "bg-[#bfdbfe]/25",
+    bg: "from-[#17324d] to-[#2563eb]",
+    facet: "bg-[#bfdbfe]/20",
     badge: "TPS",
     symbol: "¶",
   },

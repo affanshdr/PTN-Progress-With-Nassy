@@ -22,7 +22,7 @@ const PROGRAM_TABS = [
     bullets: [
       "Mencakup seluruh 7 subtes TPS & Literasi SNBT",
       "Filter soal belum dikerjakan, sudah benar, atau perlu evaluasi",
-      "Dilengkapi modul materi PDF yang siap diunduh",
+      "Dilengkapi ringkasan materi dan konsep inti di setiap subtes",
     ],
     priceTag: "Gratis",
     href: "/bank-soal",
@@ -297,7 +297,7 @@ export function LandingView() {
                       Bank Soal &amp; Pembahasan 7 Subtes
                     </div>
                     <div className="text-xs text-[var(--muted)]">
-                      PK, PM, PU, PPU, LBI, LBE, PBM + Modul PDF
+                      PK, PM, PU, PPU, LBI, LBE, PBM
                     </div>
                   </div>
                   <span className="shrink-0 font-extrabold text-[#147a4b]">

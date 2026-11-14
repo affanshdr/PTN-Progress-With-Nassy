@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { SNBT_SUBTEST_MAP, SNBT_SUBTESTS } from "@/lib/progress-utils";
+import { SNBT_SUBTEST_MATERIALS } from "@/lib/subtest-materials";
 import { getSupabaseClient, isSupabaseBrowserConfigured } from "@/lib/supabase/client";
 import { getErrorMessage, isMissingSchemaError } from "@/lib/supabase/errors";
 import type {
@@ -11,6 +12,10 @@ import type {
   SnbtSubtestCode,
 } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import {
+  SubtestThumbnail,
+  VerifiedBadgeIcon,
+} from "@/components/frontend/SkilvulUi";
 
 const OPTION_KEYS: readonly OptionLetter[] = ["A", "B", "C", "D", "E"];
 
@@ -20,6 +25,9 @@ const STATUS_TABS = [
   { key: "CORRECT", label: "Sudah Benar" },
   { key: "WRONG", label: "Perlu Review" },
 ] as const;
+
+type CategoryFilter = "ALL" | "TPS" | "Literasi";
+type ProgressFilter = "ALL" | "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED";
 
 function getOptionText(q: PracticeQuestion, letter: OptionLetter): string {
   switch (letter) {
@@ -36,6 +44,57 @@ function getOptionText(q: PracticeQuestion, letter: OptionLetter): string {
   }
 }
 
+function FilterCheckRow({
+  label,
+  checked,
+  onClick,
+}: {
+  label: string;
+  checked: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-1.5 py-1.5 text-left text-sm transition hover:bg-[#f8fafc]"
+    >
+      <span
+        className={`grid h-4.5 w-4.5 shrink-0 place-items-center rounded-[5px] border transition ${
+          checked
+            ? "border-[var(--blue)] bg-[var(--blue)] text-white"
+            : "border-[#cbd5e1] bg-white text-transparent"
+        }`}
+      >
+        <svg
+          width="11"
+          height="11"
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M2.5 6.2L5 8.7L9.5 3.5"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+      <span
+        className={
+          checked
+            ? "font-bold text-[var(--navy)]"
+            : "font-medium text-[#475467]"
+        }
+      >
+        {label}
+      </span>
+    </button>
+  );
+}
+
 export function SubtestPracticeView() {
   const { currentUser, markSchemaNeedsMigration, showToast } = useNassy();
 
@@ -43,15 +102,25 @@ export function SubtestPracticeView() {
   const [submissions, setSubmissions] = useState<
     Record<string, PracticeSubmission>
   >({});
-  const [selectedSubtest, setSelectedSubtest] = useState<
-    SnbtSubtestCode | "ALL"
-  >("PK");
+
+  // View 1 (Catalog) state
+  const [activeSubtest, setActiveSubtest] = useState<SnbtSubtestCode | null>(
+    null,
+  );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("ALL");
+  const [progressFilter, setProgressFilter] = useState<ProgressFilter>("ALL");
+
+  // View 2 (Material + Question classroom) state
+  const [showMaterialGuide, setShowMaterialGuide] = useState(true);
+  const [selectedTopic, setSelectedTopic] = useState<string>("ALL");
   const [difficultyFilter, setDifficultyFilter] = useState<string>("ALL");
   const [statusFilter, setStatusFilter] = useState<
     "ALL" | "UNANSWERED" | "CORRECT" | "WRONG"
   >("ALL");
   const [activeIndex, setActiveIndex] = useState(0);
   const [draftChoice, setDraftChoice] = useState<OptionLetter | null>(null);
+
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -114,30 +183,51 @@ export function SubtestPracticeView() {
     };
   }, [currentUser, markSchemaNeedsMigration]);
 
-  const subtestStats = useMemo(() => {
+  const subtestMeta = useMemo(() => {
     const map: Record<
       SnbtSubtestCode,
-      { total: number; answered: number; correct: number }
+      {
+        total: number;
+        answered: number;
+        correct: number;
+        topics: string[];
+      }
     > = {
-      PK: { total: 0, answered: 0, correct: 0 },
-      PM: { total: 0, answered: 0, correct: 0 },
-      PU: { total: 0, answered: 0, correct: 0 },
-      PPU: { total: 0, answered: 0, correct: 0 },
-      LBI: { total: 0, answered: 0, correct: 0 },
-      LBE: { total: 0, answered: 0, correct: 0 },
-      PBM: { total: 0, answered: 0, correct: 0 },
+      PK: { total: 0, answered: 0, correct: 0, topics: [] },
+      PM: { total: 0, answered: 0, correct: 0, topics: [] },
+      PU: { total: 0, answered: 0, correct: 0, topics: [] },
+      PPU: { total: 0, answered: 0, correct: 0, topics: [] },
+      LBI: { total: 0, answered: 0, correct: 0, topics: [] },
+      LBE: { total: 0, answered: 0, correct: 0, topics: [] },
+      PBM: { total: 0, answered: 0, correct: 0, topics: [] },
+    };
+
+    const topicSets: Record<SnbtSubtestCode, Set<string>> = {
+      PK: new Set(),
+      PM: new Set(),
+      PU: new Set(),
+      PPU: new Set(),
+      LBI: new Set(),
+      LBE: new Set(),
+      PBM: new Set(),
     };
 
     for (const q of questions) {
       const bucket = map[q.subtest];
       if (!bucket) continue;
       bucket.total += 1;
+      if (q.topic) topicSets[q.subtest].add(q.topic);
       const sub = submissions[q.id];
       if (sub) {
         bucket.answered += 1;
         if (sub.is_correct) bucket.correct += 1;
       }
     }
+
+    for (const code of Object.keys(map) as SnbtSubtestCode[]) {
+      map[code].topics = Array.from(topicSets[code]);
+    }
+
     return map;
   }, [questions, submissions]);
 
@@ -146,11 +236,56 @@ export function SubtestPracticeView() {
     [questions, submissions],
   );
 
-  const filteredQuestions = useMemo(() => {
-    return questions.filter((q) => {
-      if (selectedSubtest !== "ALL" && q.subtest !== selectedSubtest) {
+  const filteredCatalogSubtests = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    return SNBT_SUBTESTS.filter((sub) => {
+      if (categoryFilter !== "ALL" && sub.category !== categoryFilter) {
         return false;
       }
+
+      const stats = subtestMeta[sub.code];
+      const pct =
+        stats.total > 0 ? Math.round((stats.answered / stats.total) * 100) : 0;
+
+      if (progressFilter === "NOT_STARTED" && stats.answered > 0) return false;
+      if (
+        progressFilter === "IN_PROGRESS" &&
+        (stats.answered === 0 || pct >= 100)
+      ) {
+        return false;
+      }
+      if (progressFilter === "COMPLETED" && (stats.total === 0 || pct < 100)) {
+        return false;
+      }
+
+      if (!query) return true;
+      const guide = SNBT_SUBTEST_MATERIALS[sub.code];
+      const searchable = [
+        sub.code,
+        sub.name,
+        sub.category,
+        sub.description,
+        ...stats.topics,
+        ...guide.keyPoints.map((kp) => `${kp.title} ${kp.detail}`),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return searchable.includes(query);
+    });
+  }, [categoryFilter, progressFilter, searchQuery, subtestMeta]);
+
+  const activeTopics = useMemo(
+    () => (activeSubtest ? subtestMeta[activeSubtest].topics : []),
+    [activeSubtest, subtestMeta],
+  );
+
+  const filteredQuestions = useMemo(() => {
+    if (!activeSubtest) return [];
+    return questions.filter((q) => {
+      if (q.subtest !== activeSubtest) return false;
+      if (selectedTopic !== "ALL" && q.topic !== selectedTopic) return false;
       if (difficultyFilter !== "ALL" && q.difficulty !== difficultyFilter) {
         return false;
       }
@@ -161,11 +296,12 @@ export function SubtestPracticeView() {
       return true;
     });
   }, [
-    questions,
-    submissions,
-    selectedSubtest,
+    activeSubtest,
     difficultyFilter,
+    questions,
+    selectedTopic,
     statusFilter,
+    submissions,
   ]);
 
   const safeIndex =
@@ -179,21 +315,21 @@ export function SubtestPracticeView() {
   const shownChoice =
     draftChoice ?? activeSubmission?.selected_option ?? null;
 
-  const activeSubtestTotals =
-    selectedSubtest === "ALL"
-      ? { total: questions.length, answered: totalAnsweredAll }
-      : subtestStats[selectedSubtest];
-  const progressPct =
-    activeSubtestTotals.total > 0
-      ? Math.round(
-          (activeSubtestTotals.answered / activeSubtestTotals.total) * 100,
-        )
-      : 0;
-
-  function selectSubtest(code: SnbtSubtestCode | "ALL") {
-    setSelectedSubtest(code);
+  function openSubtestClassroom(code: SnbtSubtestCode) {
+    setActiveSubtest(code);
+    setSelectedTopic("ALL");
+    setDifficultyFilter("ALL");
+    setStatusFilter("ALL");
     setActiveIndex(0);
     setDraftChoice(null);
+    setShowMaterialGuide(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function backToCatalog() {
+    setActiveSubtest(null);
+    setDraftChoice(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   async function handleCheckAnswer() {
@@ -241,79 +377,270 @@ export function SubtestPracticeView() {
     }
   }
 
-  return (
-    <div className="space-y-4">
-      {/* Compact Subtest Selector & Filter Bar (keeps questions above the fold) */}
-      <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs sm:p-5">
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => selectSubtest("ALL")}
-            className={`cursor-pointer rounded-xl border px-3.5 py-2 text-left text-xs transition ${
-              selectedSubtest === "ALL"
-                ? "border-[var(--navy)] bg-[var(--navy)] text-white"
-                : "border-[var(--border)] bg-[#f8fafc] text-[var(--ink)] hover:border-[var(--blue)]"
-            }`}
-          >
-            <div className="font-extrabold">Semua Subtes</div>
-            <div
-              className={`mt-0.5 text-[11px] ${
-                selectedSubtest === "ALL"
-                  ? "text-white/80"
-                  : "text-[var(--muted)]"
-              }`}
-            >
-              {totalAnsweredAll}/{questions.length} selesai
+  // =========================================================================
+  // VIEW 1: SKILVUL-STYLE CATALOG CARDS BEFORE ENTERING MATERIAL + QUESTIONS
+  // =========================================================================
+  if (!activeSubtest) {
+    const hasActiveFilter =
+      searchQuery.trim() !== "" ||
+      categoryFilter !== "ALL" ||
+      progressFilter !== "ALL";
+
+    return (
+      <div>
+        {/* Full-bleed Navy-Blue Catalog Hero Banner */}
+        <section className="relative left-1/2 -mt-6 w-screen -translate-x-1/2 bg-gradient-to-br from-[#17324d] via-[#1c3f63] to-[#2459bd] px-4 py-10 text-white sm:-mt-8 sm:py-12">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="text-xs font-bold tracking-wide text-[#bfdbfe]">
+              Katalog Materi
             </div>
-          </button>
+            <h1 className="mt-2 font-[family-name:var(--font-jakarta)] text-2xl font-extrabold tracking-tight text-white sm:text-[34px]">
+              Materi &amp; Bank Soal UTBK-SNBT
+            </h1>
+            <p className="mt-2 text-sm leading-relaxed text-[#dbeafe]/90 sm:text-base">
+              Pilih kartu subtes di bawah untuk mempelajari ringkasan materi,
+              topik penting, lalu berlatih soal beserta pembahasannya.
+            </p>
 
-          {SNBT_SUBTESTS.map((sub) => {
-            const stats = subtestStats[sub.code];
-            const isSelected = selectedSubtest === sub.code;
-
-            return (
-              <button
-                key={sub.code}
-                type="button"
-                onClick={() => selectSubtest(sub.code)}
-                title={sub.name}
-                className={`cursor-pointer rounded-xl border px-3.5 py-2 text-left text-xs transition ${
-                  isSelected
-                    ? "border-[var(--blue)] bg-[var(--blue-soft)] text-[var(--navy)]"
-                    : "border-[var(--border)] bg-white text-[var(--ink)] hover:border-[#b9cde8]"
-                }`}
+            {/* Centered Search Bar */}
+            <div className="relative mx-auto mt-6 max-w-xl">
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Cari materi atau subtes (mis. Kuantitatif, Silogisme, LBI)..."
+                aria-label="Cari materi subtes"
+                className="w-full rounded-xl bg-white py-3.5 pr-11 pl-4 text-sm font-medium text-[var(--ink)] shadow-lg outline-none placeholder:text-[#98a2b3] focus:ring-4 focus:ring-white/25"
+              />
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[var(--blue)]"
               >
-                <div className="font-extrabold text-[var(--navy)]">
-                  {sub.code}
-                </div>
-                <div className="mt-0.5 text-[11px] text-[var(--muted)]">
-                  {stats.answered}/{stats.total} soal
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-4 flex flex-col justify-between gap-3 border-t border-[#eef2f7] pt-4 md:flex-row md:items-center">
-          <div className="min-w-0">
-            <div className="text-sm font-extrabold text-[var(--navy)]">
-              {selectedSubtest === "ALL"
-                ? "Semua 7 Subtes SNBT"
-                : `${selectedSubtest} — ${SNBT_SUBTEST_MAP[selectedSubtest].name}`}
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
             </div>
-            <p className="mt-0.5 text-xs text-[var(--muted)]">
-              {selectedSubtest === "ALL"
-                ? "Menampilkan seluruh soal latihan dari 7 subtes."
-                : SNBT_SUBTEST_MAP[selectedSubtest].description}
+          </div>
+        </section>
+
+        {/* Main 2-Column Catalog Area: Left Filter Sidebar + Right Card Grid */}
+        <div className="mt-7 grid grid-cols-1 items-start gap-6 lg:grid-cols-[240px_1fr]">
+          {/* Left Sidebar Filter */}
+          <aside className="rounded-2xl border border-[var(--border)] bg-white p-5 shadow-2xs lg:sticky lg:top-[88px]">
+            <div>
+              <h2 className="text-sm font-extrabold text-[var(--navy)]">
+                Kategori
+              </h2>
+              <div className="mt-2.5 space-y-1">
+                {(
+                  [
+                    { key: "ALL", label: "Semua" },
+                    { key: "TPS", label: "TPS (Skolastik)" },
+                    { key: "Literasi", label: "Literasi & Penalaran" },
+                  ] as const
+                ).map((item) => (
+                  <FilterCheckRow
+                    key={item.key}
+                    label={item.label}
+                    checked={categoryFilter === item.key}
+                    onClick={() => setCategoryFilter(item.key)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 border-t border-[#eef2f7] pt-4">
+              <h2 className="text-sm font-extrabold text-[var(--navy)]">
+                Status Belajar
+              </h2>
+              <div className="mt-2.5 space-y-1">
+                {(
+                  [
+                    { key: "ALL", label: "Semua Status" },
+                    { key: "NOT_STARTED", label: "Belum Dimulai" },
+                    { key: "IN_PROGRESS", label: "Sedang Dipelajari" },
+                    { key: "COMPLETED", label: "Sudah Selesai" },
+                  ] as const
+                ).map((item) => (
+                  <FilterCheckRow
+                    key={item.key}
+                    label={item.label}
+                    checked={progressFilter === item.key}
+                    onClick={() => setProgressFilter(item.key)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {hasActiveFilter ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setCategoryFilter("ALL");
+                  setProgressFilter("ALL");
+                }}
+                className="mt-5 w-full cursor-pointer rounded-lg border border-[var(--border)] bg-[#f8fafc] py-2 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
+              >
+                Reset Filter
+              </button>
+            ) : null}
+          </aside>
+
+          {/* Right Catalog Grid */}
+          <section className="min-w-0">
+            <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+              <h2 className="font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--navy)] sm:text-xl">
+                Materi 7 Subtes ({filteredCatalogSubtests.length})
+              </h2>
+              <span className="text-xs font-semibold text-[var(--muted)]">
+                Total terjawab: {totalAnsweredAll} / {questions.length} soal
+              </span>
+            </div>
+
+            {errorMessage ? (
+              <div className="rounded-2xl border border-[#ffd4d4] bg-[#fff1f1] p-5 text-sm text-[#a52b36]">
+                {errorMessage}
+              </div>
+            ) : filteredCatalogSubtests.length === 0 ? (
+              <div className="rounded-2xl border border-[var(--border)] bg-white p-8 text-center text-sm text-[var(--muted)]">
+                Tidak ada materi yang cocok dengan filter pencarianmu.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {filteredCatalogSubtests.map((sub) => {
+                  const stats = subtestMeta[sub.code];
+                  const pct =
+                    stats.total > 0
+                      ? Math.round((stats.answered / stats.total) * 100)
+                      : 0;
+                  const isDone = stats.total > 0 && pct === 100;
+
+                  return (
+                    <article
+                      key={sub.code}
+                      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e5eaf1] bg-white shadow-2xs transition hover:-translate-y-0.5 hover:border-[#c3d6f4] hover:shadow-[0_12px_26px_rgba(23,50,77,0.08)]"
+                    >
+                      <div>
+                        <SubtestThumbnail
+                          code={sub.code}
+                          topRightLabel={isDone ? "Selesai" : sub.category}
+                        />
+
+                        <div className="p-4 pb-3">
+                          <h3 className="line-clamp-2 font-[family-name:var(--font-jakarta)] text-[15px] leading-snug font-extrabold text-[var(--ink)]">
+                            {sub.name}
+                          </h3>
+
+                          <div className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-[var(--muted)]">
+                            <VerifiedBadgeIcon />
+                            <span>
+                              {sub.code} ·{" "}
+                              {isLoading
+                                ? "Memuat soal..."
+                                : `${stats.total} Soal`}
+                            </span>
+                          </div>
+
+                          <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
+                            {sub.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="px-4 pt-1 pb-4">
+                        <div className="mb-3">
+                          {stats.answered === 0 ? (
+                            <div className="text-xs font-medium text-[#b4690e]">
+                              Kamu belum mulai materi ini
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2.5">
+                              <div className="h-2 flex-1 overflow-hidden rounded-full bg-[#eef2f6]">
+                                <div
+                                  className={`h-full rounded-full transition-all ${
+                                    isDone ? "bg-[#147a4b]" : "bg-[#f59e0b]"
+                                  }`}
+                                  style={{ width: `${pct}%` }}
+                                />
+                              </div>
+                              <span className="shrink-0 text-xs font-bold text-[var(--ink)]">
+                                {pct}%
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => openSubtestClassroom(sub.code)}
+                          className="w-full cursor-pointer rounded-lg bg-[var(--blue)] py-2.5 text-center text-xs font-bold text-white transition hover:bg-[var(--blue-hover)]"
+                        >
+                          {stats.answered > 0
+                            ? "Lanjut Materi & Soal"
+                            : "Masuk Materi & Soal"}
+                        </button>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            )}
+          </section>
+        </div>
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // VIEW 2: CLASSROOM MODE (MATERI + SOAL INTERAKTIF)
+  // =========================================================================
+  const subtestInfo = SNBT_SUBTEST_MAP[activeSubtest];
+  const materialGuide = SNBT_SUBTEST_MATERIALS[activeSubtest];
+  const stats = subtestMeta[activeSubtest];
+  const progressPct =
+    stats.total > 0 ? Math.round((stats.answered / stats.total) * 100) : 0;
+
+  return (
+    <div className="space-y-5">
+      {/* Top Breadcrumb & Subtest Progress Bar */}
+      <div className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs sm:p-5">
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+          <div className="min-w-0">
+            <button
+              type="button"
+              onClick={backToCatalog}
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-1.5 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
+            >
+              ‹ Kembali ke Katalog Materi
+            </button>
+
+            <div className="mt-2.5 flex flex-wrap items-center gap-2">
+              <span className="rounded-md bg-[var(--blue-soft)] px-2.5 py-0.5 text-xs font-extrabold text-[var(--blue)]">
+                {subtestInfo.code}
+              </span>
+              <h1 className="font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--navy)] sm:text-2xl">
+                {subtestInfo.name}
+              </h1>
+            </div>
+            <p className="mt-1 text-xs text-[var(--muted)] sm:text-sm">
+              {subtestInfo.description}
             </p>
           </div>
 
-          <div className="w-full md:w-56">
+          <div className="w-full shrink-0 md:w-64">
             <div className="flex items-center justify-between text-xs font-bold text-[var(--navy)]">
-              <span>Progres</span>
+              <span>Progres Latihan</span>
               <span>
-                {activeSubtestTotals.answered}/{activeSubtestTotals.total} (
-                {progressPct}%)
+                {stats.answered}/{stats.total} Soal ({progressPct}%)
               </span>
             </div>
             <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-[#eef2f6]">
@@ -324,54 +651,149 @@ export function SubtestPracticeView() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Status Pill Tabs + Difficulty Filter */}
-        <div className="mt-3.5 flex flex-col justify-between gap-3 border-t border-[#eef2f7] pt-3.5 sm:flex-row sm:items-center">
-          <div className="flex flex-wrap gap-1.5">
-            {STATUS_TABS.map((tab) => {
-              const active = statusFilter === tab.key;
-              return (
+      {/* Material & Concepts Summary Card */}
+      <section className="rounded-2xl border border-[var(--border)] bg-white p-5 shadow-2xs sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div className="text-xs font-extrabold tracking-wide text-[var(--blue)] uppercase">
+              Materi &amp; Konsep Inti
+            </div>
+            <h2 className="mt-0.5 font-[family-name:var(--font-jakarta)] text-base font-extrabold text-[var(--navy)] sm:text-lg">
+              Ringkasan Materi {subtestInfo.name}
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowMaterialGuide((prev) => !prev)}
+            className="cursor-pointer rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-1.5 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)]"
+          >
+            {showMaterialGuide ? "Tutup Ringkasan" : "Buka Ringkasan"}
+          </button>
+        </div>
+
+        {showMaterialGuide ? (
+          <div className="mt-4 space-y-4 border-t border-[#eef2f7] pt-4">
+            <p className="text-sm leading-relaxed text-[#475467]">
+              {materialGuide.overview}
+            </p>
+
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {materialGuide.keyPoints.map((point, idx) => (
+                <div
+                  key={point.title}
+                  className="rounded-xl border border-[#e5eaf1] bg-[#f8fafd] p-4"
+                >
+                  <div className="text-xs font-extrabold text-[var(--blue)]">
+                    0{idx + 1}. {point.title}
+                  </div>
+                  <p className="mt-1 text-xs leading-relaxed text-[#475467] sm:text-sm">
+                    {point.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-xl border border-[#cde1ff] bg-[#f0f6ff] px-4 py-3 text-xs leading-relaxed text-[var(--navy)] sm:text-sm">
+              <b>Tips Ujian:</b> {materialGuide.quickTip}
+            </div>
+          </div>
+        ) : null}
+
+        {/* Topic Filter Pills */}
+        {activeTopics.length > 0 ? (
+          <div className="mt-4 border-t border-[#eef2f7] pt-4">
+            <div className="mb-2 text-xs font-bold text-[var(--muted)]">
+              Filter berdasarkan topik soal:
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedTopic("ALL");
+                  setActiveIndex(0);
+                  setDraftChoice(null);
+                }}
+                className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                  selectedTopic === "ALL"
+                    ? "bg-[var(--navy)] text-white"
+                    : "bg-[#f4f7fb] text-[var(--muted)] hover:text-[var(--navy)]"
+                }`}
+              >
+                Semua Topik ({stats.total})
+              </button>
+              {activeTopics.map((topic) => (
                 <button
-                  key={tab.key}
+                  key={topic}
                   type="button"
                   onClick={() => {
-                    setStatusFilter(tab.key);
+                    setSelectedTopic(topic);
                     setActiveIndex(0);
                     setDraftChoice(null);
                   }}
                   className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-                    active
-                      ? "bg-[var(--navy)] text-white"
+                    selectedTopic === topic
+                      ? "bg-[var(--blue)] text-white"
                       : "bg-[#f4f7fb] text-[var(--muted)] hover:text-[var(--navy)]"
                   }`}
                 >
-                  {tab.label}
+                  {topic}
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </div>
+        ) : null}
+      </section>
 
-          <select
-            aria-label="Filter kesulitan"
-            value={difficultyFilter}
-            onChange={(event) => {
-              setDifficultyFilter(event.target.value);
-              setActiveIndex(0);
-              setDraftChoice(null);
-            }}
-            className="w-full rounded-lg border border-[var(--border)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ink)] outline-none sm:w-auto"
-          >
-            <option value="ALL">Semua Level</option>
-            <option value="Mudah">Mudah</option>
-            <option value="Sedang">Sedang</option>
-            <option value="Sulit">Sulit</option>
-          </select>
+      {/* Practice Filters Bar */}
+      <div className="flex flex-col justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs sm:flex-row sm:items-center">
+        <div className="flex flex-wrap gap-1.5">
+          {STATUS_TABS.map((tab) => {
+            const active = statusFilter === tab.key;
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                onClick={() => {
+                  setStatusFilter(tab.key);
+                  setActiveIndex(0);
+                  setDraftChoice(null);
+                }}
+                className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                  active
+                    ? "bg-[var(--navy)] text-white"
+                    : "bg-[#f4f7fb] text-[var(--muted)] hover:text-[var(--navy)]"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
+
+        <select
+          aria-label="Filter kesulitan"
+          value={difficultyFilter}
+          onChange={(event) => {
+            setDifficultyFilter(event.target.value);
+            setActiveIndex(0);
+            setDraftChoice(null);
+          }}
+          className="w-full rounded-lg border border-[var(--border)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ink)] outline-none sm:w-auto"
+        >
+          <option value="ALL">Semua Level</option>
+          <option value="Mudah">Mudah</option>
+          <option value="Sedang">Sedang</option>
+          <option value="Sulit">Sulit</option>
+        </select>
       </div>
 
+      {/* Questions + Navigator Classroom Grid */}
       {isLoading ? (
         <div className="rounded-2xl border border-[var(--border)] bg-white p-10 text-center text-sm text-[var(--muted)]">
-          Memuat bank soal 7 subtes...
+          Memuat latihan soal...
         </div>
       ) : errorMessage ? (
         <div className="rounded-2xl border border-[#ffd4d4] bg-[#fff1f1] p-5 text-sm text-[#a52b36]">
@@ -480,7 +902,7 @@ export function SubtestPracticeView() {
               ) : null}
             </div>
 
-            {/* Skilvul Classroom Signature Bottom Control Bar */}
+            {/* Classroom Bottom Control Bar */}
             <div className="flex flex-col items-stretch justify-between gap-2.5 bg-[var(--navy)] px-4 py-3 text-white sm:flex-row sm:items-center sm:px-6">
               <button
                 type="button"
@@ -523,7 +945,7 @@ export function SubtestPracticeView() {
             </div>
           </div>
 
-          {/* Question Navigator Drawer Card */}
+          {/* Question Navigator Card */}
           <aside className="self-start rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs">
             <div className="text-sm font-extrabold text-[var(--navy)]">
               Navigasi Nomor Soal

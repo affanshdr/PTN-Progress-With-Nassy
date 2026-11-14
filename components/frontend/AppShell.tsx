@@ -185,7 +185,7 @@ function MobileMenuDrawer({
   const pathname = usePathname();
   const mobileLinks = [
     { href: "/dashboard", label: "Dashboard" },
-    { href: "/bank-soal", label: "Materi (7 Subtes & PDF)" },
+    { href: "/bank-soal", label: "Materi (7 Subtes)" },
     { href: "/tryout", label: "Tryout Mingguan" },
     { href: "/live-class", label: "Live Class" },
     { href: "/komunitas", label: "Komunitas Pejuang" },
