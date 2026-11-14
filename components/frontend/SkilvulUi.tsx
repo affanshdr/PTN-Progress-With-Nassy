@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import type { SnbtSubtestCode } from "@/lib/supabase/types";
 
@@ -26,7 +27,7 @@ export function getInitials(name: string | null | undefined): string {
 }
 
 /**
- * Geometric isometric cube mark paired with the PTN Progress with Nassy wordmark.
+ * Official Nassy mascot logo paired with the PTN Progress with Nassy wordmark.
  */
 export function NassyLogo({
   compact = false,
@@ -37,29 +38,20 @@ export function NassyLogo({
 }) {
   return (
     <span className="inline-flex min-w-0 items-center gap-2.5">
-      <svg
-        width="30"
-        height="30"
-        viewBox="0 0 32 32"
-        fill="none"
-        aria-hidden="true"
-        className="shrink-0"
+      <span
+        className={`relative shrink-0 overflow-hidden rounded-xl bg-white ${
+          compact ? "h-10 w-10" : "h-11 w-11"
+        }`}
       >
-        <path
-          d="M16 2.5L28 9.2V22.8L16 29.5L4 22.8V9.2L16 2.5Z"
-          fill="#17324D"
+        <Image
+          src="/logo.jpeg"
+          alt="Logo Nassy"
+          width={88}
+          height={88}
+          priority
+          className="h-full w-full scale-[1.35] object-cover"
         />
-        <path d="M16 2.5L28 9.2L16 15.9L4 9.2L16 2.5Z" fill="#2D6CDF" />
-        <path d="M16 15.9L28 9.2V22.8L16 29.5V15.9Z" fill="#1F4D8C" />
-        <path d="M16 15.9L4 9.2V22.8L16 29.5V15.9Z" fill="#132940" />
-        <path
-          d="M11 19.5V12.5L15.2 17.5V12.5"
-          stroke="#FFFFFF"
-          strokeWidth="1.9"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      </span>
       <span
         className={`truncate font-extrabold tracking-tight ${
           compact ? "text-sm sm:text-base" : "text-base sm:text-lg"

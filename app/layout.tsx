@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   title: "PTN Progress with Nassy",
   description:
     "PTN Progress with Nassy — platform latihan 7 subtes SNBT, Tryout Mingguan, Live Class, dan pelacak progres pejuang PTN.",
+  icons: {
+    icon: "/logo.jpeg",
+    apple: "/logo.jpeg",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
