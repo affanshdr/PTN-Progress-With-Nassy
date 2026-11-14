@@ -222,10 +222,6 @@ export function StorageBankView() {
           )}
         </div>
       ) : null}
-
-      <p className="mt-4 text-[13px] leading-relaxed text-[var(--muted)]">
-        File dibaca langsung dari bucket <b>{SOAL_BUCKET}</b>.
-      </p>
     </div>
   );
 }

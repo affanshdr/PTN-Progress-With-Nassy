@@ -24,9 +24,8 @@ export default function ProgresPage() {
   return (
     <div className="space-y-6">
       <WorkspaceHeroBanner
-        badge="LOG AKTIVITAS HARIAN"
-        title="Progres Belajar"
-        description="Semua catatan perjalanan belajarmu dari 7 subtes SNBT, lengkap dengan durasi belajar dan poin konsistensi."
+        title="Catatan Progres Belajar"
+        description="Riwayat sesi latihan 7 subtes SNBT, durasi fokus, dan target harianmu."
         actions={
           <button
             type="button"

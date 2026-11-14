@@ -33,12 +33,11 @@ export default function KomunitasPage() {
   return (
     <div className="space-y-6">
       <WorkspaceHeroBanner
-        badge="JEJARING PEJUANG PTN"
-        title="Komunitas Belajar SNBT"
-        description="Pantau target PTN dan progres belajar teman-teman seperjuangan untuk menjaga semangat dan konsistensi setiap hari."
+        title="Komunitas Pejuang PTN"
+        description="Pantau target PTN dan progres belajar teman-teman seperjuangan."
         actions={
-          <div className="rounded-lg border border-[#dce4ef] bg-white px-4 py-2 text-xs font-extrabold text-[var(--navy)]">
-            {allUsers.length} Pejuang Terdaftar
+          <div className="rounded-lg border border-[#dce4ef] bg-[#f8fafc] px-3.5 py-2 text-xs font-bold text-[var(--navy)]">
+            {allUsers.length} Anggota
           </div>
         }
       />

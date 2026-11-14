@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { COIN_PRICING, formatDateTimeId } from "@/lib/progress-utils";
+import { formatDateTimeId } from "@/lib/progress-utils";
 import { getSupabaseClient, isSupabaseBrowserConfigured } from "@/lib/supabase/client";
 import { getErrorMessage, isMissingSchemaError } from "@/lib/supabase/errors";
 import type { TryoutCatalogItem } from "@/lib/supabase/types";
@@ -117,23 +117,22 @@ export default function TryoutPage() {
   return (
     <div className="space-y-5">
       <WorkspaceHeroBanner
-        badge={`SIMULASI SNBT · ${COIN_PRICING.TRYOUT_WEEKLY_COST} COIN / EVENT`}
         title="Tryout Mingguan SNBT"
-        description="Uji kemampuan setiap minggu, dapatkan skor skala SNBT 200–1000, analisis per subtes, pembahasan lengkap, dan posisi di Leaderboard."
+        description="Simulasi ujian berwaktu dengan skor skala SNBT 200–1000, evaluasi per subtes, pembahasan, dan Leaderboard."
         actions={
           <>
             <Link
               href="/peringkat"
-              className="rounded-lg border border-white/25 bg-white/12 px-4 py-2.5 text-xs font-extrabold text-white backdrop-blur-xs transition hover:bg-white/20 sm:text-sm"
+              className="rounded-lg border border-[var(--border)] bg-white px-4 py-2 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] sm:text-sm"
             >
-              🏆 Leaderboard Tryout
+              Leaderboard
             </Link>
             <button
               type="button"
               onClick={openTopupModal}
-              className="cursor-pointer rounded-lg bg-white px-4 py-2.5 text-xs font-extrabold text-[var(--navy)] transition hover:bg-[var(--blue-soft)] sm:text-sm"
+              className="cursor-pointer rounded-lg bg-[var(--navy)] px-4 py-2 text-xs font-bold text-white transition hover:bg-[var(--blue)] sm:text-sm"
             >
-              🪙 Saldo: {coinBalance} Coin
+              Saldo: {coinBalance} Coin
             </button>
           </>
         }

@@ -35,15 +35,14 @@ export default function ProfilPage() {
   return (
     <div className="space-y-6">
       <WorkspaceHeroBanner
-        badge="IDENTITAS AKADEMIK"
-        title="Profil Pejuang SNBT"
-        description="Informasi akun belajar, target kampus & program studi, serta ringkasan statistik belajar kamu di Nassy."
+        title="Profil Saya"
+        description="Informasi akun belajar, target kampus, dan ringkasan progresmu."
         actions={
           <Link
             href="/coin"
-            className="inline-flex items-center rounded-lg bg-[var(--navy)] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[var(--navy-deep)] sm:text-sm"
+            className="inline-flex items-center rounded-lg bg-[var(--navy)] px-4 py-2 text-xs font-bold text-white transition hover:bg-[var(--navy-deep)] sm:text-sm"
           >
-            🪙 Kelola Dompet Coin
+            Kelola Dompet Coin
           </Link>
         }
       />

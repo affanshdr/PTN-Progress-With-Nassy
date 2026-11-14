@@ -321,9 +321,8 @@ function PeringkatContent() {
   return (
     <div className="space-y-6">
       <WorkspaceHeroBanner
-        badge="PERINGKAT KOMUNITAS"
-        title="Leaderboard SNBT & Konsistensi"
-        description="Peringkat skor Tryout SNBT nasional komunitas dan poin konsistensi belajar harian seluruh pejuang PTN."
+        title="Peringkat Belajar & Tryout"
+        description="Peringkat skor Tryout SNBT dan poin konsistensi belajar komunitas."
       />
 
       {/* Skilvul Underlined Tabs */}

@@ -229,7 +229,7 @@ const SUBTEST_THEME: Record<
 };
 
 /**
- * Skilvul-inspired 16:9 isometric course badge thumbnail for subtest cards.
+ * Clean 16:9 course badge thumbnail for subtest & live class cards.
  */
 export function SubtestThumbnail({
   code,
@@ -246,38 +246,35 @@ export function SubtestThumbnail({
     <div
       className={`relative aspect-[16/9] w-full overflow-hidden rounded-t-[13px] bg-gradient-to-br ${theme.bg} p-3.5 text-white`}
     >
-      <div className="bg-skilvul-grid pointer-events-none absolute inset-0 opacity-35" />
-
-      {/* Isometric diamond emblem echoing Skilvul course icons */}
       <div className="relative flex h-full items-center justify-center">
         <div
-          className={`grid h-14 w-14 rotate-45 place-items-center rounded-xl border border-white/25 ${theme.facet} shadow-sm backdrop-blur-xs`}
+          className={`grid h-13 w-13 rotate-45 place-items-center rounded-xl border border-white/20 ${theme.facet}`}
         >
-          <span className="-rotate-45 font-mono text-base font-extrabold tracking-tight text-white">
+          <span className="-rotate-45 font-mono text-sm font-extrabold tracking-tight text-white">
             {theme.symbol}
           </span>
         </div>
       </div>
 
-      <span className="absolute top-2.5 left-2.5 rounded-full bg-white/92 px-2.5 py-0.5 text-[11px] font-extrabold text-[var(--navy)] shadow-2xs">
-        {code === "ALL" ? "SEMUA" : code}
+      <span className="absolute top-2.5 left-2.5 rounded-md bg-white/95 px-2 py-0.5 text-[11px] font-extrabold text-[var(--navy)]">
+        {code === "ALL" ? "7 Subtes" : code}
       </span>
 
       {topRightLabel ? (
-        <span className="absolute top-2.5 right-2.5 rounded-full bg-[#eaf2ff] px-2.5 py-0.5 text-[11px] font-extrabold text-[var(--blue)] shadow-2xs">
+        <span className="absolute top-2.5 right-2.5 rounded-md bg-black/25 px-2 py-0.5 text-[11px] font-bold text-white backdrop-blur-xs">
           {topRightLabel}
         </span>
+      ) : bottomLeftLabel ? (
+        <span className="absolute top-2.5 right-2.5 rounded-md bg-black/25 px-2 py-0.5 text-[11px] font-bold text-white backdrop-blur-xs">
+          {bottomLeftLabel}
+        </span>
       ) : null}
-
-      <span className="absolute bottom-2.5 left-2.5 rounded-full bg-white/18 px-2.5 py-0.5 text-[11px] font-bold text-white backdrop-blur-xs">
-        {bottomLeftLabel ?? theme.badge}
-      </span>
     </div>
   );
 }
 
 /**
- * Skilvul-style catalog & workspace hero banner rendered in Nassy's navy-blue palette.
+ * Clean workspace page header with title, concise subtitle, and optional right actions.
  */
 export function WorkspaceHeroBanner({
   badge,
@@ -285,23 +282,26 @@ export function WorkspaceHeroBanner({
   description,
   actions,
 }: {
-  badge: string;
+  badge?: string;
   title: string;
   description: string;
   actions?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[var(--navy-deep)] via-[var(--navy)] to-[var(--blue)] p-5 text-white shadow-[0_12px_30px_rgba(23,50,77,0.12)] sm:p-7">
-      <div className="bg-skilvul-grid pointer-events-none absolute inset-0 opacity-20" />
-      <div className="relative flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
+    <section className="rounded-2xl border border-[var(--border)] bg-white p-5 shadow-2xs sm:p-6">
+      <div className="flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
         <div className="min-w-0 max-w-2xl">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/12 px-3 py-1 text-[11px] font-extrabold tracking-wide text-[#dbeafe]">
-            {badge}
-          </span>
-          <h1 className="mt-2.5 text-2xl font-extrabold tracking-tight text-white sm:text-[30px]">
+          {badge ? (
+            <span className="inline-block text-[11px] font-extrabold tracking-wider text-[var(--blue)] uppercase">
+              {badge}
+            </span>
+          ) : null}
+          <h1
+            className={`${badge ? "mt-1" : ""} text-xl font-extrabold tracking-tight text-[var(--navy)] sm:text-2xl`}
+          >
             {title}
           </h1>
-          <p className="mt-1.5 text-sm leading-relaxed text-[#dbeafe]/90">
+          <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
             {description}
           </p>
         </div>

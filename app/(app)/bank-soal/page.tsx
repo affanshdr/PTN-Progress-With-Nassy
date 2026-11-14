@@ -13,12 +13,11 @@ export default function BankSoalPage() {
   return (
     <div className="space-y-5">
       <WorkspaceHeroBanner
-        badge="100% GRATIS · TPS & LITERASI SNBT"
         title="Bank Soal & Pembahasan 7 Subtes"
-        description="Latihan terarah untuk PK, PM, PU, PPU, LBI, LBE, dan PBM lengkap dengan kunci jawaban, pembahasan, serta arsip modul PDF."
+        description="Latihan terarah untuk PK, PM, PU, PPU, LBI, LBE, dan PBM lengkap dengan kunci jawaban serta modul materi PDF."
       />
 
-      {/* Skilvul-style Underlined Tab Bar */}
+      {/* Underlined Tab Bar */}
       <div className="flex items-center gap-6 border-b border-[var(--border)] px-1">
         <button
           type="button"
@@ -29,7 +28,7 @@ export default function BankSoalPage() {
               : "text-[var(--muted)] hover:text-[var(--navy)]"
           }`}
         >
-          Latihan Interaktif 7 Subtes
+          Latihan Soal 7 Subtes
         </button>
         <button
           type="button"
@@ -40,7 +39,7 @@ export default function BankSoalPage() {
               : "text-[var(--muted)] hover:text-[var(--navy)]"
           }`}
         >
-          Arsip Modul PDF (Storage)
+          Modul Materi PDF
         </button>
       </div>
 

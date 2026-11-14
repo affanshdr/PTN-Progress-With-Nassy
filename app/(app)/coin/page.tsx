@@ -34,9 +34,8 @@ export default function CoinPage() {
   return (
     <div className="space-y-6">
       <WorkspaceHeroBanner
-        badge="DOMPET & TOP-UP"
         title="Dompet Coin & Top-Up"
-        description="Kelola saldo Coin untuk membuka akses Tryout Mingguan SNBT, Live Class Bulanan, dan pembahasan lengkap."
+        description="Kelola saldo Coin untuk mengikuti Tryout Mingguan dan mengaktifkan Live Class Bulanan."
         actions={
           <button
             type="button"
@@ -98,16 +97,15 @@ export default function CoinPage() {
         </div>
       </div>
 
-      {/* Dummy Payment Gateway Packages Preview */}
+      {/* Coin Packages */}
       <section className="rounded-2xl border border-[#e5eaf1] bg-white p-5 sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="m-0 font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--ink)]">
-              Paket Top-Up Coin (Simulasi Payment Gateway)
+              Pilihan Paket Coin
             </h2>
             <p className="mt-0.5 text-xs text-[var(--muted)]">
-              Menggunakan alur checkout dummy (QRIS, BCA/BRI VA, GoPay, OVO)
-              yang siap dihubungkan ke Midtrans atau Xendit.
+              Pilih paket isi ulang sesuai kebutuhan belajarmu.
             </p>
           </div>
           <button
@@ -115,7 +113,7 @@ export default function CoinPage() {
             onClick={openTopupModal}
             className="cursor-pointer rounded-lg bg-[var(--blue)] px-4 py-2 text-xs font-bold text-white transition hover:bg-[var(--blue-hover)]"
           >
-            Buka Checkout Top-Up →
+            Isi Ulang Coin →
           </button>
         </div>
 

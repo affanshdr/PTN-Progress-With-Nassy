@@ -122,16 +122,15 @@ export default function LiveClassPage() {
   return (
     <div className="space-y-6">
       <WorkspaceHeroBanner
-        badge="LIVE MENTORING & WEBINAR"
-        title="Live Class Bulanan SNBT"
-        description={`Akses penuh seluruh sesi kelas interaktif 7 subtes, bedah soal live, materi PDF, dan rekaman video selama 30 hari dengan ${COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin.`}
+        title="Live Class Bulanan"
+        description={`Akses seluruh sesi kelas interaktif 7 subtes, materi PDF, dan rekaman video selama 30 hari (${COIN_PRICING.LIVECLASS_MONTHLY_COST} Coin).`}
         actions={
           <button
             type="button"
             onClick={openTopupModal}
-            className="cursor-pointer rounded-lg border border-[#d6e3f5] bg-white px-4 py-2.5 text-xs font-extrabold text-[var(--navy)] transition hover:border-[var(--blue)] sm:text-sm"
+            className="cursor-pointer rounded-lg border border-[#d6e3f5] bg-white px-4 py-2 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] sm:text-sm"
           >
-            🪙 Saldo: {coinBalance} Coin (+ Isi Coin)
+            Saldo: {coinBalance} Coin (+ Isi)
           </button>
         }
       />
@@ -258,38 +257,20 @@ export default function LiveClassPage() {
                   <SubtestThumbnail
                     code={thumbCode}
                     topRightLabel={statusBadge}
-                    bottomLeftLabel={`${session.duration_minutes} Menit`}
                   />
 
                   <div className="p-5">
-                    <div className="flex items-center justify-between gap-2 text-[11px] font-bold">
-                      <span className="text-[var(--blue)]">
-                        {session.subtest}
-                      </span>
-                      <span
-                        className={`rounded-full px-2.5 py-0.5 ${
-                          session.status === "live"
-                            ? "bg-[#fef3f2] text-[#b42318]"
-                            : session.status === "upcoming"
-                              ? "bg-[#eaf2ff] text-[var(--blue)]"
-                              : "bg-[#f1f5f9] text-[var(--navy)]"
-                        }`}
-                      >
-                        {statusBadge}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-2 font-[family-name:var(--font-jakarta)] text-[17px] leading-snug font-extrabold text-[var(--ink)]">
+                    <h3 className="font-[family-name:var(--font-jakarta)] text-[17px] leading-snug font-extrabold text-[var(--ink)]">
                       {session.title}
                     </h3>
 
-                    <div className="mt-2 text-xs font-semibold text-[var(--navy)]">
-                      Mentor: {session.mentor_name}
+                    <div className="mt-1.5 text-xs font-semibold text-[var(--navy)]">
+                      {session.mentor_name} · {session.duration_minutes} menit
                     </div>
                     <div className="mt-0.5 text-xs text-[var(--muted)]">
                       {formatDateTimeId(session.scheduled_at)}
                     </div>
-                    <p className="mt-2.5 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
+                    <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
                       {session.description}
                     </p>
                   </div>
