@@ -220,27 +220,20 @@ export function SubtestPracticeView() {
     async function fetchPracticeData() {
       setIsLoading(true);
       try {
-        // 1. Load the 1,276 Google Drive curriculum questions from static JSON
+        // 1. Load ready Google Drive curriculum questions from static JSON
         const localRes = await fetch("/data/bank-soal-gdrive.json");
-        const gdriveQuestions: PracticeQuestion[] = localRes.ok
+        const rawQuestions: PracticeQuestion[] = localRes.ok
           ? ((await localRes.json()) as PracticeQuestion[])
           : [];
+        const gdriveQuestions = rawQuestions.filter(
+          (q) => (SNBT_CURRICULUM[q.subtest]?.length ?? 0) > 0,
+        );
 
         // 2. Load locally persisted submissions
         const mergedSubmissions: Record<string, PracticeSubmission> =
           loadLocalSubmissions(currentUser?.id);
 
         const remoteIds = new Set<string>();
-        const curriculumTopicsBySubtest = new Map<
-          SnbtSubtestCode,
-          Set<string>
-        >();
-        for (const code of Object.keys(SNBT_CURRICULUM) as SnbtSubtestCode[]) {
-          curriculumTopicsBySubtest.set(
-            code,
-            new Set(SNBT_CURRICULUM[code].map((l) => l.topicKey)),
-          );
-        }
 
         // 3. Also fetch from Supabase if configured & logged in
         if (currentUser && isSupabaseBrowserConfigured()) {
@@ -420,12 +413,16 @@ export function SubtestPracticeView() {
       }
 
       const stats = subtestMeta[sub.code];
+      const hasContent = stats.totalLessons > 0 && stats.totalQuestions > 0;
       const pct =
         stats.totalQuestions > 0
           ? Math.round((stats.answeredQuestions / stats.totalQuestions) * 100)
           : 0;
 
-      if (progressFilter === "NOT_STARTED" && stats.answeredQuestions > 0) {
+      if (
+        progressFilter === "NOT_STARTED" &&
+        (!hasContent || stats.answeredQuestions > 0)
+      ) {
         return false;
       }
       if (
@@ -456,8 +453,19 @@ export function SubtestPracticeView() {
         .toLowerCase();
 
       return searchable.includes(query);
+    }).sort((a, b) => {
+      const aReady = subtestMeta[a.code].totalLessons > 0 ? 1 : 0;
+      const bReady = subtestMeta[b.code].totalLessons > 0 ? 1 : 0;
+      return bReady - aReady;
     });
   }, [categoryFilter, progressFilter, searchQuery, subtestMeta]);
+
+  const availableSubtestCount = useMemo(
+    () =>
+      SNBT_SUBTESTS.filter((sub) => subtestMeta[sub.code].totalLessons > 0)
+        .length,
+    [subtestMeta],
+  );
 
   // Active Subtest & Active Sub-Materi Lesson
   const activeLessons: ReadonlyArray<SubMaterialLesson> = useMemo(
@@ -637,7 +645,7 @@ export function SubtestPracticeView() {
                 type="search"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Cari sub-materi atau subtes (mis. Tanda Baca, Konjungsi, Hukum KTSP, Fungsi Kuadrat)..."
+                placeholder="Cari sub-materi atau subtes (mis. Tanda Baca, Konjungsi, Gagasan Pokok, Main Idea, Inference)..."
                 aria-label="Cari materi subtes"
                 className="w-full rounded-xl bg-white py-3.5 pr-11 pl-4 text-sm font-medium text-[var(--ink)] shadow-lg outline-none placeholder:text-[#98a2b3] focus:ring-4 focus:ring-white/25"
               />
@@ -728,7 +736,8 @@ export function SubtestPracticeView() {
           <section className="min-w-0">
             <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--navy)] sm:text-xl">
-                Kelas 7 Subtes ({filteredCatalogSubtests.length})
+                Kelas Subtes ({availableSubtestCount} Tersedia ·{" "}
+                {filteredCatalogSubtests.length} Ditampilkan)
               </h2>
               <span className="text-xs font-semibold text-[var(--muted)]">
                 Total latihan diselesaikan: {totalAnsweredAll} /{" "}
@@ -748,6 +757,8 @@ export function SubtestPracticeView() {
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {filteredCatalogSubtests.map((sub) => {
                   const stats = subtestMeta[sub.code];
+                  const hasContent =
+                    stats.totalLessons > 0 && stats.totalQuestions > 0;
                   const pct =
                     stats.totalQuestions > 0
                       ? Math.round(
@@ -760,13 +771,27 @@ export function SubtestPracticeView() {
                   return (
                     <article
                       key={sub.code}
-                      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e5eaf1] bg-white shadow-2xs transition hover:-translate-y-0.5 hover:border-[#c3d6f4] hover:shadow-[0_12px_26px_rgba(23,50,77,0.08)]"
+                      className={`flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e5eaf1] bg-white shadow-2xs transition ${
+                        hasContent
+                          ? "hover:-translate-y-0.5 hover:border-[#c3d6f4] hover:shadow-[0_12px_26px_rgba(23,50,77,0.08)]"
+                          : "opacity-85"
+                      }`}
                     >
                       <div>
                         <SubtestThumbnail
                           code={sub.code}
-                          topRightLabel={isDone ? "Selesai" : sub.category}
-                          bottomLeftLabel={`${stats.totalLessons} Sub-Materi`}
+                          topRightLabel={
+                            !hasContent
+                              ? "Segera Hadir"
+                              : isDone
+                                ? "Selesai"
+                                : sub.category
+                          }
+                          bottomLeftLabel={
+                            hasContent
+                              ? `${stats.totalLessons} Sub-Materi`
+                              : "Belum Tersedia"
+                          }
                         />
 
                         <div className="p-4 pb-3">
@@ -777,22 +802,29 @@ export function SubtestPracticeView() {
                           <div className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-[var(--muted)]">
                             <VerifiedBadgeIcon />
                             <span>
-                              { stats.totalLessons } Sub-Materi ·{" "}
                               {isLoading
                                 ? "Memuat..."
-                                : `${stats.totalQuestions} Soal`}
+                                : hasContent
+                                  ? `${stats.totalLessons} Sub-Materi · ${stats.totalQuestions} Soal`
+                                  : "Sub-materi belum tersedia"}
                             </span>
                           </div>
 
                           <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
-                            {sub.description}
+                            {hasContent
+                              ? sub.description
+                              : "Konten sub-materi dan bank soal sedang disiapkan oleh tim."}
                           </p>
                         </div>
                       </div>
 
                       <div className="px-4 pt-1 pb-4">
                         <div className="mb-3">
-                          {stats.answeredQuestions === 0 ? (
+                          {!hasContent ? (
+                            <div className="text-xs font-medium text-[#64748b]">
+                              Materi &amp; soal akan segera ditambahkan
+                            </div>
+                          ) : stats.answeredQuestions === 0 ? (
                             <div className="text-xs font-medium text-[#b4690e]">
                               Kamu belum mulai kelas ini
                             </div>
@@ -813,15 +845,25 @@ export function SubtestPracticeView() {
                           )}
                         </div>
 
-                        <button
-                          type="button"
-                          onClick={() => openSubtestClassroom(sub.code)}
-                          className="w-full cursor-pointer rounded-lg bg-[var(--blue)] py-2.5 text-center text-xs font-bold text-white transition hover:bg-[var(--blue-hover)]"
-                        >
-                          {stats.answeredQuestions > 0
-                            ? "Lanjut Belajar"
-                            : "Mulai Kelas"}
-                        </button>
+                        {hasContent ? (
+                          <button
+                            type="button"
+                            onClick={() => openSubtestClassroom(sub.code)}
+                            className="w-full cursor-pointer rounded-lg bg-[var(--blue)] py-2.5 text-center text-xs font-bold text-white transition hover:bg-[var(--blue-hover)]"
+                          >
+                            {stats.answeredQuestions > 0
+                              ? "Lanjut Belajar"
+                              : "Mulai Kelas"}
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            disabled
+                            className="w-full cursor-not-allowed rounded-lg bg-[#e2e8f0] py-2.5 text-center text-xs font-bold text-[#64748b]"
+                          >
+                            Segera Hadir
+                          </button>
+                        )}
                       </div>
                     </article>
                   );
@@ -910,73 +952,77 @@ export function SubtestPracticeView() {
             ) : null}
 
             {/* Skilvul Inline Progress Pill */}
-            <div className="hidden items-center gap-2.5 pl-1 lg:flex">
-              <div className="h-2.5 w-28 overflow-hidden rounded-full bg-[#e2e8f0]">
-                <div
-                  className="h-full rounded-full bg-[var(--blue)] transition-all"
-                  style={{ width: `${Math.max(overallPct, 4)}%` }}
-                />
+            {activeLesson ? (
+              <div className="hidden items-center gap-2.5 pl-1 lg:flex">
+                <div className="h-2.5 w-28 overflow-hidden rounded-full bg-[#e2e8f0]">
+                  <div
+                    className="h-full rounded-full bg-[var(--blue)] transition-all"
+                    style={{ width: `${Math.max(overallPct, 4)}%` }}
+                  />
+                </div>
+                <span className="text-xs font-semibold text-[#475467]">
+                  <b className="font-extrabold text-[var(--blue)]">
+                    {stats.answeredQuestions}/{stats.totalQuestions}
+                  </b>{" "}
+                  Latihan sudah diselesaikan
+                </span>
               </div>
-              <span className="text-xs font-semibold text-[#475467]">
-                <b className="font-extrabold text-[var(--blue)]">
-                  {stats.answeredQuestions}/{stats.totalQuestions}
-                </b>{" "}
-                Latihan sudah diselesaikan
-              </span>
-            </div>
+            ) : null}
           </div>
 
           {/* Right: Mode Toggle + Daftar Isi Button */}
-          <div className="flex shrink-0 items-center gap-2">
-            <div className="inline-flex rounded-xl border border-[#dce4ef] bg-[#f8fafc] p-0.5">
+          {activeLesson ? (
+            <div className="flex shrink-0 items-center gap-2">
+              <div className="inline-flex rounded-xl border border-[#dce4ef] bg-[#f8fafc] p-0.5">
+                <button
+                  type="button"
+                  onClick={() => setClassroomMode("MATERI")}
+                  className={`cursor-pointer rounded-lg px-2.5 py-1 text-xs font-extrabold transition ${
+                    classroomMode === "MATERI"
+                      ? "bg-[var(--navy)] text-white shadow-2xs"
+                      : "text-[#475467] hover:text-[var(--navy)]"
+                  }`}
+                >
+                  Baca Materi
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setClassroomMode("LATIHAN")}
+                  className={`cursor-pointer rounded-lg px-2.5 py-1 text-xs font-extrabold transition ${
+                    classroomMode === "LATIHAN"
+                      ? "bg-[var(--blue)] text-white shadow-2xs"
+                      : "text-[#475467] hover:text-[var(--navy)]"
+                  }`}
+                >
+                  Latihan ({activeTopicStats.answered}/{activeTopicStats.total})
+                </button>
+              </div>
+
               <button
                 type="button"
-                onClick={() => setClassroomMode("MATERI")}
-                className={`cursor-pointer rounded-lg px-2.5 py-1 text-xs font-extrabold transition ${
-                  classroomMode === "MATERI"
-                    ? "bg-[var(--navy)] text-white shadow-2xs"
-                    : "text-[#475467] hover:text-[var(--navy)]"
-                }`}
+                onClick={() => setIsTocModalOpen(true)}
+                aria-label="Buka Daftar Isi"
+                className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-[var(--blue)] px-3 py-1.5 text-xs font-extrabold text-white shadow-2xs transition hover:bg-[var(--blue-hover)]"
               >
-                Baca Materi
-              </button>
-              <button
-                type="button"
-                onClick={() => setClassroomMode("LATIHAN")}
-                className={`cursor-pointer rounded-lg px-2.5 py-1 text-xs font-extrabold transition ${
-                  classroomMode === "LATIHAN"
-                    ? "bg-[var(--blue)] text-white shadow-2xs"
-                    : "text-[#475467] hover:text-[var(--navy)]"
-                }`}
-              >
-                Latihan ({activeTopicStats.answered}/{activeTopicStats.total})
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="4" y1="6" x2="20" y2="6" />
+                  <line x1="4" y1="12" x2="20" y2="12" />
+                  <line x1="4" y1="18" x2="20" y2="18" />
+                </svg>
+                <span className="hidden sm:inline">Daftar Isi</span>
               </button>
             </div>
-
-            <button
-              type="button"
-              onClick={() => setIsTocModalOpen(true)}
-              aria-label="Buka Daftar Isi"
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-[var(--blue)] px-3 py-1.5 text-xs font-extrabold text-white shadow-2xs transition hover:bg-[var(--blue-hover)]"
-            >
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-              </svg>
-              <span className="hidden sm:inline">Daftar Isi</span>
-            </button>
-          </div>
+          ) : null}
         </div>
       </div>
 
@@ -1050,9 +1096,10 @@ export function SubtestPracticeView() {
                         correct: 0,
                       };
                       const isCompleted =
-                        (tStat.total > 0 && tStat.answered >= tStat.total) ||
-                        Boolean(readLessonIds[lesson.id] && tStat.answered > 0);
-                      const isPartial = !isCompleted && tStat.answered > 0;
+                        tStat.total > 0 && tStat.answered >= tStat.total;
+                      const isPartial =
+                        !isCompleted &&
+                        (tStat.answered > 0 || Boolean(readLessonIds[lesson.id]));
 
                       return (
                         <button
@@ -1108,8 +1155,27 @@ export function SubtestPracticeView() {
       ) : null}
 
       {/* =====================================================================
-          3. MAIN CLASSROOM BODY: MODE "MATERI" (ARTICLE VIEW ALA SKILVUL)
+          3. MAIN CLASSROOM BODY: EMPTY FALLBACK / MODE "MATERI" (ARTICLE VIEW ALA SKILVUL)
          ===================================================================== */}
+      {!activeLesson ? (
+        <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-[var(--border)] bg-white p-8 text-center shadow-2xs">
+          <h2 className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[var(--navy)]">
+            Materi {subtestInfo.name} Belum Tersedia
+          </h2>
+          <p className="mt-2 text-sm text-[var(--muted)]">
+            Konten sub-materi dan latihan soal untuk subtes ini sedang
+            disiapkan dan akan segera ditambahkan.
+          </p>
+          <button
+            type="button"
+            onClick={backToCatalog}
+            className="mt-5 cursor-pointer rounded-xl bg-[var(--blue)] px-5 py-2.5 text-xs font-extrabold text-white transition hover:bg-[var(--blue-hover)]"
+          >
+            ‹ Kembali ke Katalog Subtes
+          </button>
+        </div>
+      ) : null}
+
       {classroomMode === "MATERI" && activeLesson ? (
         <article className="mx-auto mt-6 max-w-4xl rounded-2xl border border-[#e5eaf1] bg-white px-5 py-7 shadow-2xs sm:px-12 sm:py-10">
           {/* Sub-Materi Header Metadata */}
