@@ -28,10 +28,10 @@ import {
 const OPTION_KEYS: readonly OptionLetter[] = ["A", "B", "C", "D", "E"];
 
 const STATUS_TABS = [
-  { key: "ALL", label: "Semua Soal" },
-  { key: "UNANSWERED", label: "Belum Dikerjakan" },
-  { key: "CORRECT", label: "Sudah Benar" },
-  { key: "WRONG", label: "Perlu Review" },
+  { key: "ALL", label: "Semua" },
+  { key: "UNANSWERED", label: "Belum" },
+  { key: "CORRECT", label: "Benar" },
+  { key: "WRONG", label: "Salah" },
 ] as const;
 
 type CategoryFilter = "ALL" | "TPS" | "Literasi";
@@ -289,6 +289,19 @@ export function SubtestPracticeView() {
       active = false;
     };
   }, [currentUser]);
+
+  useEffect(() => {
+    if (!isTocModalOpen) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsTocModalOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isTocModalOpen]);
 
   // Statistics per Subtest and per Sub-Materi topic
   const subtestMeta = useMemo(() => {
@@ -550,6 +563,16 @@ export function SubtestPracticeView() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function switchMode(mode: ClassroomMode, scrollToTop = false) {
+    if (mode === "LATIHAN" && activeLesson) {
+      setReadLessonIds((prev) => ({ ...prev, [activeLesson.id]: true }));
+    }
+    setClassroomMode(mode);
+    if (scrollToTop) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }
+
   function backToCatalog() {
     setActiveSubtest(null);
     setDraftChoice(null);
@@ -736,12 +759,11 @@ export function SubtestPracticeView() {
           <section className="min-w-0">
             <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--navy)] sm:text-xl">
-                Kelas Subtes ({availableSubtestCount} Tersedia ·{" "}
+                Kelas Subtes ({availableSubtestCount} Aktif ·{" "}
                 {filteredCatalogSubtests.length} Ditampilkan)
               </h2>
               <span className="text-xs font-semibold text-[var(--muted)]">
-                Total latihan diselesaikan: {totalAnsweredAll} /{" "}
-                {questions.length} soal
+                Progres: {totalAnsweredAll} / {questions.length} soal
               </span>
             </div>
 
@@ -774,7 +796,7 @@ export function SubtestPracticeView() {
                       className={`flex flex-col justify-between overflow-hidden rounded-2xl border border-[#e5eaf1] bg-white shadow-2xs transition ${
                         hasContent
                           ? "hover:-translate-y-0.5 hover:border-[#c3d6f4] hover:shadow-[0_12px_26px_rgba(23,50,77,0.08)]"
-                          : "opacity-85"
+                          : "opacity-80"
                       }`}
                     >
                       <div>
@@ -786,11 +808,6 @@ export function SubtestPracticeView() {
                               : isDone
                                 ? "Selesai"
                                 : sub.category
-                          }
-                          bottomLeftLabel={
-                            hasContent
-                              ? `${stats.totalLessons} Sub-Materi`
-                              : "Belum Tersedia"
                           }
                         />
 
@@ -806,44 +823,40 @@ export function SubtestPracticeView() {
                                 ? "Memuat..."
                                 : hasContent
                                   ? `${stats.totalLessons} Sub-Materi · ${stats.totalQuestions} Soal`
-                                  : "Sub-materi belum tersedia"}
+                                  : "Dalam tahap penyusunan"}
                             </span>
                           </div>
 
                           <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[var(--muted)]">
-                            {hasContent
-                              ? sub.description
-                              : "Konten sub-materi dan bank soal sedang disiapkan oleh tim."}
+                            {sub.description}
                           </p>
                         </div>
                       </div>
 
                       <div className="px-4 pt-1 pb-4">
-                        <div className="mb-3">
-                          {!hasContent ? (
-                            <div className="text-xs font-medium text-[#64748b]">
-                              Materi &amp; soal akan segera ditambahkan
-                            </div>
-                          ) : stats.answeredQuestions === 0 ? (
-                            <div className="text-xs font-medium text-[#b4690e]">
-                              Kamu belum mulai kelas ini
-                            </div>
-                          ) : (
-                            <div className="flex items-center gap-2.5">
-                              <div className="h-2 flex-1 overflow-hidden rounded-full bg-[#eef2f6]">
-                                <div
-                                  className={`h-full rounded-full transition-all ${
-                                    isDone ? "bg-[#147a4b]" : "bg-[#f59e0b]"
-                                  }`}
-                                  style={{ width: `${pct}%` }}
-                                />
+                        {hasContent ? (
+                          <div className="mb-3">
+                            {stats.answeredQuestions === 0 ? (
+                              <div className="text-xs font-medium text-[#b4690e]">
+                                Belum dimulai
                               </div>
-                              <span className="shrink-0 text-xs font-bold text-[var(--ink)]">
-                                {pct}%
-                              </span>
-                            </div>
-                          )}
-                        </div>
+                            ) : (
+                              <div className="flex items-center gap-2.5">
+                                <div className="h-2 flex-1 overflow-hidden rounded-full bg-[#eef2f6]">
+                                  <div
+                                    className={`h-full rounded-full transition-all ${
+                                      isDone ? "bg-[#147a4b]" : "bg-[#f59e0b]"
+                                    }`}
+                                    style={{ width: `${pct}%` }}
+                                  />
+                                </div>
+                                <span className="shrink-0 text-xs font-bold text-[var(--ink)]">
+                                  {pct}%
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        ) : null}
 
                         {hasContent ? (
                           <button
@@ -896,19 +909,19 @@ export function SubtestPracticeView() {
       : 0;
 
   return (
-    <div className="pb-20">
+    <div className="pb-24">
       {/* =====================================================================
-          1. SKILVUL TOP CLASSROOM BAR (BREADCRUMB DROPDOWN + PROGRESS + MENU)
+          1. SKILVUL TOP CLASSROOM BAR (SINGLE-ROW BREADCRUMB + PROGRESS + MODE)
          ===================================================================== */}
-      <div className="sticky top-[68px] z-20 -mx-1 rounded-2xl border border-[#dce4ef] bg-white/95 px-3.5 py-2.5 shadow-[0_6px_20px_rgba(23,50,77,0.06)] backdrop-blur-md sm:px-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          {/* Left: Back button + Clickable Skilvul Breadcrumb Pill */}
-          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
+      <div className="sticky top-[78px] z-20 rounded-xl border border-[#e2e8f0] bg-white/95 px-3.5 py-2 shadow-[0_4px_16px_rgba(23,50,77,0.05)] backdrop-blur-md sm:px-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 md:flex-nowrap md:gap-3">
+          {/* Left: Back button + Clickable Breadcrumb (Daftar Isi) + Inline Progress */}
+          <div className="flex min-w-0 flex-1 items-center gap-2">
             <button
               type="button"
               onClick={backToCatalog}
               title="Kembali ke Katalog Kelas"
-              className="inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-2.5 py-1.5 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
+              className="inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-lg border border-[#e2e8f0] bg-[#f8fafc] px-2.5 py-1.5 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
             >
               <span>‹</span>
               <span className="hidden sm:inline">Katalog</span>
@@ -919,22 +932,25 @@ export function SubtestPracticeView() {
                 type="button"
                 onClick={() => setIsTocModalOpen(true)}
                 title="Klik untuk membuka Daftar Isi Sub-Materi"
-                className="group flex min-w-0 cursor-pointer items-center gap-1.5 rounded-xl border border-[#c7daf7] bg-[#eef5ff] px-3 py-1.5 text-left text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] hover:bg-[#e0edff]"
+                aria-label="Buka Daftar Isi Sub-Materi"
+                className="group flex min-w-0 cursor-pointer items-center gap-1.5 rounded-lg border border-[#c7daf7] bg-[#eef5ff] px-2.5 py-1.5 text-left text-xs transition hover:border-[var(--blue)] hover:bg-[#e0edff]"
               >
                 <span className="shrink-0 font-extrabold text-[var(--blue)]">
                   {subtestInfo.code}
                 </span>
-                <span className="text-[#94a3b8]">›</span>
-                <span className="hidden max-w-[180px] truncate text-[#475467] md:inline">
+                <span className="hidden shrink-0 text-[#94a3b8] xl:inline">
+                  ›
+                </span>
+                <span className="hidden max-w-[160px] shrink truncate font-semibold text-[#475467] xl:inline">
                   {activeLesson.chapterTitle}
                 </span>
-                <span className="hidden text-[#94a3b8] md:inline">›</span>
-                <span className="max-w-[200px] truncate font-extrabold text-[var(--navy)] sm:max-w-[280px]">
+                <span className="shrink-0 text-[#94a3b8]">›</span>
+                <span className="min-w-0 truncate font-extrabold text-[var(--navy)]">
                   {activeLesson.orderNumber}. {activeLesson.title}
                 </span>
                 <svg
-                  width="14"
-                  height="14"
+                  width="13"
+                  height="13"
                   viewBox="0 0 12 12"
                   fill="none"
                   aria-hidden="true"
@@ -951,75 +967,51 @@ export function SubtestPracticeView() {
               </button>
             ) : null}
 
-            {/* Skilvul Inline Progress Pill */}
             {activeLesson ? (
-              <div className="hidden items-center gap-2.5 pl-1 lg:flex">
-                <div className="h-2.5 w-28 overflow-hidden rounded-full bg-[#e2e8f0]">
+              <div
+                title={`${stats.answeredQuestions} dari ${stats.totalQuestions} soal selesai`}
+                className="hidden shrink-0 items-center gap-2 pl-1 lg:flex"
+              >
+                <div className="h-2 w-20 overflow-hidden rounded-full bg-[#e2e8f0]">
                   <div
                     className="h-full rounded-full bg-[var(--blue)] transition-all"
                     style={{ width: `${Math.max(overallPct, 4)}%` }}
                   />
                 </div>
-                <span className="text-xs font-semibold text-[#475467]">
+                <span className="whitespace-nowrap text-xs font-semibold text-[#64748b] tabular-nums">
                   <b className="font-extrabold text-[var(--blue)]">
                     {stats.answeredQuestions}/{stats.totalQuestions}
                   </b>{" "}
-                  Latihan sudah diselesaikan
+                  soal
                 </span>
               </div>
             ) : null}
           </div>
 
-          {/* Right: Mode Toggle + Daftar Isi Button */}
+          {/* Right: Clean Materi / Latihan Mode Toggle */}
           {activeLesson ? (
-            <div className="flex shrink-0 items-center gap-2">
-              <div className="inline-flex rounded-xl border border-[#dce4ef] bg-[#f8fafc] p-0.5">
-                <button
-                  type="button"
-                  onClick={() => setClassroomMode("MATERI")}
-                  className={`cursor-pointer rounded-lg px-2.5 py-1 text-xs font-extrabold transition ${
-                    classroomMode === "MATERI"
-                      ? "bg-[var(--navy)] text-white shadow-2xs"
-                      : "text-[#475467] hover:text-[var(--navy)]"
-                  }`}
-                >
-                  Baca Materi
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setClassroomMode("LATIHAN")}
-                  className={`cursor-pointer rounded-lg px-2.5 py-1 text-xs font-extrabold transition ${
-                    classroomMode === "LATIHAN"
-                      ? "bg-[var(--blue)] text-white shadow-2xs"
-                      : "text-[#475467] hover:text-[var(--navy)]"
-                  }`}
-                >
-                  Latihan ({activeTopicStats.answered}/{activeTopicStats.total})
-                </button>
-              </div>
-
+            <div className="inline-flex shrink-0 rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-0.5">
               <button
                 type="button"
-                onClick={() => setIsTocModalOpen(true)}
-                aria-label="Buka Daftar Isi"
-                className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-[var(--blue)] px-3 py-1.5 text-xs font-extrabold text-white shadow-2xs transition hover:bg-[var(--blue-hover)]"
+                onClick={() => switchMode("MATERI")}
+                className={`cursor-pointer rounded-md px-3 py-1 text-xs font-extrabold transition ${
+                  classroomMode === "MATERI"
+                    ? "bg-[var(--navy)] text-white shadow-2xs"
+                    : "text-[#475467] hover:text-[var(--navy)]"
+                }`}
               >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <line x1="4" y1="6" x2="20" y2="6" />
-                  <line x1="4" y1="12" x2="20" y2="12" />
-                  <line x1="4" y1="18" x2="20" y2="18" />
-                </svg>
-                <span className="hidden sm:inline">Daftar Isi</span>
+                Materi
+              </button>
+              <button
+                type="button"
+                onClick={() => switchMode("LATIHAN")}
+                className={`cursor-pointer rounded-md px-3 py-1 text-xs font-extrabold tabular-nums transition ${
+                  classroomMode === "LATIHAN"
+                    ? "bg-[var(--blue)] text-white shadow-2xs"
+                    : "text-[#475467] hover:text-[var(--navy)]"
+                }`}
+              >
+                Latihan ({activeTopicStats.answered}/{activeTopicStats.total})
               </button>
             </div>
           ) : null}
@@ -1027,7 +1019,7 @@ export function SubtestPracticeView() {
       </div>
 
       {/* =====================================================================
-          2. MODAL "DAFTAR ISI | NAMA SUBTES" ALA SKILVUL (SCREENSHOT 3)
+          2. MODAL "DAFTAR ISI | NAMA SUBTES" ALA SKILVUL
          ===================================================================== */}
       {isTocModalOpen ? (
         <div
@@ -1043,7 +1035,7 @@ export function SubtestPracticeView() {
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-[#eef2f7] px-6 py-4">
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-[var(--ink)]">
                   Daftar Isi
                 </span>
@@ -1057,7 +1049,7 @@ export function SubtestPracticeView() {
                 type="button"
                 onClick={() => setIsTocModalOpen(false)}
                 aria-label="Tutup Daftar Isi"
-                className="grid h-9 w-9 cursor-pointer place-items-center rounded-xl border-2 border-[#60a5fa] bg-white text-[var(--navy)] transition hover:bg-[#eff6ff]"
+                className="grid h-9 w-9 cursor-pointer place-items-center rounded-xl border border-[#e2e8f0] bg-white text-[#64748b] transition hover:bg-[#f8fafc] hover:text-[var(--navy)]"
               >
                 <svg
                   width="16"
@@ -1108,12 +1100,12 @@ export function SubtestPracticeView() {
                           onClick={() => selectLesson(idx, "MATERI")}
                           className={`flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl px-4 py-2.5 text-left transition ${
                             isCurrent
-                              ? "bg-[#f1f5f9] font-extrabold text-[var(--navy)]"
+                              ? "bg-[#eef5ff] font-extrabold text-[var(--navy)]"
                               : "font-medium text-[#334155] hover:bg-[#f8fafc]"
                           }`}
                         >
                           <div className="flex min-w-0 items-center gap-3">
-                            <span className="w-6 shrink-0 text-sm font-bold text-[#64748b]">
+                            <span className="w-6 shrink-0 text-sm font-bold text-[#64748b] tabular-nums">
                               {lesson.orderNumber}.
                             </span>
                             <span className="truncate text-sm">
@@ -1122,8 +1114,8 @@ export function SubtestPracticeView() {
                           </div>
 
                           <div className="flex shrink-0 items-center gap-2.5">
-                            <span className="rounded-md bg-[#f1f5f9] px-2 py-0.5 text-[11px] font-bold text-[#475467]">
-                              {tStat.answered}/{tStat.total} Soal
+                            <span className="text-xs font-semibold text-[#64748b] tabular-nums">
+                              {tStat.answered}/{tStat.total}
                             </span>
                             {isCompleted ? (
                               <CompletedCheckCircle />
@@ -1155,7 +1147,7 @@ export function SubtestPracticeView() {
       ) : null}
 
       {/* =====================================================================
-          3. MAIN CLASSROOM BODY: EMPTY FALLBACK / MODE "MATERI" (ARTICLE VIEW ALA SKILVUL)
+          3. MAIN CLASSROOM BODY: EMPTY FALLBACK / MODE "MATERI"
          ===================================================================== */}
       {!activeLesson ? (
         <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-[var(--border)] bg-white p-8 text-center shadow-2xs">
@@ -1177,22 +1169,12 @@ export function SubtestPracticeView() {
       ) : null}
 
       {classroomMode === "MATERI" && activeLesson ? (
-        <article className="mx-auto mt-6 max-w-4xl rounded-2xl border border-[#e5eaf1] bg-white px-5 py-7 shadow-2xs sm:px-12 sm:py-10">
-          {/* Sub-Materi Header Metadata */}
-          <div className="flex flex-wrap items-center gap-2 text-xs font-extrabold text-[var(--blue)]">
-            <span className="rounded-md bg-[var(--blue-soft)] px-2.5 py-1">
-              {subtestInfo.code} · Sub-Materi {activeLesson.orderNumber}/
-              {activeLessons.length}
-            </span>
-            <span className="text-[#94a3b8]">•</span>
-            <span>{activeLesson.chapterTitle}</span>
-            <span className="text-[#94a3b8]">•</span>
-            <span className="text-[#475467]">
-              {activeTopicStats.total} Soal Drilling Tersedia
-            </span>
+        <article className="mx-auto mt-5 max-w-3xl rounded-2xl border border-[#e5eaf1] bg-white px-5 py-7 shadow-2xs sm:px-10 sm:py-9">
+          <div className="text-xs font-semibold text-[#64748b]">
+            {activeLesson.chapterTitle} · {activeTopicStats.total} soal latihan
           </div>
 
-          <h1 className="mt-3 font-[family-name:var(--font-jakarta)] text-2xl font-extrabold tracking-tight text-[var(--navy)] sm:text-3xl">
+          <h1 className="mt-2 font-[family-name:var(--font-jakarta)] text-2xl font-extrabold tracking-tight text-[var(--navy)] sm:text-3xl">
             {activeLesson.orderNumber}. {activeLesson.title}
           </h1>
 
@@ -1203,36 +1185,17 @@ export function SubtestPracticeView() {
             ))}
           </div>
 
-          {/* Centered Visual Concept Card (Matching Skilvul's Centered Graphic Card in Screenshot 1) */}
-          <div className="my-8 overflow-hidden rounded-2xl border border-[#dbeafe] bg-gradient-to-br from-[#f8fbff] via-white to-[#eef5ff] p-6 text-center shadow-[0_12px_32px_rgba(23,50,77,0.07)] sm:p-8">
-            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-[var(--blue)] text-sm font-extrabold text-white shadow-sm">
-              {subtestInfo.code}
-            </div>
-            <div className="mt-3 text-xs font-extrabold tracking-wider text-[var(--blue)] uppercase">
+          {/* Clean Visual Concept Box (distraction-free, no duplicate CTAs) */}
+          <div className="my-7 rounded-xl border border-[#dbeafe] bg-[#f8fbff] p-5 text-center sm:p-6">
+            <div className="text-[11px] font-extrabold tracking-wider text-[var(--blue)] uppercase">
               {activeLesson.heroConceptTitle}
             </div>
-            <div className="mx-auto mt-2 max-w-2xl rounded-xl border border-[#bfdbfe] bg-white px-4 py-3 font-mono text-sm font-extrabold text-[var(--navy)] shadow-2xs sm:text-base">
+            <div className="mx-auto mt-2.5 max-w-2xl rounded-lg border border-[#bfdbfe] bg-white px-4 py-3 font-mono text-sm font-extrabold text-[var(--navy)] sm:text-base">
               {activeLesson.heroConceptFormula}
             </div>
             <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-[#475467] sm:text-sm">
               {activeLesson.heroConceptSubtitle}
             </p>
-            <div className="mt-4 inline-flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setClassroomMode("LATIHAN")}
-                className="cursor-pointer rounded-full bg-[var(--blue)] px-4 py-1.5 text-xs font-extrabold text-white transition hover:bg-[var(--blue-hover)]"
-              >
-                Latihan {activeTopicStats.total} Soal Sub-Materi Ini
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsTocModalOpen(true)}
-                className="cursor-pointer rounded-full border border-[#cbd5e1] bg-white px-4 py-1.5 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)]"
-              >
-                Lihat Daftar Isi
-              </button>
-            </div>
           </div>
 
           {/* Detailed Sections */}
@@ -1277,7 +1240,7 @@ export function SubtestPracticeView() {
                       </p>
                     </div>
                     <div className="text-xs leading-relaxed text-[#475467] sm:col-span-2">
-                      <b>Catatan Penyuntingan:</b> {sec.exampleBox.note}
+                      <b>Catatan:</b> {sec.exampleBox.note}
                     </div>
                   </div>
                 ) : null}
@@ -1286,54 +1249,23 @@ export function SubtestPracticeView() {
           </div>
 
           {/* Exam Tip Callout */}
-          <div className="mt-8 rounded-2xl border border-[#bfdbfe] bg-[#eff6ff] p-5 text-sm leading-relaxed text-[var(--navy)]">
+          <div className="mt-8 rounded-xl border border-[#dbeafe] bg-[#eff6ff] p-4.5 text-sm leading-relaxed text-[var(--navy)]">
             <div className="font-extrabold text-[var(--blue)]">
-              💡 Tips Cepat UTBK-SNBT:
+              Tips Cepat UTBK-SNBT
             </div>
             <p className="mt-1">{activeLesson.examTip}</p>
-          </div>
-
-          {/* Inline CTA Card to Start Drilling */}
-          <div className="mt-7 flex flex-col items-start justify-between gap-4 rounded-2xl border border-[#dce4ef] bg-[#f8fafd] p-5 sm:flex-row sm:items-center">
-            <div>
-              <div className="text-sm font-extrabold text-[var(--navy)]">
-                Sudah paham konsep {activeLesson.title}?
-              </div>
-              <p className="mt-0.5 text-xs text-[#475467]">
-                Uji pemahamanmu dengan mengerjakan {activeTopicStats.total} soal
-                drilling beserta pembahasan lengkap pada sub-materi ini.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                setClassroomMode("LATIHAN");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="shrink-0 cursor-pointer rounded-xl bg-[var(--blue)] px-5 py-2.5 text-xs font-extrabold text-white shadow-sm transition hover:bg-[var(--blue-hover)] sm:text-sm"
-            >
-              Mulai Latihan ({activeTopicStats.total} Soal) ›
-            </button>
           </div>
         </article>
       ) : null}
 
       {/* =====================================================================
-          4. MAIN CLASSROOM BODY: MODE "LATIHAN" (DRILLING SOAL SUB-MATERI)
+          4. MAIN CLASSROOM BODY: MODE "LATIHAN" (FOCUSED DRILLING)
          ===================================================================== */}
       {classroomMode === "LATIHAN" && activeLesson ? (
-        <div className="mt-5 space-y-4">
-          {/* Sub-Materi Latihan Filter & Back-to-Materi Bar */}
-          <div className="flex flex-col justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs sm:flex-row sm:items-center">
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setClassroomMode("MATERI")}
-                className="cursor-pointer rounded-lg border border-[#dce4ef] bg-[#f8fafd] px-3 py-1.5 text-xs font-extrabold text-[var(--navy)] transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
-              >
-                ‹ Baca Materi Sub-Topik
-              </button>
-
+        <div className="mx-auto mt-5 max-w-5xl space-y-4">
+          {/* Lightweight Filter Row */}
+          <div className="flex flex-wrap items-center justify-between gap-2.5">
+            <div className="flex flex-wrap items-center gap-1.5">
               {STATUS_TABS.map((tab) => {
                 const active = statusFilter === tab.key;
                 return (
@@ -1348,7 +1280,7 @@ export function SubtestPracticeView() {
                     className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold transition ${
                       active
                         ? "bg-[var(--navy)] text-white"
-                        : "bg-[#f4f7fb] text-[var(--muted)] hover:text-[var(--navy)]"
+                        : "border border-[#e2e8f0] bg-white text-[#475467] hover:text-[var(--navy)]"
                     }`}
                   >
                     {tab.label}
@@ -1365,7 +1297,7 @@ export function SubtestPracticeView() {
                 setActiveQuestionIndex(0);
                 setDraftChoice(null);
               }}
-              className="w-full rounded-lg border border-[var(--border)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ink)] outline-none sm:w-auto"
+              className="rounded-lg border border-[#e2e8f0] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ink)] outline-none"
             >
               <option value="ALL">Semua Level</option>
               <option value="Mudah">Mudah</option>
@@ -1381,29 +1313,21 @@ export function SubtestPracticeView() {
             </div>
           ) : filteredQuestions.length === 0 ? (
             <div className="rounded-2xl border border-[var(--border)] bg-white p-10 text-center text-sm text-[var(--muted)]">
-              Tidak ada soal pada sub-materi ini yang cocok dengan filter status
-              / level saat ini.
+              Tidak ada soal pada sub-materi ini yang cocok dengan filter saat
+              ini.
             </div>
           ) : activeQuestion ? (
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_270px]">
+            <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-[1fr_256px]">
               {/* Active Question Card */}
               <div className="min-w-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-2xs">
                 <div className="p-5 sm:p-6">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border)] pb-3.5">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-[var(--blue-soft)] px-3 py-1 text-xs font-extrabold text-[var(--blue)]">
-                        {activeQuestion.subtest}
-                      </span>
-                      <span className="rounded-full bg-[#f1f5f9] px-3 py-1 text-xs font-bold text-[var(--navy)]">
-                        {activeLesson.orderNumber}. {activeLesson.title}
-                      </span>
-                      <span className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold text-[var(--muted)]">
-                        {activeQuestion.difficulty}
-                      </span>
-                    </div>
-                    <span className="text-xs font-extrabold text-[var(--muted)]">
+                  <div className="flex items-center justify-between gap-2 border-b border-[var(--border)] pb-3">
+                    <span className="text-xs font-extrabold text-[var(--navy)]">
                       Soal {safeQuestionIndex + 1} dari{" "}
                       {filteredQuestions.length}
+                    </span>
+                    <span className="rounded-full border border-[var(--border)] bg-[#f8fafc] px-2.5 py-0.5 text-[11px] font-bold text-[#475467]">
+                      {activeQuestion.difficulty}
                     </span>
                   </div>
 
@@ -1464,20 +1388,20 @@ export function SubtestPracticeView() {
                       }}
                       className="cursor-pointer rounded-xl border border-[#dce4ef] bg-[#f8fafc] px-4 py-2 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] disabled:cursor-not-allowed disabled:opacity-40"
                     >
-                      ‹ Soal Sebelumnya
+                      ‹ Sebelumnya
                     </button>
 
                     <button
                       type="button"
                       disabled={isSubmitting || !shownChoice}
                       onClick={() => void handleCheckAnswer()}
-                      className="cursor-pointer rounded-xl bg-[var(--blue)] px-5 py-2.5 text-center text-xs font-extrabold text-white shadow-2xs transition hover:bg-[var(--blue-hover)] disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm"
+                      className="cursor-pointer rounded-xl bg-[var(--blue)] px-5 py-2 text-center text-xs font-extrabold text-white shadow-2xs transition hover:bg-[var(--blue-hover)] disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm"
                     >
                       {isSubmitting
                         ? "Memeriksa..."
                         : activeSubmission
-                          ? "Periksa Ulang Jawaban"
-                          : "Periksa Jawaban & Buka Pembahasan"}
+                          ? "Periksa Ulang"
+                          : "Periksa Jawaban"}
                     </button>
 
                     <button
@@ -1493,7 +1417,7 @@ export function SubtestPracticeView() {
                       }}
                       className="cursor-pointer rounded-xl border border-[#dce4ef] bg-[#f8fafc] px-4 py-2 text-xs font-bold text-[var(--navy)] transition hover:border-[var(--blue)] disabled:cursor-not-allowed disabled:opacity-40"
                     >
-                      Soal Berikutnya ›
+                      Berikutnya ›
                     </button>
                   </div>
 
@@ -1506,22 +1430,17 @@ export function SubtestPracticeView() {
                           : "border-[#fed7aa] bg-[#fffaf0]"
                       }`}
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <b
-                          className={`text-sm font-extrabold ${
-                            activeSubmission.is_correct
-                              ? "text-[#147a4b]"
-                              : "text-[#b45309]"
-                          }`}
-                        >
-                          {activeSubmission.is_correct
-                            ? "✓ Jawaban Kamu Benar!"
-                            : `✕ Jawaban Kamu (${activeSubmission.selected_option}) Belum Tepat · Kunci: ${activeQuestion.correct_option}`}
-                        </b>
-                        <span className="rounded-full bg-white px-2.5 py-0.5 text-[11px] font-extrabold text-[var(--navy)]">
-                          Pembahasan Lengkap
-                        </span>
-                      </div>
+                      <b
+                        className={`text-sm font-extrabold ${
+                          activeSubmission.is_correct
+                            ? "text-[#147a4b]"
+                            : "text-[#b45309]"
+                        }`}
+                      >
+                        {activeSubmission.is_correct
+                          ? "✓ Jawaban Kamu Benar!"
+                          : `✕ Jawaban Kamu (${activeSubmission.selected_option}) Belum Tepat · Kunci: ${activeQuestion.correct_option}`}
+                      </b>
                       <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--ink)]">
                         {activeQuestion.explanation}
                       </p>
@@ -1530,13 +1449,13 @@ export function SubtestPracticeView() {
                 </div>
               </div>
 
-              {/* Right Sidebar: Question Number Navigator for Active Sub-Materi */}
-              <aside className="self-start rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs">
+              {/* Right Sidebar: Sticky Question Number Navigator */}
+              <aside className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-2xs lg:sticky lg:top-[136px]">
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-extrabold text-[var(--navy)]">
-                    Nomor Soal Sub-Materi
+                    Navigasi Soal
                   </div>
-                  <span className="rounded-md bg-[var(--blue-soft)] px-2 py-0.5 text-[11px] font-extrabold text-[var(--blue)]">
+                  <span className="text-xs font-extrabold text-[var(--blue)] tabular-nums">
                     {activeTopicStats.answered}/{activeTopicStats.total}
                   </span>
                 </div>
@@ -1576,14 +1495,6 @@ export function SubtestPracticeView() {
                     );
                   })}
                 </div>
-
-                <button
-                  type="button"
-                  onClick={() => setIsTocModalOpen(true)}
-                  className="mt-4 w-full cursor-pointer rounded-xl border border-[#dce4ef] bg-[#f8fafc] py-2 text-xs font-extrabold text-[var(--navy)] transition hover:border-[var(--blue)] hover:text-[var(--blue)]"
-                >
-                  Pindah Sub-Materi Lain ({activeLessons.length})
-                </button>
               </aside>
             </div>
           ) : null}
@@ -1591,7 +1502,7 @@ export function SubtestPracticeView() {
       ) : null}
 
       {/* =====================================================================
-          5. SKILVUL STICKY BOTTOM CLASSROOM BAR (PREV SUB-MATERI | MULAI LATIHAN | NEXT SUB-MATERI)
+          5. SKILVUL STICKY BOTTOM CLASSROOM BAR (PREV | CTA | NEXT)
          ===================================================================== */}
       {activeLesson ? (
         <div className="fixed right-0 bottom-0 left-0 z-30 border-t border-white/15 bg-gradient-to-r from-[#17324d] via-[#1d3f63] to-[#2459bd] px-4 py-2.5 text-white shadow-[0_-8px_24px_rgba(15,23,42,0.18)] sm:px-8">
@@ -1607,31 +1518,15 @@ export function SubtestPracticeView() {
                   <span className="shrink-0">‹</span>
                   <span className="truncate">{prevLesson.title}</span>
                 </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={backToCatalog}
-                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-extrabold text-white/85 transition hover:bg-white/10 sm:text-sm"
-                >
-                  <span>‹</span>
-                  <span>Katalog Kelas</span>
-                </button>
-              )}
+              ) : null}
             </div>
 
-            {/* Center: Prominent White Button ("Mulai Latihan" / "Baca Materi") matching Screenshot 1 */}
+            {/* Center: Prominent Mode Switch CTA */}
             <div className="shrink-0">
               {classroomMode === "MATERI" ? (
                 <button
                   type="button"
-                  onClick={() => {
-                    setReadLessonIds((prev) => ({
-                      ...prev,
-                      [activeLesson.id]: true,
-                    }));
-                    setClassroomMode("LATIHAN");
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
+                  onClick={() => switchMode("LATIHAN", true)}
                   className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs font-extrabold text-[var(--navy)] shadow-md transition hover:bg-[#eff6ff] sm:px-6 sm:text-sm"
                 >
                   <svg
@@ -1656,18 +1551,29 @@ export function SubtestPracticeView() {
               ) : (
                 <button
                   type="button"
-                  onClick={() => {
-                    setClassroomMode("MATERI");
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
+                  onClick={() => switchMode("MATERI", true)}
                   className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs font-extrabold text-[var(--navy)] shadow-md transition hover:bg-[#eff6ff] sm:px-6 sm:text-sm"
                 >
-                  <span>📖 Baca Materi Sub-Topik</span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className="text-[var(--blue)]"
+                  >
+                    <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V19a2 2 0 0 1 2-2h14" />
+                  </svg>
+                  <span>Baca Materi</span>
                 </button>
               )}
             </div>
 
-            {/* Right: Next Sub-Materi */}
+            {/* Right: Next Sub-Materi or Finish */}
             <div className="flex min-w-0 flex-1 justify-end">
               {nextLesson ? (
                 <button
@@ -1681,10 +1587,10 @@ export function SubtestPracticeView() {
               ) : (
                 <button
                   type="button"
-                  onClick={() => setIsTocModalOpen(true)}
-                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-extrabold text-white/85 transition hover:bg-white/10 sm:text-sm"
+                  onClick={backToCatalog}
+                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-extrabold text-white/90 transition hover:bg-white/10 sm:text-sm"
                 >
-                  <span>Daftar Isi</span>
+                  <span>Selesai · Katalog</span>
                   <span>›</span>
                 </button>
               )}
