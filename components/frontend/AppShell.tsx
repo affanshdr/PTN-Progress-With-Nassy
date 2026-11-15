@@ -20,6 +20,7 @@ import { SchemaMigrationBanner } from "@/components/frontend/SchemaMigrationBann
 import {
   AvatarBadge,
   NassyLogo,
+  NavbarCoinPill,
   VerifiedBadgeIcon,
 } from "@/components/frontend/SkilvulUi";
 
@@ -83,7 +84,7 @@ function CenterDesktopNav() {
     <nav
       ref={navRef}
       aria-label="Navigasi utama"
-      className="hidden items-center gap-8 md:flex"
+      className="hidden items-center gap-5 whitespace-nowrap md:flex lg:gap-8"
     >
       {topNavItems.map((item) => {
         const isActive = item.children
@@ -353,10 +354,10 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[var(--background)] pb-14">
-      {/* Skilvul-style Top Navbar: Left Logo | Center Features | Right User Button */}
+      {/* Skilvul-style Top Navbar: Left Logo | Center Features | Right Coin & User Button */}
       <header className="sticky top-0 z-30 border-b border-[var(--border)] bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex h-[72px] w-[min(1160px,92%)] items-center justify-between gap-4">
-          <Link href="/dashboard" className="min-w-0 shrink-0">
+        <div className="mx-auto flex h-[72px] w-[min(1160px,92%)] items-center justify-between gap-3 lg:gap-4">
+          <Link href="/dashboard" className="min-w-0 lg:shrink-0">
             <NassyLogo compact />
           </Link>
 
@@ -364,7 +365,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             <CenterDesktopNav />
           </Suspense>
 
-          <div className="flex shrink-0 items-center gap-2.5">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+            <NavbarCoinPill balance={coinBalance} />
+
             {/* Skilvul User Pill Button (`[AS] AFFAN`) */}
             <div className="relative" ref={dropdownRef}>
               <button
@@ -372,10 +375,10 @@ export function AppShell({ children }: { children: ReactNode }) {
                 aria-haspopup="menu"
                 aria-expanded={profileMenuOpen}
                 onClick={() => setProfileMenuOpen((prev) => !prev)}
-                className="flex cursor-pointer items-center gap-2.5 rounded-xl border border-[#dfe5ee] bg-white px-3 py-1.5 text-xs font-bold tracking-wide text-[var(--ink)] transition hover:border-[var(--blue)] sm:px-3.5 sm:py-2"
+                className="flex cursor-pointer items-center gap-2 rounded-xl border border-[#dfe5ee] bg-white px-2.5 py-1.5 text-xs font-bold tracking-wide text-[var(--ink)] transition hover:border-[var(--blue)] sm:gap-2.5 sm:px-3.5 sm:py-2"
               >
                 <AvatarBadge name={currentUser.name} size="sm" />
-                <span className="max-w-[110px] truncate uppercase">
+                <span className="max-w-[76px] truncate uppercase sm:max-w-[110px]">
                   {firstName}
                 </span>
               </button>

@@ -7,6 +7,7 @@ import { useNassy } from "@/components/frontend/NassyProvider";
 import {
   AvatarBadge,
   NassyLogo,
+  NavbarCoinPill,
   SubtestThumbnail,
   VerifiedBadgeIcon,
 } from "@/components/frontend/SkilvulUi";
@@ -81,7 +82,7 @@ const STUDENT_STORIES = [
 ] as const;
 
 export function LandingView() {
-  const { currentUser, openAuthModal } = useNassy();
+  const { currentUser, coinBalance, openAuthModal } = useNassy();
   const [activeProgramId, setActiveProgramId] = useState<string>(
     PROGRAM_TABS[0].id,
   );
@@ -92,14 +93,14 @@ export function LandingView() {
 
   return (
     <div className="min-h-screen overflow-x-clip bg-white text-[var(--ink)]">
-      {/* Top Navbar (Logo Left | 4 Core Features Center | User/Auth Right) */}
+      {/* Top Navbar (Logo Left | 4 Core Features Center | Coin & User/Auth Right) */}
       <nav className="sticky top-0 z-30 border-b border-[var(--border)] bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex h-[72px] w-[min(1160px,92%)] items-center justify-between gap-4">
-          <Link href="/" className="shrink-0">
+        <div className="mx-auto flex h-[72px] w-[min(1160px,92%)] items-center justify-between gap-3 lg:gap-4">
+          <Link href="/" className="min-w-0 lg:shrink-0">
             <NassyLogo compact />
           </Link>
 
-          <div className="hidden items-center gap-8 text-sm font-semibold text-[#526071] md:flex">
+          <div className="hidden items-center gap-5 text-sm font-semibold whitespace-nowrap text-[#526071] md:flex lg:gap-8">
             <Link
               href="/bank-soal"
               className="transition hover:text-[var(--navy)]"
@@ -126,17 +127,21 @@ export function LandingView() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
             {currentUser ? (
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2.5 rounded-xl border border-[#dfe5ee] bg-white px-3 py-1.5 text-xs font-bold tracking-wide text-[var(--ink)] transition hover:border-[var(--blue)] sm:px-3.5 sm:py-2"
-              >
-                <AvatarBadge name={currentUser.name} size="sm" />
-                <span className="max-w-[110px] truncate uppercase">
-                  {currentUser.name.trim().split(/\s+/)[0] || currentUser.name}
-                </span>
-              </Link>
+              <>
+                <NavbarCoinPill balance={coinBalance} />
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-2 rounded-xl border border-[#dfe5ee] bg-white px-2.5 py-1.5 text-xs font-bold tracking-wide text-[var(--ink)] transition hover:border-[var(--blue)] sm:gap-2.5 sm:px-3.5 sm:py-2"
+                >
+                  <AvatarBadge name={currentUser.name} size="sm" />
+                  <span className="max-w-[76px] truncate uppercase sm:max-w-[110px]">
+                    {currentUser.name.trim().split(/\s+/)[0] ||
+                      currentUser.name}
+                  </span>
+                </Link>
+              </>
             ) : (
               <div className="hidden items-center gap-2 sm:flex">
                 <button

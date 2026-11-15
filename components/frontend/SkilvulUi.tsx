@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import type { SnbtSubtestCode } from "@/lib/supabase/types";
 
@@ -84,6 +85,49 @@ export function VerifiedBadgeIcon() {
         fill="#147A4B"
       />
     </svg>
+  );
+}
+
+/**
+ * Compact wallet coin balance pill placed beside the user profile button in the top navbar.
+ */
+export function NavbarCoinPill({ balance }: { balance: number }) {
+  return (
+    <Link
+      href="/coin"
+      title="Dompet & Top-Up Coin"
+      aria-label={`Saldo ${balance} Coin, buka Dompet Coin`}
+      className="inline-flex shrink-0 items-center gap-1.5 rounded-xl border border-[#f2dca0] bg-[#fffdf5] px-2.5 py-1.5 text-xs font-extrabold text-[#8a5300] transition hover:border-[#eab308] hover:bg-[#fef7dc] sm:gap-2 sm:px-3 sm:py-2"
+    >
+      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#fef3c7] text-[#b45309]">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="9"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="#fde68a"
+          />
+          <circle
+            cx="12"
+            cy="12"
+            r="5.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+        </svg>
+      </span>
+      <span className="tabular-nums">{balance.toLocaleString("id-ID")}</span>
+      <span className="hidden font-bold sm:inline">Coin</span>
+    </Link>
   );
 }
 
