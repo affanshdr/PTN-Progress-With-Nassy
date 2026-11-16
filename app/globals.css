@@ -33,3 +33,13 @@ body {
   background: var(--background);
   color: var(--ink);
 }
+
+.katex {
+  font-size: 1.03em;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}

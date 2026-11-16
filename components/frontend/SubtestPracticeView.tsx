@@ -20,6 +20,7 @@ import type {
   SnbtSubtestCode,
 } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import { RichFormattedText } from "@/components/frontend/RichFormattedText";
 import {
   SubtestThumbnail,
   VerifiedBadgeIcon,
@@ -1191,7 +1192,7 @@ export function SubtestPracticeView() {
               {activeLesson.heroConceptTitle}
             </div>
             <div className="mx-auto mt-2.5 max-w-2xl rounded-lg border border-[#bfdbfe] bg-white px-4 py-3 font-mono text-sm font-extrabold text-[var(--navy)] sm:text-base">
-              {activeLesson.heroConceptFormula}
+              <RichFormattedText text={activeLesson.heroConceptFormula} />
             </div>
             <p className="mx-auto mt-3 max-w-xl text-xs leading-relaxed text-[#475467] sm:text-sm">
               {activeLesson.heroConceptSubtitle}
@@ -1331,9 +1332,11 @@ export function SubtestPracticeView() {
                     </span>
                   </div>
 
-                  <p className="mt-5 whitespace-pre-line text-[15px] leading-relaxed font-medium text-[var(--ink)]">
-                    {activeQuestion.question_text}
-                  </p>
+                  <RichFormattedText
+                    as="p"
+                    text={activeQuestion.question_text}
+                    className="mt-5 text-[15px] leading-relaxed font-medium text-[var(--ink)]"
+                  />
 
                   <div className="mt-5 grid gap-2.5">
                     {OPTION_KEYS.map((letter) => {
@@ -1369,9 +1372,10 @@ export function SubtestPracticeView() {
                           <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-current text-xs font-extrabold">
                             {letter}
                           </span>
-                          <span className="min-w-0 break-words leading-relaxed">
-                            {getOptionText(activeQuestion, letter)}
-                          </span>
+                          <RichFormattedText
+                            text={getOptionText(activeQuestion, letter)}
+                            className="min-w-0 leading-relaxed"
+                          />
                         </button>
                       );
                     })}
@@ -1441,9 +1445,11 @@ export function SubtestPracticeView() {
                           ? "✓ Jawaban Kamu Benar!"
                           : `✕ Jawaban Kamu (${activeSubmission.selected_option}) Belum Tepat · Kunci: ${activeQuestion.correct_option}`}
                       </b>
-                      <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-[var(--ink)]">
-                        {activeQuestion.explanation}
-                      </p>
+                      <RichFormattedText
+                        as="p"
+                        text={activeQuestion.explanation}
+                        className="mt-2 text-sm leading-relaxed text-[var(--ink)]"
+                      />
                     </div>
                   ) : null}
                 </div>

@@ -17,6 +17,7 @@ import type {
   TryoutReviewItem,
 } from "@/lib/supabase/types";
 import { useNassy } from "@/components/frontend/NassyProvider";
+import { RichFormattedText } from "@/components/frontend/RichFormattedText";
 
 const OPTION_KEYS: readonly OptionLetter[] = ["A", "B", "C", "D", "E"];
 
@@ -485,9 +486,11 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
                     </span>
                   </div>
 
-                  <p className="mt-3 whitespace-pre-line text-sm leading-relaxed font-medium text-[var(--ink)]">
-                    {item.question_text}
-                  </p>
+                  <RichFormattedText
+                    as="p"
+                    text={item.question_text}
+                    className="mt-3 text-sm leading-relaxed font-medium text-[var(--ink)]"
+                  />
 
                   <div className="mt-3 grid gap-1.5 text-xs">
                     {OPTION_KEYS.map((letter) => {
@@ -504,7 +507,8 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
                                 : "border-[var(--border)] bg-[#fafbfd] text-[var(--ink)]"
                           }`}
                         >
-                          <b>{letter}.</b> {getOptionText(item, letter)}
+                          <b>{letter}.</b>{" "}
+                          <RichFormattedText text={getOptionText(item, letter)} />
                         </div>
                       );
                     })}
@@ -512,7 +516,7 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
 
                   <div className="mt-3 rounded-xl bg-[#f8fafc] p-3.5 text-xs leading-relaxed text-[var(--ink)]">
                     <b className="text-[var(--navy)]">Pembahasan:</b>{" "}
-                    {item.explanation}
+                    <RichFormattedText text={item.explanation} />
                   </div>
                 </article>
               );
@@ -632,9 +636,11 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
               </span>
             </div>
 
-            <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed font-medium text-[var(--ink)]">
-              {currentQuestion.question_text}
-            </p>
+            <RichFormattedText
+              as="p"
+              text={currentQuestion.question_text}
+              className="mt-4 text-[15px] leading-relaxed font-medium text-[var(--ink)]"
+            />
 
             <div className="mt-5 grid gap-2.5">
               {OPTION_KEYS.map((letter) => {
@@ -653,9 +659,10 @@ export function TryoutRoomView({ tryoutId }: { tryoutId: string }) {
                     <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-current text-xs font-extrabold">
                       {letter}
                     </span>
-                    <span className="min-w-0 break-words leading-relaxed">
-                      {getOptionText(currentQuestion, letter)}
-                    </span>
+                    <RichFormattedText
+                      text={getOptionText(currentQuestion, letter)}
+                      className="min-w-0 leading-relaxed"
+                    />
                   </button>
                 );
               })}

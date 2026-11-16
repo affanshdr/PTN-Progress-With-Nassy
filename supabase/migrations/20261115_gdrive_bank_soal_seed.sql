@@ -18,15 +18,15 @@ Bidang: Saintek (Biologi dan Konservasi)
 
 Bacalah teks berikut untuk menjawab soal nomor 1–4.
 
-(1) Orangutan tapanuli (Pongo tapanuliensis) adalah spesies orangutan ketiga yang diakui para ilmuwan. (2) Spesies ini diumumkan pada November 2017 setelah para peneliti melangsungkan analisis genetik dan morfologi yang menunjukkan perbedaan mendasar dengan orangutan sumatra dan orangutan kalimantan. (3) Orangutan sumatra dijumpai di utara Danau Toba, [...] orangutan tapanuli terbatas di ekosistem Batang Toru yang terletak di selatan danau tersebut.
+(1) Orangutan tapanuli (Pongo tapanuliensis) adalah spesies orangutan ketiga yang **diakui** para ilmuwan. (2) Spesies ini diumumkan pada November 2017 setelah para peneliti **melangsungkan** analisis genetik dan morfologi yang menunjukkan perbedaan mendasar dengan orangutan sumatra dan orangutan kalimantan. (3) Orangutan sumatra dijumpai di utara Danau Toba, [...] orangutan tapanuli **terbatas** di ekosistem Batang Toru yang terletak di selatan danau tersebut.
 
-(4) Populasinya diperkirakan kurang dari 800 individu. (5) Jalan lintas kabupaten membelah hutan Batang Toru, sehingga populasi orangutan terpisah menjadi kelompok-kelompok kecil. (6) Kondisi tersebut diperparah oleh alih fungsi lahan, pembunuhan ilegal, dan pembangunan infrastruktur. (7) Akibatnya, populasi spesies ini menyusut sebesar 83 persen dalam tiga generasi sehingga IUCN menetapkannya berstatus kritis (Critically Endangered), satu langkah menuju kepunahan di alam liar.
+(4) Populasinya diperkirakan kurang dari 800 individu. (5) Jalan lintas kabupaten **membelah** hutan Batang Toru, sehingga populasi orangutan terpisah menjadi kelompok-kelompok kecil. (6) Kondisi tersebut diperparah oleh alih fungsi lahan, pembunuhan ilegal, dan pembangunan infrastruktur. (7) Akibatnya, populasi spesies ini **menyusut** sebesar 83 persen dalam tiga generasi sehingga IUCN menetapkannya berstatus kritis (Critically Endangered), satu langkah menuju kepunahan di alam liar.
 
 (8) Pada 2019, IUCN meminta agar proyek yang berdampak pada habitat orangutan tapanuli dihentikan sementara hingga ada kajian independen. (9) Upaya penyelamatan juga memerlukan kolaborasi organisasi masyarakat sipil, masyarakat lokal, dan pemerintah daerah. (10) Oleh karena itu, ….
 
-Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025),
+Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025)
 
-Penggunaan kata bercetak tebal yang kurang tepat terdapat pada kalimat nomor…', '(1)', '(2)', '(3)', '(5)', '(7)', 'B', '(2)
+Penggunaan kata bercetak tebal yang kurang tepat terdapat pada kalimat nomor…', '(1)', '(2)', '(3)', '(5)', '(7)', 'B', 'Jawaban: (2)
 Materi: Diksi (ketepatan pilihan kata)
 Konsep: Kata yang tepat harus sesuai dengan makna dan cocok dipasangkan dengan kata di sekitarnya (kolokasi). Arti kata yang benar belum tentu pas jika dipasangkan dengan kata lain.
 Pembahasan: Pada kalimat (2), kata melangsungkan biasanya berpasangan dengan acara atau kegiatan, misalnya melangsungkan pernikahan atau rapat. Padahal yang dilakukan peneliti adalah analisis, sehingga pasangan yang tepat adalah melakukan atau menjalankan analisis.
@@ -47,7 +47,7 @@ Bacalah teks berikut untuk menjawab soal nomor 1–4.
 
 (8) Pada 2019, IUCN meminta agar proyek yang berdampak pada habitat orangutan tapanuli dihentikan sementara hingga ada kajian independen. (9) Upaya penyelamatan juga memerlukan kolaborasi organisasi masyarakat sipil, masyarakat lokal, dan pemerintah daerah. (10) Oleh karena itu, ….
 
-Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025),
+Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025)
 
 Kata penghubung yang paling tepat untuk melengkapi kalimat (3) adalah…', 'sehingga', 'karena', 'sedangkan', 'bahwa', 'oleh karena itu', 'C', 'sedangkan
 Materi: Konjungsi (kata penghubung)
@@ -70,7 +70,7 @@ Bacalah teks berikut untuk menjawab soal nomor 1–4.
 
 (8) Pada 2019, IUCN meminta agar proyek yang berdampak pada habitat orangutan tapanuli dihentikan sementara hingga ada kajian independen. (9) Upaya penyelamatan juga memerlukan kolaborasi organisasi masyarakat sipil, masyarakat lokal, dan pemerintah daerah. (10) Oleh karena itu, ….
 
-Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025),
+Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025)
 
 Agar sesuai dengan konteks bacaan, pernyataan yang paling tepat untuk melengkapi kalimat (10) adalah…', 'orangutan tapanuli sebaiknya dipindahkan ke kebun binatang agar terhindar dari ancaman di alam liar.', 'kawasan Batang Toru perlu dibuka sebagai objek wisata agar pendapatan daerah meningkat.', 'orangutan tapanuli mampu beradaptasi dengan lahan terbuka sehingga tidak perlu dikhawatirkan.', 'pembangunan di kawasan Batang Toru perlu dikaji dengan cermat agar habitat orangutan tapanuli tetap terlindungi.', 'orangutan sumatra dan orangutan kalimantan perlu lebih diutamakan karena jumlahnya lebih banyak.', 'D', 'pembangunan di kawasan Batang Toru perlu dikaji dengan cermat agar habitat orangutan tapanuli tetap terlindungi.
 Materi: Melengkapi kalimat rumpang (kesesuaian dengan konteks)
@@ -93,9 +93,9 @@ Bacalah teks berikut untuk menjawab soal nomor 1–4.
 
 (8) Pada 2019, IUCN meminta agar proyek yang berdampak pada habitat orangutan tapanuli dihentikan sementara hingga ada kajian independen. (9) Upaya penyelamatan juga memerlukan kolaborasi organisasi masyarakat sipil, masyarakat lokal, dan pemerintah daerah. (10) Oleh karena itu, ….
 
-Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025),
+Diadaptasi dari: Mongabay Indonesia, “Orangutan Tapanuli: Berstatus Kritis dan Terancam di Habitatnya” (3 Februari 2025)
 
-Penggunaan tanda koma yang salah terdapat pada kalimat nomor…', '(1)', '(4)', '(5)', '(6)', '(8)', 'C', '(5)
+Penggunaan tanda koma yang salah terdapat pada kalimat nomor…', '(1)', '(4)', '(5)', '(6)', '(8)', 'C', 'Jawaban: (5)
 Materi: Tanda koma (EYD V)
 Konsep: Koma dipakai untuk memisahkan unsur rincian, keterangan di awal kalimat, dan sebelum konjungsi pertentangan seperti tetapi dan sedangkan. Koma tidak dipakai sebelum konjungsi yang menyatakan sebab atau akibat seperti karena dan sehingga ketika anak kalimat berada setelah induk kalimat.
 Pembahasan: Kalimat (5) berbunyi “… hutan Batang Toru, sehingga populasi …”. Koma sebelum sehingga tidak diperlukan. Penulisan yang benar: “… hutan Batang Toru sehingga populasi …”.
@@ -104,8 +104,8 @@ A. (1) dan B. (4) memang tidak memiliki koma dan tidak perlu koma.
 D. (6) benar karena koma memisahkan unsur rincian: alih fungsi lahan, pembunuhan ilegal, dan pembangunan infrastruktur.
 E. (8) benar karena koma memisahkan keterangan waktu di awal kalimat (Pada 2019,).', true),
 ('b60368ad-91b7-5257-a598-f8faaf2e2a0f', 'PBM', 105, '01. Kompilasi Pemahaman Bacaan & Menulis', 'Mudah', '(1) Kongres Pemuda II berlangsung pada 27–28 Oktober 1928 di Batavia, yang kini bernama Jakarta. (2) Kongres ini dipimpin oleh Soegondo Djojopoespito dari Perhimpunan Pelajar-Pelajar Indonesia (PPPI). (3) Pada penutupan kongres, W.R. Supratman memperdengarkan lagu Indonesia Raya dengan biola. (4) Hasil kongres tersebut dikenal sebagai Sumpah Pemuda, yang menegaskan satu tanah air, satu bangsa, dan satu bahasa persatuan, yaitu bahasa Indonesia. (5) Gedung tempat kongres ditutup kini dikenal sebagai museum Sumpah Pemuda di Jalan Kramat Raya, Jakarta.
-Diadaptasi dari: Metrotvnews.com, “Sumpah Pemuda 28 Oktober: Gedung Kramat Raya Jadi Saksi Persatuan” (28 Oktober 2025),
-Penulisan huruf kapital yang salah terdapat pada kalimat nomor…', '(1)', '(2)', '(3)', '(4)', '(5)', 'E', '(5)
+Diadaptasi dari: Metrotvnews.com, “Sumpah Pemuda 28 Oktober: Gedung Kramat Raya Jadi Saksi Persatuan” (28 Oktober 2025)
+Penulisan huruf kapital yang salah terdapat pada kalimat nomor…', '(1)', '(2)', '(3)', '(4)', '(5)', 'E', 'Jawaban: (5)
 Materi: Penggunaan huruf kapital (EYD V)
 Konsep: Huruf kapital dipakai pada awal kalimat dan pada nama diri, termasuk nama lembaga, gedung, museum, jalan, dan peristiwa sejarah. Semua unsur nama resmi ditulis dengan huruf kapital, kecuali kata tugas seperti dari dan di.
 Pembahasan: Museum Sumpah Pemuda adalah nama resmi museum, sehingga kata museum ikut berkapital. Penulisan pada kalimat (5), “museum Sumpah Pemuda”, keliru.
@@ -126,7 +126,7 @@ Bacalah teks berikut untuk menjawab soal nomor 6–9.
 
 (8) Kunci pertumbuhan tersebut adalah pemanfaatan data transaksi digital yang dihasilkan dari kegiatan usaha. (9) Oleh karena itu, pelaku UMKM perlu meningkatkan kemampuan dalam mengelola dan memanfaatkan data usahanya.
 
-Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2 ; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026
+Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026”
 
 Kata yang harus dihilangkan pada kalimat (5) adalah…', 'terhadap', 'memengaruhi', 'satu', 'dari', 'pelanggan', 'A', 'terhadap
 Materi: Kalimat efektif (kehematan kata)
@@ -149,9 +149,9 @@ Bacalah teks berikut untuk menjawab soal nomor 6–9.
 
 (8) Kunci pertumbuhan tersebut adalah pemanfaatan data transaksi digital yang dihasilkan dari kegiatan usaha. (9) Oleh karena itu, pelaku UMKM perlu meningkatkan kemampuan dalam mengelola dan memanfaatkan data usahanya.
 
-Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2 ; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026
+Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026”
 
-Kalimat tersebut paling tepat ditempatkan setelah kalimat nomor…', '(2)', '(4)', '(5)', '(6)', '(7)', 'D', '(6)
+Kalimat tersebut paling tepat ditempatkan setelah kalimat nomor…', '(2)', '(4)', '(5)', '(6)', '(7)', 'D', 'Jawaban: (6)
 Materi: Penyisipan kalimat
 Konsep: Kalimat sisipan harus punya hubungan makna dengan kalimat sebelum dan sesudahnya. Kata rujukan seperti tersebut dan ini menunjukkan kalimat sisipan harus berada tepat setelah kalimat yang disebut.
 Pembahasan: Kalimat sisipan diawali Catatan tersebut, sehingga butuh kalimat sebelumnya yang menyebut pencatatan. Kalimat (6) menyatakan transaksi QRIS tercatat secara digital, maka sisipan paling tepat setelah (6).
@@ -172,7 +172,7 @@ Bacalah teks berikut untuk menjawab soal nomor 6–9.
 
 (8) Kunci pertumbuhan tersebut adalah pemanfaatan data transaksi digital yang dihasilkan dari kegiatan usaha. (9) Oleh karena itu, pelaku UMKM perlu meningkatkan kemampuan dalam mengelola dan memanfaatkan data usahanya.
 
-Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2 ; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026
+Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026”
 
 Kalimat manakah yang merupakan perbaikan kalimat (2)?', 'Berdasarkan data Bank Indonesia, menunjukkan bahwa hingga Juni 2026 QRIS digunakan oleh 65,77 juta pengguna dan diterima oleh 44,86 juta merchant.', 'Data Bank Indonesia menunjukkan bahwa hingga Juni 2026 QRIS digunakan oleh 65,77 juta pengguna dan diterima oleh 44,86 juta merchant.', 'Berdasarkan data Bank Indonesia bahwa hingga Juni 2026 QRIS digunakan oleh 65,77 juta pengguna dan diterima oleh 44,86 juta merchant.', 'Menurut data Bank Indonesia menunjukkan bahwa hingga Juni 2026 QRIS digunakan oleh 65,77 juta pengguna dan diterima oleh 44,86 juta merchant.', 'Dari data Bank Indonesia, bahwa hingga Juni 2026 QRIS digunakan oleh 65,77 juta pengguna dan diterima oleh 44,86 juta merchant.', 'B', 'Data Bank Indonesia menunjukkan bahwa hingga Juni 2026 QRIS digunakan oleh 65,77 juta pengguna dan diterima oleh 44,86 juta merchant.
 Materi: Perbaikan kalimat (kejelasan subjek dan predikat)
@@ -193,7 +193,7 @@ Bacalah teks berikut untuk menjawab soal nomor 6–9.
 
 (8) Kunci pertumbuhan tersebut adalah pemanfaatan data transaksi digital yang dihasilkan dari kegiatan usaha. (9) Oleh karena itu, pelaku UMKM perlu meningkatkan kemampuan dalam mengelola dan memanfaatkan data usahanya.
 
-Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2 ; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026
+Diadaptasi dari: Republika, “BI Ungkap 96,68 Persen Merchant QRIS adalah UMKM” (21 Agustus 2026), https://ekonomi.republika.co.id/berita/tk4dix502/bi-ungkap-9668-persen-merchant-qris-adalah-umkm-part2; InfoBanknews, “Transaksi QRIS Melonjak 100,12 Persen di Semester I 2026”
 
 Kalimat (3) perlu disempurnakan dengan cara…', 'mengganti kata merchant dengan kata pedagang', 'mengganti kata sebagian besar dengan kata semua', 'mengganti kata di mana dengan kata yang', 'mengganti kata mencapai dengan kata sampai', 'menghilangkan kata tersebut', 'C', 'mengganti kata di mana dengan kata yang
 Materi: Penyempurnaan kalimat (kata penghubung di mana)
@@ -204,9 +204,9 @@ A. merchant adalah istilah yang konsisten dipakai dan bukan sumber kesalahan.
 B. mengganti dengan semua mengubah data, padahal yang benar 96,68 persen.
 D. mencapai dan sampai sama-sama bisa, tetapi bukan kesalahan kalimat.
 E. tersebut diperlukan sebagai penunjuk, dan menghilangkannya tidak memperbaiki kesalahan.', true),
-('ae7444ef-2f08-5093-8c66-798cf7aad71b', 'PBM', 110, '01. Kompilasi Pemahaman Bacaan & Menulis', 'Sedang', '(1) Indonesia berada di daerah khatulistiwa sehingga menerima sinar matahari yang berlimpah sepanjang tahun. (2) Potensi energi surya nasional diperkirakan mencapai 3,3 terawatt (TW), tetapi hingga akhir 2024 kapasitas terpasang baru sekitar 916 megawatt. (3) Biaya pemasangan pembangkit di daerah terpencil bisa jauh lebih mahal daripada di perkotaan. (4) Pemerintah mencari solusi melalui peningkatan kapasitas penyimpanan baterai dan sistem gabungan tenaga surya dengan tenaga air. (5) Solusi itu diperlukan karena pasokan listrik tenaga surya bersifat tidak kontinyu akibat bergantung pada sinar matahari.
-Diadaptasi dari: Mongabay Indonesia, “Mengapa Pemanfaatan Energi Surya Lamban di Indonesia?” (12 September 2025
-Penulisan kata bercetak tebal yang salah terdapat pada kalimat nomor…', '(1)', '(2)', '(3)', '(4)', '(5)', 'E', '(5)
+('ae7444ef-2f08-5093-8c66-798cf7aad71b', 'PBM', 110, '01. Kompilasi Pemahaman Bacaan & Menulis', 'Sedang', '(1) Indonesia berada di daerah **khatulistiwa** sehingga menerima sinar matahari yang berlimpah sepanjang tahun. (2) Potensi energi surya nasional diperkirakan mencapai 3,3 terawatt (TW), tetapi hingga akhir 2024 kapasitas terpasang baru sekitar 916 **megawatt**. (3) Biaya pemasangan pembangkit di daerah **terpencil** bisa jauh lebih mahal daripada di perkotaan. (4) Pemerintah mencari solusi melalui peningkatan kapasitas penyimpanan **baterai** dan sistem gabungan tenaga surya dengan tenaga air. (5) Solusi itu diperlukan karena pasokan listrik tenaga surya bersifat tidak **kontinyu** akibat bergantung pada sinar matahari.
+Diadaptasi dari: Mongabay Indonesia, “Mengapa Pemanfaatan Energi Surya Lamban di Indonesia?” (12 September 2025)
+Penulisan kata bercetak tebal yang salah terdapat pada kalimat nomor…', '(1)', '(2)', '(3)', '(4)', '(5)', 'E', 'Jawaban: (5)
 Materi: Penulisan kata (kata baku dan ejaan)
 Konsep: Penulisan kata mengikuti KBBI dan EYD V. Kesalahan umum biasanya muncul karena terbawa pelafalan, misalnya menambah huruf y.
 Pembahasan: Bentuk baku adalah kontinu, bukan kontinyu. Karena itu kalimat (5) salah.
@@ -227,7 +227,7 @@ Bacalah teks berikut untuk menjawab soal nomor 11–15.
 
 (7) Oleh karena itu, pemeriksaan tekanan darah secara rutin perlu menjadi bagian dari layanan kesehatan tingkat pertama. (8) Dengan langkah tersebut, banyak kematian akibat hipertensi sebenarnya dapat dicegah.
 
-Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk
+Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk”
 
 Kata kondisi dalam kalimat (2) seharusnya…', 'diikuti kata ini', 'didahului kata semua', 'dihilangkan', 'diganti kata keadaan', 'dibiarkan saja (sudah benar)', 'A', 'diikuti kata ini
 Materi: Kalimat efektif (kejelasan acuan)
@@ -250,7 +250,7 @@ Bacalah teks berikut untuk menjawab soal nomor 11–15.
 
 (7) Oleh karena itu, pemeriksaan tekanan darah secara rutin perlu menjadi bagian dari layanan kesehatan tingkat pertama. (8) Dengan langkah tersebut, banyak kematian akibat hipertensi sebenarnya dapat dicegah.
 
-Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk
+Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk”
 
 Pernyataan yang paling tepat untuk melengkapi kalimat (5) adalah…', 'penggunaan alat ukur tekanan darah yang telah divalidasi', 'konsumsi alkohol dan penggunaan tembakau', 'pemeriksaan tekanan darah secara berkala', 'ketersediaan obat di fasilitas kesehatan', 'pengobatan rutin sesuai anjuran dokter', 'B', 'konsumsi alkohol dan penggunaan tembakau
 Materi: Melengkapi kalimat rumpang (kesejajaran dan kesesuaian isi)
@@ -270,7 +270,7 @@ Bacalah teks berikut untuk menjawab soal nomor 11–15.
 
 (7) Oleh karena itu, pemeriksaan tekanan darah secara rutin perlu menjadi bagian dari layanan kesehatan tingkat pertama. (8) Dengan langkah tersebut, banyak kematian akibat hipertensi sebenarnya dapat dicegah.
 
-Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk
+Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk”
 
 Judul yang paling tepat untuk teks tersebut adalah…', 'Hipertensi Hanya Menyerang Penduduk Negara Berpenghasilan Rendah', 'Cara Mengobati Hipertensi dengan Obat Herbal', 'Dampak Hipertensi terhadap Penyakit Ginjal Kronis', 'Hipertensi: Penyakit Senyap yang Masih Sulit Dikendalikan', 'Perbedaan Tekanan Darah Sistolik dan Diastolik', 'D', 'Hipertensi: Penyakit Senyap yang Masih Sulit Dikendalikan
 Materi: Menentukan judul (gagasan utama)
@@ -293,7 +293,7 @@ Bacalah teks berikut untuk menjawab soal nomor 11–15.
 
 (7) Oleh karena itu, pemeriksaan tekanan darah secara rutin perlu menjadi bagian dari layanan kesehatan tingkat pertama. (8) Dengan langkah tersebut, banyak kematian akibat hipertensi sebenarnya dapat dicegah.
 
-Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk
+Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk”
 
 Kalimat manakah yang paling efektif sebagai hasil penggabungan kalimat (3) dan (4)?', 'Pada 2024, sekitar 1,4 miliar orang berusia 30–79 tahun di dunia hidup dengan hipertensi sehingga hanya sekitar satu dari lima penderita yang tekanan darahnya terkendali.', 'Pada 2024, sekitar 1,4 miliar orang berusia 30–79 tahun di dunia hidup dengan hipertensi atau hanya sekitar satu dari lima penderita yang tekanan darahnya terkendali.', 'Pada 2024, sekitar 1,4 miliar orang berusia 30–79 tahun di dunia hidup dengan hipertensi, padahal hanya sekitar satu dari lima penderita yang tekanan darahnya terkendali.', 'Pada 2024, sekitar 1,4 miliar orang berusia 30–79 tahun di dunia hidup dengan hipertensi, meskipun hanya sekitar satu dari lima penderita yang tekanan darahnya terkendali.', 'Pada 2024, sekitar 1,4 miliar orang berusia 30–79 tahun di dunia hidup dengan hipertensi, tetapi hanya sekitar satu dari lima penderita yang tekanan darahnya terkendali.', 'E', 'Pada 2024, sekitar 1,4 miliar orang berusia 30–79 tahun di dunia hidup dengan hipertensi, tetapi hanya sekitar satu dari lima penderita yang tekanan darahnya terkendali.
 Materi: Penggabungan kalimat (hubungan makna antarkalimat)
@@ -316,7 +316,7 @@ Bacalah teks berikut untuk menjawab soal nomor 11–15.
 
 (7) Oleh karena itu, pemeriksaan tekanan darah secara rutin perlu menjadi bagian dari layanan kesehatan tingkat pertama. (8) Dengan langkah tersebut, banyak kematian akibat hipertensi sebenarnya dapat dicegah.
 
-Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk
+Diadaptasi dari: World Health Organization, “Uncontrolled high blood pressure puts over a billion people at risk”
 
 Inti kalimat pada kalimat (6) adalah…', 'keterbatasan akses obat dapat menghambat pengendalian hipertensi', 'keterbatasan akses obat di negara berpenghasilan rendah dapat menghambat pengendalian hipertensi', 'keterbatasan akses obat juga dapat menghambat pengendalian', 'keterbatasan akses obat dapat menghambat hipertensi', 'keterbatasan akses obat juga dapat menghambat pengendalian hipertensi', 'A', 'keterbatasan akses obat dapat menghambat pengendalian hipertensi
 Materi: Inti kalimat (S–P–O)
@@ -333,15 +333,15 @@ Bidang: Soshum (Kependudukan dan Ekonomi)
 
 Bacalah teks berikut untuk menjawab soal nomor 16–19.
 
-(1) Bonus demografi adalah kondisi ketika jumlah penduduk usia produktif, yaitu 15–64 tahun, lebih banyak daripada penduduk nonproduktif. (2) Bappenas memperkirakan bahwa puncak bonus demografi Indonesia terjadi sekitar tahun 2030. (3) Kondisi ini dapat meningkatkan produktivitas nasional dan menjadi modal untuk mewujudkan Indonesia Emas 2045.
+(1) Bonus demografi adalah kondisi ketika jumlah penduduk usia produktif, yaitu 15–64 tahun, lebih banyak daripada penduduk **nonproduktif**. (2) Bappenas memperkirakan bahwa puncak bonus demografi Indonesia terjadi sekitar tahun 2030. (3) Kondisi ini dapat meningkatkan **produktivitas** nasional dan menjadi modal untuk mewujudkan Indonesia Emas 2045.
 
-(4) [...], bonus demografi tidak otomatis membawa kemakmuran. (5) Tanpa lapangan kerja yang layak, melimpahnya angkatan kerja justru mengandung resiko berubah menjadi beban ekonomi dan sumber masalah sosial. (6) Di sisi lain, pekerja muda membutuhkan akan keterampilan digital agar mampu bersaing di pasar kerja.
+(4) [...], bonus demografi tidak otomatis membawa kemakmuran. (5) Tanpa lapangan kerja yang layak, melimpahnya angkatan kerja justru mengandung **resiko** berubah menjadi beban ekonomi dan sumber masalah sosial. (6) Di sisi lain, pekerja muda membutuhkan akan **keterampilan** digital agar mampu bersaing di pasar kerja.
 
-(7) Struktur pasar kerja Indonesia juga masih didominasi sektor informal yang minim perlindungan bagi pekerjanya. (8) Oleh karena itu, peningkatan kualitas pendidikan dan pelatihan serta penciptaan lapangan kerja layak perlu diprioritaskan agar bonus demografi menjadi peluang, bukan beban.
+(7) Struktur pasar kerja Indonesia juga masih didominasi sektor **informal** yang minim perlindungan bagi pekerjanya. (8) Oleh karena itu, peningkatan kualitas pendidikan dan pelatihan serta penciptaan lapangan kerja layak perlu diprioritaskan agar bonus demografi menjadi peluang, bukan beban.
 
-Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi
+Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi”
 
-Penulisan kata bercetak tebal yang salah pada teks tersebut terdapat pada kalimat nomor…', '(1)', '(3)', '(5)', '(6)', '(7)', 'C', '(5)
+Penulisan kata bercetak tebal yang salah pada teks tersebut terdapat pada kalimat nomor…', '(1)', '(3)', '(5)', '(6)', '(7)', 'C', 'Jawaban: (5)
 Materi: Penulisan kata (kata baku)
 Konsep: Kata serapan harus mengikuti bentuk baku di KBBI. Bentuk yang benar: risiko, produktivitas, keterampilan, dan nonproduktif.
 Pembahasan: Kalimat (5) memuat resiko, padahal bentuk bakunya adalah risiko.
@@ -362,7 +362,7 @@ Bacalah teks berikut untuk menjawab soal nomor 16–19.
 
 (7) Struktur pasar kerja Indonesia juga masih didominasi sektor informal yang minim perlindungan bagi pekerjanya. (8) Oleh karena itu, peningkatan kualitas pendidikan dan pelatihan serta penciptaan lapangan kerja layak perlu diprioritaskan agar bonus demografi menjadi peluang, bukan beban.
 
-Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi
+Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi”
 
 Kata penghubung yang paling tepat untuk melengkapi kalimat (4) adalah…', 'Dengan demikian', 'Selain itu', 'Oleh karena itu', 'Misalnya', 'Namun', 'E', 'Namun
 Materi: Konjungsi antarkalimat
@@ -385,7 +385,7 @@ Bacalah teks berikut untuk menjawab soal nomor 16–19.
 
 (7) Struktur pasar kerja Indonesia juga masih didominasi sektor informal yang minim perlindungan bagi pekerjanya. (8) Oleh karena itu, peningkatan kualitas pendidikan dan pelatihan serta penciptaan lapangan kerja layak perlu diprioritaskan agar bonus demografi menjadi peluang, bukan beban.
 
-Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi
+Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi”
 
 Kalimat manakah yang merupakan kalimat efektif dari kalimat (6)?', 'Di sisi lain, pekerja muda membutuhkan keterampilan digital agar mampu bersaing di pasar kerja.', 'Di sisi lain, pekerja muda membutuhkan keterampilan digital agar supaya mampu bersaing di pasar kerja.', 'Di sisi lain, para pekerja-pekerja muda membutuhkan keterampilan digital agar mampu bersaing di pasar kerja.', 'Di sisi lain, pekerja muda membutuhkan terhadap keterampilan digital agar mampu bersaing di pasar kerja.', 'Di sisi lain, pekerja muda membutuhkan keterampilan digital dalam rangka agar mampu bersaing di pasar kerja.', 'A', 'Di sisi lain, pekerja muda membutuhkan keterampilan digital agar mampu bersaing di pasar kerja.
 Materi: Kalimat efektif
@@ -408,7 +408,7 @@ Bacalah teks berikut untuk menjawab soal nomor 16–19.
 
 (7) Struktur pasar kerja Indonesia juga masih didominasi sektor informal yang minim perlindungan bagi pekerjanya. (8) Oleh karena itu, peningkatan kualitas pendidikan dan pelatihan serta penciptaan lapangan kerja layak perlu diprioritaskan agar bonus demografi menjadi peluang, bukan beban.
 
-Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi
+Diadaptasi dari: Tirto.id, “Dampak Negatif Bonus Demografi”
 
 Kalimat manakah yang maknanya sama dengan kalimat (1)?', 'Bonus demografi adalah kondisi ketika jumlah penduduk meningkat pesat akibat tingginya angka kelahiran.', 'Bonus demografi terjadi ketika penduduk berusia 15–64 tahun lebih mendominasi dibandingkan kelompok usia yang tidak produktif.', 'Bonus demografi adalah keuntungan ekonomi yang pasti diperoleh setiap negara berpenduduk besar.', 'Bonus demografi adalah kondisi ketika penduduk lanjut usia lebih banyak daripada penduduk usia produktif.', 'Bonus demografi muncul ketika jumlah angkatan kerja bertambah karena lapangan kerja baru terus tercipta.', 'B', 'Bonus demografi terjadi ketika penduduk berusia 15–64 tahun lebih mendominasi dibandingkan kelompok usia yang tidak produktif.
 Materi: Kesamaan makna kalimat (parafrase)
@@ -419,7 +419,7 @@ A. salah karena menyebut pertambahan penduduk akibat angka kelahiran, bukan komp
 C. salah karena bonus demografi bukan keuntungan yang pasti, teks justru menyebut tidak otomatis.
 D. salah karena kebalikan, yang banyak adalah usia produktif.
 E. salah karena menambah sebab (lapangan kerja baru) yang tidak ada di kalimat (1).', true),
-('a48ba744-854a-5d88-9ba7-671fcfe28721', 'PBM', 120, '01. Kompilasi Pemahaman Bacaan & Menulis', 'Sulit', 'Jika lima kalimat tersebut disusun menjadi paragraf, urutan kalimat yang tepat adalah…', '(2) – (3) – (1) – (5) – (4)', '(2) – (5) – (3) – (1) – (4)', '(1) – (2) – (3) – (5) – (4)', '(2) – (3) – (5) – (1) – (4)', '(3) – (2) – (5) – (1) – (4)', 'D', '(2) – (3) – (5) – (1) – (4)
+('a48ba744-854a-5d88-9ba7-671fcfe28721', 'PBM', 120, '01. Kompilasi Pemahaman Bacaan & Menulis', 'Sulit', 'Jika lima kalimat tersebut disusun menjadi paragraf, urutan kalimat yang tepat adalah…', '(2) – (3) – (1) – (5) – (4)', '(2) – (5) – (3) – (1) – (4)', '(1) – (2) – (3) – (5) – (4)', '(2) – (3) – (5) – (1) – (4)', '(3) – (2) – (5) – (1) – (4)', 'D', 'Jawaban: (2) – (3) – (5) – (1) – (4)
 Materi: Menyusun kalimat acak menjadi paragraf
 Konsep: Paragraf disusun dari umum ke khusus atau secara kronologis. Kata rujukan seperti ini, tersebut, dan berkat menjadi petunjuk letak kalimat.
 Pembahasan: Kalimat (2) memperkenalkan smong, jadi menjadi pembuka. Kalimat (3) “Tradisi ini…” merujuk ke (2) dan menjelaskan asal-usulnya. Kalimat (5) “Pengalaman tersebut…” merujuk ke (3) dan menjelaskan cara pewarisannya. Kalimat (1) menceritakan penerapan smong saat tsunami 2004, lalu kalimat (4) “Berkat smong…” menyimpulkan hasilnya.
@@ -434,7 +434,7 @@ Perhatikan teks berikut!
 
 (1) Perkembangan teknologi digital telah mengubah cara masyarakat memperoleh informasi. (2) Melalui perangkat elektronik, masyarakat dapat membaca berita, mengikuti perkembangan ilmu pengetahuan, dan berkomunikasi dengan orang lain. (3) Kemudahan tersebut memberikan banyak manfaat bagi kehidupan sehari-hari. (4) Oleh karena itu masyarakat perlu meningkatkan kemampuan literasi digital agar tidak mudah mempercayai informasi yang keliru. (5) Kemampuan tersebut penting dimiliki oleh seluruh lapisan masyarakat.
 
-Kalimat yang mengandung kesalahan penggunaan tanda baca adalah ....', 'Kalimat (1)', 'Kalimat (2)', 'Kalimat (3)', 'Kalimat (4)', 'Kalimat (5)', 'D', '— Kalimat (4)
+Kalimat yang mengandung kesalahan penggunaan tanda baca adalah ....', 'Kalimat (1)', 'Kalimat (2)', 'Kalimat (3)', 'Kalimat (4)', 'Kalimat (5)', 'D', 'Jawaban: Kalimat (4)
 Konsep: Ungkapan penghubung antarkalimat yang berada di awal kalimat, seperti oleh karena itu, diikuti tanda koma.
 Analisis:
 A salah: Kalimat (1) merupakan kalimat pernyataan yang diakhiri titik dengan tepat.
@@ -490,7 +490,7 @@ Perhatikan teks berikut!
 
 (1) Minat masyarakat terhadap transportasi umum terus meningkat. (2) Pemerintah menyediakan sejumlah fasilitas, seperti halte yang nyaman, jalur khusus, dan sistem pembayaran digital. (3) Meskipun demikian penggunaan transportasi umum masih menghadapi beberapa kendala. (4) Sebagian masyarakat menganggap waktu tunggu kendaraan terlalu lama, sementara sebagian lainnya mengeluhkan keterbatasan rute. (5) Peningkatan kualitas transportasi umum perlu dilakukan secara berkelanjutan.
 
-Kalimat yang mengandung kesalahan penggunaan tanda baca adalah ....', 'Kalimat (1)', 'Kalimat (2)', 'Kalimat (3)', 'Kalimat (4)', 'Kalimat (5)', 'C', '— Kalimat (3)
+Kalimat yang mengandung kesalahan penggunaan tanda baca adalah ....', 'Kalimat (1)', 'Kalimat (2)', 'Kalimat (3)', 'Kalimat (4)', 'Kalimat (5)', 'C', 'Jawaban: Kalimat (3)
 Konsep: Ungkapan penghubung antarkalimat yang berada di awal kalimat diikuti tanda koma.
 Analisis:
 A salah: Kalimat (1) tidak memiliki kesalahan tanda baca.
@@ -559,7 +559,7 @@ Perhatikan teks berikut!
 
 (1) Perpustakaan sekolah memiliki peran penting dalam mendukung kegiatan belajar. (2) Ruangan tersebut menyediakan buku pelajaran, bacaan populer, dan karya sastra. (3) Menurut kepala perpustakaan, “Koleksi buku akan terus diperbarui agar sesuai dengan kebutuhan siswa”. (4) Selain menambah koleksi pihak sekolah juga berencana memperluas ruang baca. (5) Perpustakaan diharapkan menjadi tempat belajar yang nyaman bagi seluruh siswa.
 
-Kalimat yang mengandung kesalahan penggunaan tanda baca adalah ....', 'Kalimat (1)', 'Kalimat (2)', 'Kalimat (3)', 'Kalimat (4)', 'Kalimat (5)', 'C', '— Kalimat (3)
+Kalimat yang mengandung kesalahan penggunaan tanda baca adalah ....', 'Kalimat (1)', 'Kalimat (2)', 'Kalimat (3)', 'Kalimat (4)', 'Kalimat (5)', 'C', 'Jawaban: Kalimat (3)
 Konsep: Tanda titik yang mengakhiri petikan langsung diletakkan di dalam tanda petik.
 Analisis:
 A salah: Kalimat (1) menggunakan tanda titik dengan tepat.
@@ -662,8 +662,8 @@ Bedakan fungsi titik dua dan titik koma.
 Periksa penulisan rentang angka, tanggal, dan waktu.
 Baca kembali kalimat setelah tanda baca diperbaiki untuk memastikan strukturnya tetap logis.', true),
 ('92dda0e2-4d23-5023-9127-edc118d5ba3a', 'PBM', 141, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Bacalah kalimat berikut!
-Pemerintah berupaya mensosialisasikan kebijakan baru tersebut kepada seluruh lapisan masyarakat.
-Perbaikan kata bercetak miring yang tepat adalah ....', 'mensosialisasi', 'menyosialisasikan', 'mengsosialisasikan', 'mensosialkan', 'Tidak perlu diperbaiki', 'B', '— menyosialisasikan
+Pemerintah berupaya *mensosialisasikan* kebijakan baru tersebut kepada seluruh lapisan masyarakat.
+Perbaikan kata bercetak miring yang tepat adalah ....', 'mensosialisasi', 'menyosialisasikan', 'mengsosialisasikan', 'mensosialkan', 'Tidak perlu diperbaiki', 'B', 'Jawaban: menyosialisasikan
 Konsep:
 Kata berimbuhan harus mengikuti kaidah pembentukan kata. Pada kata dasar yang diawali huruf /s/, huruf tersebut luluh ketika mendapat awalan meN-.
 Analisis opsi:
@@ -673,7 +673,7 @@ C salah: Bentuk mengsampaikan atau mengsosialisasikan tidak sesuai kaidah pemben
 D salah: Menyosialkan bukan bentuk yang sesuai dengan makna kata dalam kalimat.
 E salah: Kata pada kalimat perlu diperbaiki.
 Kesimpulan: Bentuk yang tepat adalah menyosialisasikan.', true),
-('a99b5685-c142-532c-b2c4-c32c1dfafd58', 'PBM', 142, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kalimat yang seluruh kata bercetak tebalnya ditulis sesuai bentuk baku adalah ....', 'Petugas memeriksa apotik sebelum jam operasional dimulai.', 'Aktivitas membaca dapat meningkatkan wawasan seseorang.', 'Perusahaan harus mempertimbangkan setiap resiko investasi.', 'Kepala sekolah memberikan ijin kepada peserta lomba.', 'Dokter meminta pasien menjalani praktek secara rutin.', 'B', '— Aktivitas
+('a99b5685-c142-532c-b2c4-c32c1dfafd58', 'PBM', 142, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kalimat yang seluruh kata bercetak tebalnya ditulis sesuai bentuk baku adalah ....', 'Petugas memeriksa **apotik** sebelum jam operasional dimulai.', '**Aktivitas** membaca dapat meningkatkan wawasan seseorang.', 'Perusahaan harus mempertimbangkan setiap **resiko** investasi.', 'Kepala sekolah memberikan **ijin** kepada peserta lomba.', 'Dokter meminta pasien menjalani **praktek** secara rutin.', 'B', 'Jawaban: Aktivitas
 Konsep:
 Kata baku merupakan kata yang bentuk dan penulisannya sesuai dengan standar bahasa Indonesia.
 Analisis opsi:
@@ -685,7 +685,7 @@ E salah: Bentuk bakunya adalah praktik, bukan praktek.
 Kesimpulan: Kata yang ditulis secara baku terdapat pada opsi B.', true),
 ('09285a7f-d523-550a-a899-649376198904', 'PBM', 143, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Perhatikan kalimat berikut!
 Pemerintah daerah sedang menyusun rencana untuk meningkatkan kwalitas pelayanan publik.
-Kata yang harus diperbaiki adalah ....', 'pemerintah menjadi pemrintah', 'daerah menjadi daera', 'menyusun menjadi mensusun', 'kwalitas menjadi kualitas', 'pelayanan menjadi pelayanaan', 'D', '— kualitas
+Kata yang harus diperbaiki adalah ....', 'pemerintah menjadi pemrintah', 'daerah menjadi daera', 'menyusun menjadi mensusun', 'kwalitas menjadi kualitas', 'pelayanan menjadi pelayanaan', 'D', 'Jawaban: kualitas
 Konsep:
 Kata serapan harus ditulis mengikuti bentuk yang telah disesuaikan dengan ejaan bahasa Indonesia.
 Analisis opsi:
@@ -695,7 +695,7 @@ C salah: Menyusun sudah merupakan bentuk yang tepat.
 D benar: Bentuk baku adalah kualitas, bukan kwalitas.
 E salah: Pelayanan sudah merupakan bentuk yang tepat.
 Kesimpulan: Kata kwalitas harus diperbaiki menjadi kualitas.', true),
-('8dddeafb-2649-59b8-8451-81d6e944bf37', 'PBM', 144, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kalimat yang menggunakan bentuk kata turunan secara tepat adalah ....', 'Para peneliti sedang menganalisa hasil survei.', 'Petugas sedang mentonton rekaman kamera pengawas.', 'Tim ahli berusaha mengidentifikasi penyebab kerusakan.', 'Pemerintah berencana merubah kebijakan tersebut.', 'Panitia sedang mempraktekkan prosedur keselamatan.', 'C', '— mengidentifikasi
+('8dddeafb-2649-59b8-8451-81d6e944bf37', 'PBM', 144, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kalimat yang menggunakan bentuk kata turunan secara tepat adalah ....', 'Para peneliti sedang menganalisa hasil survei.', 'Petugas sedang mentonton rekaman kamera pengawas.', 'Tim ahli berusaha mengidentifikasi penyebab kerusakan.', 'Pemerintah berencana merubah kebijakan tersebut.', 'Panitia sedang mempraktekkan prosedur keselamatan.', 'C', 'Jawaban: mengidentifikasi
 Konsep:
 Kata berimbuhan harus dibentuk sesuai kaidah morfologi bahasa Indonesia.
 Analisis opsi:
@@ -705,7 +705,7 @@ C benar: Mengidentifikasi merupakan bentuk kata yang tepat.
 D salah: Bentuk baku adalah mengubah, bukan merubah.
 E salah: Bentuk baku adalah mempraktikkan, bukan mempraktekkan.
 Kesimpulan: Kata mengidentifikasi pada opsi C ditulis dengan benar.', true),
-('b29c7917-1dd9-596a-a249-4cbc2c7bb52b', 'PBM', 145, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kalimat yang mengandung kata tidak baku adalah ....', 'Peserta diminta membawa ijazah asli saat pendaftaran.', 'Pemerintah melakukan evaluasi terhadap program tersebut.', 'Ia menyampaikan nasihat kepada adiknya.', 'Perusahaan memperbarui sistem keamanan secara berkala.', 'Para siswa mengikuti aktifitas olahraga setiap Jumat.', 'E', '— aktifitas
+('b29c7917-1dd9-596a-a249-4cbc2c7bb52b', 'PBM', 145, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kalimat yang mengandung kata tidak baku adalah ....', 'Peserta diminta membawa ijazah asli saat pendaftaran.', 'Pemerintah melakukan evaluasi terhadap program tersebut.', 'Ia menyampaikan nasihat kepada adiknya.', 'Perusahaan memperbarui sistem keamanan secara berkala.', 'Para siswa mengikuti aktifitas olahraga setiap Jumat.', 'E', 'Jawaban: aktifitas
 Konsep:
 Kata baku digunakan dalam penulisan formal, termasuk laporan, karya ilmiah, dan dokumen pendidikan.
 Analisis opsi:
@@ -715,7 +715,7 @@ C benar: Nasihat merupakan kata baku.
 D benar: Sistem merupakan kata baku.
 E salah: Bentuk bakunya adalah aktivitas, bukan aktifitas.
 Kesimpulan: Kata tidak baku terdapat pada opsi E.', true),
-('2f828315-5a4f-56cc-8077-73aee2d031a9', 'PBM', 146, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kelompok kata yang seluruhnya merupakan bentuk baku adalah ....', 'apotek, izin, risiko', 'apotik, izin, risiko', 'apotek, ijin, resiko', 'aktifitas, sistem, nasihat', 'praktik, analisa, kualitas', 'A', '— apotek, izin, risiko
+('2f828315-5a4f-56cc-8077-73aee2d031a9', 'PBM', 146, '03. Penulisan Kata Baku & Kata Serapan', 'Mudah', 'Kelompok kata yang seluruhnya merupakan bentuk baku adalah ....', 'apotek, izin, risiko', 'apotik, izin, risiko', 'apotek, ijin, resiko', 'aktifitas, sistem, nasihat', 'praktik, analisa, kualitas', 'A', 'Jawaban: apotek, izin, risiko
 Konsep:
 Beberapa kata yang sering salah ditulis memiliki bentuk baku yang perlu diingat.
 Analisis opsi:
@@ -725,7 +725,7 @@ C salah: Ijin dan resiko tidak baku.
 D salah: Aktifitas tidak baku; bentuk bakunya aktivitas.
 E salah: Analisa bukan bentuk yang tepat dalam konteks kata kerja; bentuk yang digunakan adalah analisis atau menganalisis sesuai struktur kalimat.
 Kesimpulan: Kelompok kata baku terdapat pada opsi A.', true),
-('fd44e70d-4459-56f0-99c2-dbeb1b26b516', 'PBM', 147, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kalimat yang menggunakan kata depan secara tepat adalah ....', 'Siswa sedang belajar diperpustakaan sekolah.', 'Buku tersebut disimpan di dalam lemari.', 'Mereka berkumpul diruang rapat sejak pagi.', 'Dokumen itu diletakkan diatas meja.', 'Peserta diminta masuk kedalam ruangan.', 'B', '— di dalam lemari
+('fd44e70d-4459-56f0-99c2-dbeb1b26b516', 'PBM', 147, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kalimat yang menggunakan kata depan secara tepat adalah ....', 'Siswa sedang belajar diperpustakaan sekolah.', 'Buku tersebut disimpan di dalam lemari.', 'Mereka berkumpul diruang rapat sejak pagi.', 'Dokumen itu diletakkan diatas meja.', 'Peserta diminta masuk kedalam ruangan.', 'B', 'Jawaban: di dalam lemari
 Konsep:
 Kata depan di ditulis terpisah dari kata yang mengikutinya. Sebaliknya, awalan di- pada kata kerja pasif ditulis serangkai.
 Analisis opsi:
@@ -744,8 +744,8 @@ C benar: Di aula menunjukkan tempat sehingga kata depan di ditulis terpisah.
 D salah: Bentuk yang tepat adalah disimpan.
 E salah: Bentuk yang tepat adalah dikumpulkan.
 Kesimpulan: Opsi C menggunakan imbuhan dan kata depan secara tepat.', true),
-('d45208a8-ebf0-5498-9b8e-08643b5f431a', 'PBM', 149, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kata yang tepat untuk menggantikan kata system dalam kalimat berikut adalah ....
-Perusahaan sedang memperbarui system keamanan untuk melindungi data pelanggan.', 'sistim', 'sistem', 'systema', 'sisteme', 'sistemy', 'B', '— sistem
+('d45208a8-ebf0-5498-9b8e-08643b5f431a', 'PBM', 149, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kata yang tepat untuk menggantikan kata *system* dalam kalimat berikut adalah ....
+Perusahaan sedang memperbarui *system* keamanan untuk melindungi data pelanggan.', 'sistim', 'sistem', 'systema', 'sisteme', 'sistemy', 'B', 'Jawaban: sistem
 Konsep:
 Kata serapan yang sudah disesuaikan dengan ejaan bahasa Indonesia harus menggunakan bentuk bakunya.
 Analisis opsi:
@@ -755,7 +755,7 @@ C salah: Systema bukan bentuk yang tepat dalam bahasa Indonesia.
 D salah: Sisteme bukan bentuk baku.
 E salah: Sistemy bukan bentuk baku.
 Kesimpulan: Kata system harus ditulis sistem.', true),
-('99434d89-70dc-5ab7-a2e0-2a1654d38a05', 'PBM', 150, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kalimat yang menggunakan tanda hubung dalam bentuk ulang secara tepat adalah ....', 'Anak anak mengikuti kegiatan literasi di sekolah.', 'Buku-buku tersebut disusun berdasarkan kategori.', 'Para siswa saling tolong menolong ketika bekerja.', 'Kegiatan itu diikuti oleh murid murid kelas tujuh.', 'Ia membeli sayur mayur-mayur di pasar tradisional.', 'B', '— Buku-buku
+('99434d89-70dc-5ab7-a2e0-2a1654d38a05', 'PBM', 150, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kalimat yang menggunakan tanda hubung dalam bentuk ulang secara tepat adalah ....', 'Anak anak mengikuti kegiatan literasi di sekolah.', 'Buku-buku tersebut disusun berdasarkan kategori.', 'Para siswa saling tolong menolong ketika bekerja.', 'Kegiatan itu diikuti oleh murid murid kelas tujuh.', 'Ia membeli sayur mayur-mayur di pasar tradisional.', 'B', 'Jawaban: Buku-buku
 Konsep:
 Tanda hubung digunakan untuk menyambung unsur bentuk ulang.
 Analisis opsi:
@@ -765,7 +765,7 @@ C salah: Bentuk yang tepat adalah tolong-menolong.
 D salah: Bentuk yang tepat adalah murid-murid.
 E salah: Bentuk sayur-mayur sudah merupakan bentuk ulang yang benar, bukan sayur mayur-mayur.
 Kesimpulan: Penulisan bentuk ulang yang tepat terdapat pada opsi B.', true),
-('5e1db76a-8054-5b97-927c-42ee1d45cd2b', 'PBM', 151, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kalimat yang menggunakan gabungan kata secara tepat adalah ....', 'Pemerintah mengajak masyarakat untuk bekerja sama menjaga lingkungan.', 'Setiap peserta harus bertanggung jawabatas tugasnya.', 'Para siswa mengikuti kerja-sama antarkelas.', 'Ia memiliki rasa tanggungjawab yang tinggi.', 'Panitia mengadakan kerjasama dengan beberapa sekolah.', 'A', '— bekerja sama
+('5e1db76a-8054-5b97-927c-42ee1d45cd2b', 'PBM', 151, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kalimat yang menggunakan gabungan kata secara tepat adalah ....', 'Pemerintah mengajak masyarakat untuk bekerja sama menjaga lingkungan.', 'Setiap peserta harus bertanggung jawabatas tugasnya.', 'Para siswa mengikuti kerja-sama antarkelas.', 'Ia memiliki rasa tanggungjawab yang tinggi.', 'Panitia mengadakan kerjasama dengan beberapa sekolah.', 'A', 'Jawaban: bekerja sama
 Konsep:
 Gabungan kata pada umumnya ditulis terpisah, kecuali gabungan kata yang telah mendapat bentuk tertentu sesuai kaidah.
 Analisis opsi:
@@ -775,7 +775,7 @@ C salah: Bentuk kerja sama tidak menggunakan tanda hubung dalam konteks ini.
 D salah: Bentuk yang tepat adalah tanggung jawab.
 E salah: Bentuk yang tepat adalah kerja sama.
 Kesimpulan: Penulisan gabungan kata yang tepat terdapat pada opsi A.', true),
-('46003678-3b02-5c00-9658-db9148d4c988', 'PBM', 152, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Penulisan bentuk terikat yang tepat terdapat pada kalimat ....', 'Pemerintah mengembangkan program pra sekolah bagi anak usia dini.', 'Kegiatan itu melibatkan kerja sama antar negara.', 'Para siswa mengikuti kegiatan ekstrakurikuler setiap pekan.', 'Ia menggunakan metode non formal dalam penelitian.', 'Tim tersebut melakukan evaluasi pasca panen.', 'C', '— ekstrakurikuler
+('46003678-3b02-5c00-9658-db9148d4c988', 'PBM', 152, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Penulisan bentuk terikat yang tepat terdapat pada kalimat ....', 'Pemerintah mengembangkan program pra sekolah bagi anak usia dini.', 'Kegiatan itu melibatkan kerja sama antar negara.', 'Para siswa mengikuti kegiatan ekstrakurikuler setiap pekan.', 'Ia menggunakan metode non formal dalam penelitian.', 'Tim tersebut melakukan evaluasi pasca panen.', 'C', 'Jawaban: ekstrakurikuler
 Konsep:
 Bentuk terikat seperti ekstra-, pra-, antar-, dan pasca- umumnya ditulis serangkai dengan kata yang mengikutinya apabila tidak diikuti nama diri atau singkatan berhuruf kapital.
 Analisis opsi:
@@ -785,7 +785,7 @@ C benar: Ekstrakurikuler ditulis serangkai.
 D salah: Bentuk yang tepat adalah nonformal.
 E salah: Bentuk yang tepat adalah pascapanen.
 Kesimpulan: Penulisan bentuk terikat yang tepat terdapat pada opsi C.', true),
-('938f1386-0bba-5be0-ade5-63ac0e1f2bd9', 'PBM', 153, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kelompok kata yang seluruhnya baku adalah ....', 'ijazah, karier, sistem', 'ijasah, karier, sistem', 'ijazah, karir, sistim', 'nasihat, analisa, apotek', 'aktif, ijin, kualitas', 'A', '— ijazah, karier, sistem
+('938f1386-0bba-5be0-ade5-63ac0e1f2bd9', 'PBM', 153, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kelompok kata yang seluruhnya baku adalah ....', 'ijazah, karier, sistem', 'ijasah, karier, sistem', 'ijazah, karir, sistim', 'nasihat, analisa, apotek', 'aktif, ijin, kualitas', 'A', 'Jawaban: ijazah, karier, sistem
 Konsep:
 Kata baku harus mengikuti bentuk yang telah ditetapkan dalam bahasa Indonesia.
 Analisis opsi:
@@ -795,7 +795,7 @@ C salah: Karir dan sistim bukan bentuk baku.
 D salah: Analisa tidak tepat untuk menggantikan bentuk analisis.
 E salah: Ijin tidak baku; bentuk bakunya izin.
 Kesimpulan: Kelompok kata baku terdapat pada opsi A.', true),
-('772529c4-6fd7-5f7a-8c1d-aecfa886e7d5', 'PBM', 154, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kelompok kata yang seluruhnya tidak baku adalah ....', 'apotik, ijin, resiko', 'apotek, izin, risiko', 'praktik, aktivitas, kualitas', 'ijazah, nasihat, karier', 'sistem, analisis, objek', 'A', '— apotik, ijin, resiko
+('772529c4-6fd7-5f7a-8c1d-aecfa886e7d5', 'PBM', 154, '03. Penulisan Kata Baku & Kata Serapan', 'Sedang', 'Kelompok kata yang seluruhnya tidak baku adalah ....', 'apotik, ijin, resiko', 'apotek, izin, risiko', 'praktik, aktivitas, kualitas', 'ijazah, nasihat, karier', 'sistem, analisis, objek', 'A', 'Jawaban: apotik, ijin, resiko
 Konsep:
 Kata tidak baku merupakan bentuk yang tidak sesuai dengan bentuk standar bahasa Indonesia.
 Analisis opsi:
@@ -805,7 +805,7 @@ C salah: Ketiganya merupakan bentuk baku.
 D salah: Ketiganya merupakan bentuk baku.
 E salah: Ketiganya merupakan bentuk baku.
 Kesimpulan: Kelompok kata tidak baku terdapat pada opsi A.', true),
-('fa271c57-a930-5d47-a070-687a44820334', 'PBM', 155, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Kalimat yang penulisan katanya tepat adalah ....', 'Ayah membeli obat di apotik dekat rumah.', 'Mahasiswa diminta mempraktekkan teori di laboratorium.', 'Para peneliti sedang menganalisis hasil pengamatan.', 'Pemerintah berusaha mengurangi resiko bencana.', 'Kepala sekolah memberikan ijin kepada peserta.', 'C', '— menganalisis
+('fa271c57-a930-5d47-a070-687a44820334', 'PBM', 155, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Kalimat yang penulisan katanya tepat adalah ....', 'Ayah membeli obat di apotik dekat rumah.', 'Mahasiswa diminta mempraktekkan teori di laboratorium.', 'Para peneliti sedang menganalisis hasil pengamatan.', 'Pemerintah berusaha mengurangi resiko bencana.', 'Kepala sekolah memberikan ijin kepada peserta.', 'C', 'Jawaban: menganalisis
 Konsep:
 Penulisan kata berimbuhan harus memperhatikan bentuk dasar dan proses pembentukan kata.
 Analisis opsi:
@@ -816,7 +816,7 @@ D salah: Bentuk bakunya adalah risiko.
 E salah: Bentuk bakunya adalah izin.
 Kesimpulan: Kalimat pada opsi C menggunakan kata baku dan bentuk imbuhan yang tepat.', true),
 ('cf928e00-0fc4-5371-8d44-9b4abcf37e1b', 'PBM', 156, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Bentuk kata berimbuhan yang tepat untuk melengkapi kalimat berikut adalah ....
-Para ahli sedang ____ berbagai data untuk memperoleh kesimpulan yang akurat.', 'menganalisa', 'menganalisis', 'menganalysa', 'mengalisa', 'analisis', 'B', '— menganalisis
+Para ahli sedang ____ berbagai data untuk memperoleh kesimpulan yang akurat.', 'menganalisa', 'menganalisis', 'menganalysa', 'mengalisa', 'analisis', 'B', 'Jawaban: menganalisis
 Konsep:
 Kata analisis merupakan kata benda, sedangkan bentuk kata kerja yang tepat adalah menganalisis.
 Analisis opsi:
@@ -826,7 +826,7 @@ C salah: Menganalysa merupakan bentuk yang tidak baku.
 D salah: Mengalisa bukan bentuk yang tepat.
 E salah: Analisis merupakan kata benda, sehingga tidak sesuai untuk mengisi posisi kata kerja dalam kalimat.
 Kesimpulan: Kata yang tepat adalah menganalisis.', true),
-('92c94baf-e8be-5448-bcb7-b6c6f93c8468', 'PBM', 157, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Penulisan jumlah uang yang sesuai dengan kaidah adalah ....', 'Rp 125.000,-', 'Rp.125.000,00', 'Rp125,000.00', 'Rp125.000,00', 'Rp125,000,-', 'D', '— Rp125.000,00
+('92c94baf-e8be-5448-bcb7-b6c6f93c8468', 'PBM', 157, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Penulisan jumlah uang yang sesuai dengan kaidah adalah ....', 'Rp 125.000,-', 'Rp.125.000,00', 'Rp125,000.00', 'Rp125.000,00', 'Rp125,000,-', 'D', 'Jawaban: Rp125.000,00
 Konsep:
 Penulisan rupiah mengikuti aturan berikut:
 Simbol Rp ditulis tanpa titik.
@@ -846,7 +846,7 @@ Kesimpulan: Penulisan jumlah uang yang tepat terdapat pada opsi D.', true),
 (3) Buku itu disimpan di dalam lemari.
 (4) Pengumuman tersebut di sampaikan melalui papan informasi.
 (5) Mereka melakukan pengamatan di sekitar lingkungan sekolah.
-Kalimat yang penulisan kata depannya salah adalah ....', '(1)', '(2)', '(3)', '(4)', '(5)', 'A', '— Kalimat (1)
+Kalimat yang penulisan kata depannya salah adalah ....', '(1)', '(2)', '(3)', '(4)', '(5)', 'A', 'Jawaban: Kalimat (1)
 Konsep:
 Kata depan di yang menunjukkan tempat ditulis terpisah dari kata yang mengikutinya.
 Analisis:
@@ -858,7 +858,7 @@ Kalimat (5) benar: Di sekitar merupakan kata depan yang ditulis terpisah.
 Kesimpulan: Kesalahan terdapat pada kalimat (1).', true),
 ('57688d0e-3361-5e61-97b4-7baf3b2cd0e9', 'PBM', 159, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Perhatikan kalimat berikut!
 Penelitian tersebut membahas akibat pencemaran terhadap lingkungan perairan. Hasil pengamatan menunjukkan bahwa limbah dapat merusak keseimbangan ekosistem.
-Padanan kata yang paling tepat untuk menggantikan kata akibat, lingkungan, dan merusak secara berurutan adalah ....', 'dampak, ekosistem, mengganggu', 'hasil, habitat, mendukung', 'sebab, kawasan, memperbaiki', 'pengaruh, tempat, memulihkan', 'proses, wilayah, melestarikan', 'A', '— dampak, ekosistem, mengganggu
+Padanan kata yang paling tepat untuk menggantikan kata akibat, lingkungan, dan merusak secara berurutan adalah ....', 'dampak, ekosistem, mengganggu', 'hasil, habitat, mendukung', 'sebab, kawasan, memperbaiki', 'pengaruh, tempat, memulihkan', 'proses, wilayah, melestarikan', 'A', 'Jawaban: dampak, ekosistem, mengganggu
 Konsep:
 Pemilihan padanan kata harus mempertimbangkan kesamaan makna dan kesesuaian dengan konteks kalimat.
 Analisis opsi:
@@ -868,7 +868,7 @@ C salah: Memperbaiki bertentangan dengan makna merusak.
 D salah: Memulihkan tidak sesuai dengan konteks pencemaran yang menimbulkan kerusakan.
 E salah: Melestarikan bertentangan dengan makna kerusakan yang dibicarakan.
 Kesimpulan: Padanan kata yang paling sesuai adalah opsi A.', true),
-('865a05c9-5792-5cf5-aa98-d1cea8404aad', 'PBM', 160, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Kalimat yang seluruh penulisan katanya sesuai dengan kaidah bahasa Indonesia adalah ....', 'Peserta diminta mengumpulkan foto copy kartu identitas.', 'Pemerintah sedang mengevaluasi kwalitas pelayanan publik.', 'Para mahasiswa mengikuti praktik kerja lapangan di perusahaan.', 'Kepala sekolah memberikan ijin kepada siswa untuk mengikuti perlombaan.', 'Peneliti sedang menganalisa data hasil pengamatan.', 'C', '— Praktik kerja lapangan
+('865a05c9-5792-5cf5-aa98-d1cea8404aad', 'PBM', 160, '03. Penulisan Kata Baku & Kata Serapan', 'Sulit', 'Kalimat yang seluruh penulisan katanya sesuai dengan kaidah bahasa Indonesia adalah ....', 'Peserta diminta mengumpulkan foto copy kartu identitas.', 'Pemerintah sedang mengevaluasi kwalitas pelayanan publik.', 'Para mahasiswa mengikuti praktik kerja lapangan di perusahaan.', 'Kepala sekolah memberikan ijin kepada siswa untuk mengikuti perlombaan.', 'Peneliti sedang menganalisa data hasil pengamatan.', 'C', 'Jawaban: Praktik kerja lapangan
 Konsep:
 Ketepatan penulisan kata mencakup kata serapan, kata depan, dan bentuk kata berimbuhan.
 Analisis opsi:
@@ -940,8 +940,8 @@ Bedakan kata dasar, kata turunan, dan gabungan kata.
 Periksa penulisan kata serapan yang berasal dari bahasa asing.
 Saat memilih padanan kata, perhatikan makna dalam konteks kalimat, bukan hanya kemiripan katanya.', true),
 ('12607559-7c0c-5782-b774-350d14025ffc', 'PBM', 161, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Bacalah kalimat berikut!
-Pemerintah berupaya mensosialisasikan kebijakan baru tersebut kepada seluruh lapisan masyarakat.
-Perbaikan kata bercetak miring yang tepat adalah ....', 'mensosialisasi', 'menyosialisasikan', 'mengsosialisasikan', 'mensosialkan', 'Tidak perlu diperbaiki', 'B', '— menyosialisasikan
+Pemerintah berupaya *mensosialisasikan* kebijakan baru tersebut kepada seluruh lapisan masyarakat.
+Perbaikan kata bercetak miring yang tepat adalah ....', 'mensosialisasi', 'menyosialisasikan', 'mengsosialisasikan', 'mensosialkan', 'Tidak perlu diperbaiki', 'B', 'Jawaban: menyosialisasikan
 Konsep:
 Kata berimbuhan harus mengikuti kaidah pembentukan kata. Pada kata dasar yang diawali huruf /s/, huruf tersebut luluh ketika mendapat awalan meN-.
 Analisis opsi:
@@ -951,7 +951,7 @@ C salah: Bentuk mengsampaikan atau mengsosialisasikan tidak sesuai kaidah pemben
 D salah: Menyosialkan bukan bentuk yang sesuai dengan makna kata dalam kalimat.
 E salah: Kata pada kalimat perlu diperbaiki.
 Kesimpulan: Bentuk yang tepat adalah menyosialisasikan.', true),
-('009b53dd-5268-5797-a617-8d55aca71e84', 'PBM', 162, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kalimat yang seluruh kata bercetak tebalnya ditulis sesuai bentuk baku adalah ....', 'Petugas memeriksa apotik sebelum jam operasional dimulai.', 'Aktivitas membaca dapat meningkatkan wawasan seseorang.', 'Perusahaan harus mempertimbangkan setiap resiko investasi.', 'Kepala sekolah memberikan ijin kepada peserta lomba.', 'Dokter meminta pasien menjalani praktek secara rutin.', 'B', '— Aktivitas
+('009b53dd-5268-5797-a617-8d55aca71e84', 'PBM', 162, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kalimat yang seluruh kata bercetak tebalnya ditulis sesuai bentuk baku adalah ....', 'Petugas memeriksa **apotik** sebelum jam operasional dimulai.', '**Aktivitas** membaca dapat meningkatkan wawasan seseorang.', 'Perusahaan harus mempertimbangkan setiap **resiko** investasi.', 'Kepala sekolah memberikan **ijin** kepada peserta lomba.', 'Dokter meminta pasien menjalani **praktek** secara rutin.', 'B', 'Jawaban: Aktivitas
 Konsep:
 Kata baku merupakan kata yang bentuk dan penulisannya sesuai dengan standar bahasa Indonesia.
 Analisis opsi:
@@ -963,7 +963,7 @@ E salah: Bentuk bakunya adalah praktik, bukan praktek.
 Kesimpulan: Kata yang ditulis secara baku terdapat pada opsi B.', true),
 ('fc349de5-d7a1-54e0-a464-d9ee646a5b28', 'PBM', 163, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Perhatikan kalimat berikut!
 Pemerintah daerah sedang menyusun rencana untuk meningkatkan kwalitas pelayanan publik.
-Kata yang harus diperbaiki adalah ....', 'pemerintah menjadi pemrintah', 'daerah menjadi daera', 'menyusun menjadi mensusun', 'kwalitas menjadi kualitas', 'pelayanan menjadi pelayanaan', 'D', '— kualitas
+Kata yang harus diperbaiki adalah ....', 'pemerintah menjadi pemrintah', 'daerah menjadi daera', 'menyusun menjadi mensusun', 'kwalitas menjadi kualitas', 'pelayanan menjadi pelayanaan', 'D', 'Jawaban: kualitas
 Konsep:
 Kata serapan harus ditulis mengikuti bentuk yang telah disesuaikan dengan ejaan bahasa Indonesia.
 Analisis opsi:
@@ -973,7 +973,7 @@ C salah: Menyusun sudah merupakan bentuk yang tepat.
 D benar: Bentuk baku adalah kualitas, bukan kwalitas.
 E salah: Pelayanan sudah merupakan bentuk yang tepat.
 Kesimpulan: Kata kwalitas harus diperbaiki menjadi kualitas.', true),
-('2d616e2e-7a26-5a30-ae4d-7ed8dd108246', 'PBM', 164, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kalimat yang menggunakan bentuk kata turunan secara tepat adalah ....', 'Para peneliti sedang menganalisa hasil survei.', 'Petugas sedang mentonton rekaman kamera pengawas.', 'Tim ahli berusaha mengidentifikasi penyebab kerusakan.', 'Pemerintah berencana merubah kebijakan tersebut.', 'Panitia sedang mempraktekkan prosedur keselamatan.', 'C', '— mengidentifikasi
+('2d616e2e-7a26-5a30-ae4d-7ed8dd108246', 'PBM', 164, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kalimat yang menggunakan bentuk kata turunan secara tepat adalah ....', 'Para peneliti sedang menganalisa hasil survei.', 'Petugas sedang mentonton rekaman kamera pengawas.', 'Tim ahli berusaha mengidentifikasi penyebab kerusakan.', 'Pemerintah berencana merubah kebijakan tersebut.', 'Panitia sedang mempraktekkan prosedur keselamatan.', 'C', 'Jawaban: mengidentifikasi
 Konsep:
 Kata berimbuhan harus dibentuk sesuai kaidah morfologi bahasa Indonesia.
 Analisis opsi:
@@ -983,7 +983,7 @@ C benar: Mengidentifikasi merupakan bentuk kata yang tepat.
 D salah: Bentuk baku adalah mengubah, bukan merubah.
 E salah: Bentuk baku adalah mempraktikkan, bukan mempraktekkan.
 Kesimpulan: Kata mengidentifikasi pada opsi C ditulis dengan benar.', true),
-('12d84b56-a47c-55e9-9cc8-e7e070b6d076', 'PBM', 165, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kalimat yang mengandung kata tidak baku adalah ....', 'Peserta diminta membawa ijazah asli saat pendaftaran.', 'Pemerintah melakukan evaluasi terhadap program tersebut.', 'Ia menyampaikan nasihat kepada adiknya.', 'Perusahaan memperbarui sistem keamanan secara berkala.', 'Para siswa mengikuti aktifitas olahraga setiap Jumat.', 'E', '— aktifitas
+('12d84b56-a47c-55e9-9cc8-e7e070b6d076', 'PBM', 165, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kalimat yang mengandung kata tidak baku adalah ....', 'Peserta diminta membawa ijazah asli saat pendaftaran.', 'Pemerintah melakukan evaluasi terhadap program tersebut.', 'Ia menyampaikan nasihat kepada adiknya.', 'Perusahaan memperbarui sistem keamanan secara berkala.', 'Para siswa mengikuti aktifitas olahraga setiap Jumat.', 'E', 'Jawaban: aktifitas
 Konsep:
 Kata baku digunakan dalam penulisan formal, termasuk laporan, karya ilmiah, dan dokumen pendidikan.
 Analisis opsi:
@@ -993,7 +993,7 @@ C benar: Nasihat merupakan kata baku.
 D benar: Sistem merupakan kata baku.
 E salah: Bentuk bakunya adalah aktivitas, bukan aktifitas.
 Kesimpulan: Kata tidak baku terdapat pada opsi E.', true),
-('6edb5acc-4caa-5758-9467-1c7fd4c8ac56', 'PBM', 166, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kelompok kata yang seluruhnya merupakan bentuk baku adalah ....', 'apotek, izin, risiko', 'apotik, izin, risiko', 'apotek, ijin, resiko', 'aktifitas, sistem, nasihat', 'praktik, analisa, kualitas', 'A', '— apotek, izin, risiko
+('6edb5acc-4caa-5758-9467-1c7fd4c8ac56', 'PBM', 166, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Mudah', 'Kelompok kata yang seluruhnya merupakan bentuk baku adalah ....', 'apotek, izin, risiko', 'apotik, izin, risiko', 'apotek, ijin, resiko', 'aktifitas, sistem, nasihat', 'praktik, analisa, kualitas', 'A', 'Jawaban: apotek, izin, risiko
 Konsep:
 Beberapa kata yang sering salah ditulis memiliki bentuk baku yang perlu diingat.
 Analisis opsi:
@@ -1003,7 +1003,7 @@ C salah: Ijin dan resiko tidak baku.
 D salah: Aktifitas tidak baku; bentuk bakunya aktivitas.
 E salah: Analisa bukan bentuk yang tepat dalam konteks kata kerja; bentuk yang digunakan adalah analisis atau menganalisis sesuai struktur kalimat.
 Kesimpulan: Kelompok kata baku terdapat pada opsi A.', true),
-('64c8404f-d1fe-5edf-8710-e54dd49cba26', 'PBM', 167, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kalimat yang menggunakan kata depan secara tepat adalah ....', 'Siswa sedang belajar diperpustakaan sekolah.', 'Buku tersebut disimpan di dalam lemari.', 'Mereka berkumpul diruang rapat sejak pagi.', 'Dokumen itu diletakkan diatas meja.', 'Peserta diminta masuk kedalam ruangan.', 'B', '— di dalam lemari
+('64c8404f-d1fe-5edf-8710-e54dd49cba26', 'PBM', 167, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kalimat yang menggunakan kata depan secara tepat adalah ....', 'Siswa sedang belajar diperpustakaan sekolah.', 'Buku tersebut disimpan di dalam lemari.', 'Mereka berkumpul diruang rapat sejak pagi.', 'Dokumen itu diletakkan diatas meja.', 'Peserta diminta masuk kedalam ruangan.', 'B', 'Jawaban: di dalam lemari
 Konsep:
 Kata depan di ditulis terpisah dari kata yang mengikutinya. Sebaliknya, awalan di- pada kata kerja pasif ditulis serangkai.
 Analisis opsi:
@@ -1022,8 +1022,8 @@ C benar: Di aula menunjukkan tempat sehingga kata depan di ditulis terpisah.
 D salah: Bentuk yang tepat adalah disimpan.
 E salah: Bentuk yang tepat adalah dikumpulkan.
 Kesimpulan: Opsi C menggunakan imbuhan dan kata depan secara tepat.', true),
-('f55b3141-0b6b-510f-92ac-d16c434e4a6b', 'PBM', 169, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kata yang tepat untuk menggantikan kata system dalam kalimat berikut adalah ....
-Perusahaan sedang memperbarui system keamanan untuk melindungi data pelanggan.', 'sistim', 'sistem', 'systema', 'sisteme', 'sistemy', 'B', '— sistem
+('f55b3141-0b6b-510f-92ac-d16c434e4a6b', 'PBM', 169, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kata yang tepat untuk menggantikan kata *system* dalam kalimat berikut adalah ....
+Perusahaan sedang memperbarui *system* keamanan untuk melindungi data pelanggan.', 'sistim', 'sistem', 'systema', 'sisteme', 'sistemy', 'B', 'Jawaban: sistem
 Konsep:
 Kata serapan yang sudah disesuaikan dengan ejaan bahasa Indonesia harus menggunakan bentuk bakunya.
 Analisis opsi:
@@ -1033,7 +1033,7 @@ C salah: Systema bukan bentuk yang tepat dalam bahasa Indonesia.
 D salah: Sisteme bukan bentuk baku.
 E salah: Sistemy bukan bentuk baku.
 Kesimpulan: Kata system harus ditulis sistem.', true),
-('210ae587-7e8d-5006-81e3-2dfc91cbf294', 'PBM', 170, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kalimat yang menggunakan tanda hubung dalam bentuk ulang secara tepat adalah ....', 'Anak anak mengikuti kegiatan literasi di sekolah.', 'Buku-buku tersebut disusun berdasarkan kategori.', 'Para siswa saling tolong menolong ketika bekerja.', 'Kegiatan itu diikuti oleh murid murid kelas tujuh.', 'Ia membeli sayur mayur-mayur di pasar tradisional.', 'B', '— Buku-buku
+('210ae587-7e8d-5006-81e3-2dfc91cbf294', 'PBM', 170, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kalimat yang menggunakan tanda hubung dalam bentuk ulang secara tepat adalah ....', 'Anak anak mengikuti kegiatan literasi di sekolah.', 'Buku-buku tersebut disusun berdasarkan kategori.', 'Para siswa saling tolong menolong ketika bekerja.', 'Kegiatan itu diikuti oleh murid murid kelas tujuh.', 'Ia membeli sayur mayur-mayur di pasar tradisional.', 'B', 'Jawaban: Buku-buku
 Konsep:
 Tanda hubung digunakan untuk menyambung unsur bentuk ulang.
 Analisis opsi:
@@ -1043,7 +1043,7 @@ C salah: Bentuk yang tepat adalah tolong-menolong.
 D salah: Bentuk yang tepat adalah murid-murid.
 E salah: Bentuk sayur-mayur sudah merupakan bentuk ulang yang benar, bukan sayur mayur-mayur.
 Kesimpulan: Penulisan bentuk ulang yang tepat terdapat pada opsi B.', true),
-('9425786d-c003-5179-acf9-c8b8f97f0fdb', 'PBM', 171, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kalimat yang menggunakan gabungan kata secara tepat adalah ....', 'Pemerintah mengajak masyarakat untuk bekerja sama menjaga lingkungan.', 'Setiap peserta harus bertanggung jawabatas tugasnya.', 'Para siswa mengikuti kerja-sama antarkelas.', 'Ia memiliki rasa tanggungjawab yang tinggi.', 'Panitia mengadakan kerjasama dengan beberapa sekolah.', 'A', '— bekerja sama
+('9425786d-c003-5179-acf9-c8b8f97f0fdb', 'PBM', 171, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kalimat yang menggunakan gabungan kata secara tepat adalah ....', 'Pemerintah mengajak masyarakat untuk bekerja sama menjaga lingkungan.', 'Setiap peserta harus bertanggung jawabatas tugasnya.', 'Para siswa mengikuti kerja-sama antarkelas.', 'Ia memiliki rasa tanggungjawab yang tinggi.', 'Panitia mengadakan kerjasama dengan beberapa sekolah.', 'A', 'Jawaban: bekerja sama
 Konsep:
 Gabungan kata pada umumnya ditulis terpisah, kecuali gabungan kata yang telah mendapat bentuk tertentu sesuai kaidah.
 Analisis opsi:
@@ -1053,7 +1053,7 @@ C salah: Bentuk kerja sama tidak menggunakan tanda hubung dalam konteks ini.
 D salah: Bentuk yang tepat adalah tanggung jawab.
 E salah: Bentuk yang tepat adalah kerja sama.
 Kesimpulan: Penulisan gabungan kata yang tepat terdapat pada opsi A.', true),
-('f76be989-5e80-5819-990f-8791be902632', 'PBM', 172, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Penulisan bentuk terikat yang tepat terdapat pada kalimat ....', 'Pemerintah mengembangkan program pra sekolah bagi anak usia dini.', 'Kegiatan itu melibatkan kerja sama antar negara.', 'Para siswa mengikuti kegiatan ekstrakurikuler setiap pekan.', 'Ia menggunakan metode non formal dalam penelitian.', 'Tim tersebut melakukan evaluasi pasca panen.', 'C', '— ekstrakurikuler
+('f76be989-5e80-5819-990f-8791be902632', 'PBM', 172, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Penulisan bentuk terikat yang tepat terdapat pada kalimat ....', 'Pemerintah mengembangkan program pra sekolah bagi anak usia dini.', 'Kegiatan itu melibatkan kerja sama antar negara.', 'Para siswa mengikuti kegiatan ekstrakurikuler setiap pekan.', 'Ia menggunakan metode non formal dalam penelitian.', 'Tim tersebut melakukan evaluasi pasca panen.', 'C', 'Jawaban: ekstrakurikuler
 Konsep:
 Bentuk terikat seperti ekstra-, pra-, antar-, dan pasca- umumnya ditulis serangkai dengan kata yang mengikutinya apabila tidak diikuti nama diri atau singkatan berhuruf kapital.
 Analisis opsi:
@@ -1063,7 +1063,7 @@ C benar: Ekstrakurikuler ditulis serangkai.
 D salah: Bentuk yang tepat adalah nonformal.
 E salah: Bentuk yang tepat adalah pascapanen.
 Kesimpulan: Penulisan bentuk terikat yang tepat terdapat pada opsi C.', true),
-('c42d0f65-4162-59f8-92d4-7e099c6d119c', 'PBM', 173, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kelompok kata yang seluruhnya baku adalah ....', 'ijazah, karier, sistem', 'ijasah, karier, sistem', 'ijazah, karir, sistim', 'nasihat, analisa, apotek', 'aktif, ijin, kualitas', 'A', '— ijazah, karier, sistem
+('c42d0f65-4162-59f8-92d4-7e099c6d119c', 'PBM', 173, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kelompok kata yang seluruhnya baku adalah ....', 'ijazah, karier, sistem', 'ijasah, karier, sistem', 'ijazah, karir, sistim', 'nasihat, analisa, apotek', 'aktif, ijin, kualitas', 'A', 'Jawaban: ijazah, karier, sistem
 Konsep:
 Kata baku harus mengikuti bentuk yang telah ditetapkan dalam bahasa Indonesia.
 Analisis opsi:
@@ -1073,7 +1073,7 @@ C salah: Karir dan sistim bukan bentuk baku.
 D salah: Analisa tidak tepat untuk menggantikan bentuk analisis.
 E salah: Ijin tidak baku; bentuk bakunya izin.
 Kesimpulan: Kelompok kata baku terdapat pada opsi A.', true),
-('9a89c950-3e26-5ec6-9ca3-b41a268bd8c7', 'PBM', 174, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kelompok kata yang seluruhnya tidak baku adalah ....', 'apotik, ijin, resiko', 'apotek, izin, risiko', 'praktik, aktivitas, kualitas', 'ijazah, nasihat, karier', 'sistem, analisis, objek', 'A', '— apotik, ijin, resiko
+('9a89c950-3e26-5ec6-9ca3-b41a268bd8c7', 'PBM', 174, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sedang', 'Kelompok kata yang seluruhnya tidak baku adalah ....', 'apotik, ijin, resiko', 'apotek, izin, risiko', 'praktik, aktivitas, kualitas', 'ijazah, nasihat, karier', 'sistem, analisis, objek', 'A', 'Jawaban: apotik, ijin, resiko
 Konsep:
 Kata tidak baku merupakan bentuk yang tidak sesuai dengan bentuk standar bahasa Indonesia.
 Analisis opsi:
@@ -1083,7 +1083,7 @@ C salah: Ketiganya merupakan bentuk baku.
 D salah: Ketiganya merupakan bentuk baku.
 E salah: Ketiganya merupakan bentuk baku.
 Kesimpulan: Kelompok kata tidak baku terdapat pada opsi A.', true),
-('bb1688d2-e665-59cc-862a-f03ae240d271', 'PBM', 175, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Kalimat yang penulisan katanya tepat adalah ....', 'Ayah membeli obat di apotik dekat rumah.', 'Mahasiswa diminta mempraktekkan teori di laboratorium.', 'Para peneliti sedang menganalisis hasil pengamatan.', 'Pemerintah berusaha mengurangi resiko bencana.', 'Kepala sekolah memberikan ijin kepada peserta.', 'C', '— menganalisis
+('bb1688d2-e665-59cc-862a-f03ae240d271', 'PBM', 175, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Kalimat yang penulisan katanya tepat adalah ....', 'Ayah membeli obat di apotik dekat rumah.', 'Mahasiswa diminta mempraktekkan teori di laboratorium.', 'Para peneliti sedang menganalisis hasil pengamatan.', 'Pemerintah berusaha mengurangi resiko bencana.', 'Kepala sekolah memberikan ijin kepada peserta.', 'C', 'Jawaban: menganalisis
 Konsep:
 Penulisan kata berimbuhan harus memperhatikan bentuk dasar dan proses pembentukan kata.
 Analisis opsi:
@@ -1094,7 +1094,7 @@ D salah: Bentuk bakunya adalah risiko.
 E salah: Bentuk bakunya adalah izin.
 Kesimpulan: Kalimat pada opsi C menggunakan kata baku dan bentuk imbuhan yang tepat.', true),
 ('221d5688-4f77-5a27-9fe4-8d814b5d6814', 'PBM', 176, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Bentuk kata berimbuhan yang tepat untuk melengkapi kalimat berikut adalah ....
-Para ahli sedang ____ berbagai data untuk memperoleh kesimpulan yang akurat.', 'menganalisa', 'menganalisis', 'menganalysa', 'mengalisa', 'analisis', 'B', '— menganalisis
+Para ahli sedang ____ berbagai data untuk memperoleh kesimpulan yang akurat.', 'menganalisa', 'menganalisis', 'menganalysa', 'mengalisa', 'analisis', 'B', 'Jawaban: menganalisis
 Konsep:
 Kata analisis merupakan kata benda, sedangkan bentuk kata kerja yang tepat adalah menganalisis.
 Analisis opsi:
@@ -1104,7 +1104,7 @@ C salah: Menganalysa merupakan bentuk yang tidak baku.
 D salah: Mengalisa bukan bentuk yang tepat.
 E salah: Analisis merupakan kata benda, sehingga tidak sesuai untuk mengisi posisi kata kerja dalam kalimat.
 Kesimpulan: Kata yang tepat adalah menganalisis.', true),
-('f9a0701d-1884-5a99-aa06-5abd7fc94772', 'PBM', 177, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Penulisan jumlah uang yang sesuai dengan kaidah adalah ....', 'Rp 125.000,-', 'Rp.125.000,00', 'Rp125,000.00', 'Rp125.000,00', 'Rp125,000,-', 'D', '— Rp125.000,00
+('f9a0701d-1884-5a99-aa06-5abd7fc94772', 'PBM', 177, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Penulisan jumlah uang yang sesuai dengan kaidah adalah ....', 'Rp 125.000,-', 'Rp.125.000,00', 'Rp125,000.00', 'Rp125.000,00', 'Rp125,000,-', 'D', 'Jawaban: Rp125.000,00
 Konsep:
 Penulisan rupiah mengikuti aturan berikut:
 Simbol Rp ditulis tanpa titik.
@@ -1124,7 +1124,7 @@ Kesimpulan: Penulisan jumlah uang yang tepat terdapat pada opsi D.', true),
 (3) Buku itu disimpan di dalam lemari.
 (4) Pengumuman tersebut di sampaikan melalui papan informasi.
 (5) Mereka melakukan pengamatan di sekitar lingkungan sekolah.
-Kalimat yang penulisan kata depannya salah adalah ....', '(1)', '(2)', '(3)', '(4)', '(5)', 'A', '— Kalimat (1)
+Kalimat yang penulisan kata depannya salah adalah ....', '(1)', '(2)', '(3)', '(4)', '(5)', 'A', 'Jawaban: Kalimat (1)
 Konsep:
 Kata depan di yang menunjukkan tempat ditulis terpisah dari kata yang mengikutinya.
 Analisis:
@@ -1136,7 +1136,7 @@ Kalimat (5) benar: Di sekitar merupakan kata depan yang ditulis terpisah.
 Kesimpulan: Kesalahan terdapat pada kalimat (1).', true),
 ('30ac5edf-4704-5bde-8d88-f0538f2d9281', 'PBM', 179, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Perhatikan kalimat berikut!
 Penelitian tersebut membahas akibat pencemaran terhadap lingkungan perairan. Hasil pengamatan menunjukkan bahwa limbah dapat merusak keseimbangan ekosistem.
-Padanan kata yang paling tepat untuk menggantikan kata akibat, lingkungan, dan merusak secara berurutan adalah ....', 'dampak, ekosistem, mengganggu', 'hasil, habitat, mendukung', 'sebab, kawasan, memperbaiki', 'pengaruh, tempat, memulihkan', 'proses, wilayah, melestarikan', 'A', '— dampak, ekosistem, mengganggu
+Padanan kata yang paling tepat untuk menggantikan kata akibat, lingkungan, dan merusak secara berurutan adalah ....', 'dampak, ekosistem, mengganggu', 'hasil, habitat, mendukung', 'sebab, kawasan, memperbaiki', 'pengaruh, tempat, memulihkan', 'proses, wilayah, melestarikan', 'A', 'Jawaban: dampak, ekosistem, mengganggu
 Konsep:
 Pemilihan padanan kata harus mempertimbangkan kesamaan makna dan kesesuaian dengan konteks kalimat.
 Analisis opsi:
@@ -1146,7 +1146,7 @@ C salah: Memperbaiki bertentangan dengan makna merusak.
 D salah: Memulihkan tidak sesuai dengan konteks pencemaran yang menimbulkan kerusakan.
 E salah: Melestarikan bertentangan dengan makna kerusakan yang dibicarakan.
 Kesimpulan: Padanan kata yang paling sesuai adalah opsi A.', true),
-('39be27ec-af0f-5872-b016-4cf5267613a7', 'PBM', 180, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Kalimat yang seluruh penulisan katanya sesuai dengan kaidah bahasa Indonesia adalah ....', 'Peserta diminta mengumpulkan foto copy kartu identitas.', 'Pemerintah sedang mengevaluasi kwalitas pelayanan publik.', 'Para mahasiswa mengikuti praktik kerja lapangan di perusahaan.', 'Kepala sekolah memberikan ijin kepada siswa untuk mengikuti perlombaan.', 'Peneliti sedang menganalisa data hasil pengamatan.', 'C', '— Praktik kerja lapangan
+('39be27ec-af0f-5872-b016-4cf5267613a7', 'PBM', 180, '04. Penulisan Gabungan Kata & Bentuk Terikat', 'Sulit', 'Kalimat yang seluruh penulisan katanya sesuai dengan kaidah bahasa Indonesia adalah ....', 'Peserta diminta mengumpulkan foto copy kartu identitas.', 'Pemerintah sedang mengevaluasi kwalitas pelayanan publik.', 'Para mahasiswa mengikuti praktik kerja lapangan di perusahaan.', 'Kepala sekolah memberikan ijin kepada siswa untuk mengikuti perlombaan.', 'Peneliti sedang menganalisa data hasil pengamatan.', 'C', 'Jawaban: Praktik kerja lapangan
 Konsep:
 Ketepatan penulisan kata mencakup kata serapan, kata depan, dan bentuk kata berimbuhan.
 Analisis opsi:

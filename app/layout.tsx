@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Inter, Plus_Jakarta_Sans } from "next/font/google";
+import "katex/dist/katex.min.css";
 import { NassyProvider } from "@/components/frontend/NassyProvider";
 import "./globals.css";
 
